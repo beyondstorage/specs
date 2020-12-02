@@ -29,6 +29,10 @@ pair "expire" {
   description = "specify when the url returned by reach will expire"
   parser      = "parseInt"
 }
+pair "user_agent" {
+  type        = "string"
+  description = "specify the custom user-agent from client"
+}
 pair "http_client_options" {
   type        = "*httpclient.Options"
   description = "sepcify the options for the http client"
