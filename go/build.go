@@ -38,6 +38,9 @@ func ParseService(filePath string) (*Service, error) {
 		return nil, fmt.Errorf("parse spec: %w", err)
 	}
 
+	// Make sure services has been sorted, so that we can format the specs correctly.
+	srv.Sort()
+
 	err = FormatHCL(filePath, srv)
 	if err != nil {
 		return nil, fmt.Errorf("format spec: %w", err)
@@ -147,14 +150,17 @@ func init() {
 	if err != nil {
 		log.Fatalf("parse: %v", err)
 	}
+	ParsedPairs.Sort()
 
 	err = parseHCL(MustAsset(infoPath), infoPath, &ParsedInfos)
 	if err != nil {
 		log.Fatalf("parse: %v", err)
 	}
+	ParsedInfos.Sort()
 
 	err = parseHCL(MustAsset(operationPath), operationPath, &ParsedOperations)
 	if err != nil {
 		log.Fatalf("parse: %v", err)
 	}
+	ParsedOperations.Sort()
 }

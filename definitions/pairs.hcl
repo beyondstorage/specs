@@ -29,10 +29,6 @@ pair "expire" {
   description = "specify when the url returned by reach will expire"
   parser      = "parseInt"
 }
-pair "user_agent" {
-  type        = "string"
-  description = "specify the custom user-agent from client"
-}
 pair "http_client_options" {
   type        = "*httpclient.Options"
   description = "sepcify the options for the http client"
@@ -67,6 +63,10 @@ pair "size" {
 }
 pair "storage_class" {
   type = "string"
+}
+pair "user_agent" {
+  type        = "string"
+  description = "specify the custom user-agent from client"
 }
 pair "work_dir" {
   type        = "string"
