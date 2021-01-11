@@ -115,6 +115,10 @@ So I propose following changes:
 - Add a new pair `ListType` with two valid value: `dir` and `prefix`
   - Storager could have their default list type: filesystem could use `dir` and object storage could use `prefix` 
 
+Segments related API should also be changed:
+
+- Merge `ListPrefixSegments` and `ListDirSegments` into `ListSegments`
+
 ## Rationale
 
 <proposal's rationale content, other implementations>
