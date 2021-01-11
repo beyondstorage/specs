@@ -36,6 +36,9 @@ pair "http_client_options" {
 pair "interceptor" {
   type = "Interceptor"
 }
+pair "list_type" {
+  type = "ListType"
+}
 pair "location" {
   type        = "string"
   description = "specify the location for service or storage"
