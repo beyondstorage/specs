@@ -29,7 +29,7 @@ interface "index_segmenter" {
   }
   op "complete_index_segment" {
     description = "will complete a segment and merge them into a File."
-    params      = ["seg"]
+    params      = ["seg", "parts"]
   }
 }
 interface "mover" {
@@ -169,6 +169,9 @@ field "oi" {
 }
 field "pairs" {
   type = "...Pair"
+}
+field "parts" {
+  type = "[]*Part"
 }
 field "path" {
   type = "string"

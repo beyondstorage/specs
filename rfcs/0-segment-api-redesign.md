@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-01-12
 ---
 
-# Proposal: TBD
+# Proposal: Segment API Redesign
 
 ## Background
 
@@ -72,6 +72,12 @@ type Segment struct {
     ID string
 }
 
+type Part struct {
+	Index int
+	Size int64
+	ETag string
+}
+
 type Segmenter interface {
     ListSegments(pairs ...Pair) SegmentIterator
     InitSegment(path string, pairs ...Pair) Segment
@@ -81,8 +87,8 @@ type Segmenter interface {
 type IndexSegmenter interface {
     Segmenter
 
-    ListSegment(seg Segment) PartIterator
-    CompleteSegment(seg Segment, idxs []int, pairs ...Pair) error
+    ListIndexSegment(seg Segment) (PartIterator, error)
+    CompleteIndexSegment(seg Segment, parts []*Part, pairs ...Pair) error
     WriteIndexSegment(seg Segment, r io.Reader, index int, size int64, pairs ...Pair) (err error)
 }
 
@@ -100,12 +106,12 @@ type OffsetSegmenter interface {
 
 ## Rationale
 
-<proposal's rationale content, other implementations>
+No rationale content.
 
 ## Compatibility
 
-<proposal's compatibility statement>
+Segment related API could be broken.
 
 ## Implementation
 
-<proposal's implementation>
+Most of the work would be done by the author of this proposal.
