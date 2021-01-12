@@ -121,14 +121,34 @@ Segments related API should also be changed:
 
 ## Rationale
 
-<proposal's rationale content, other implementations>
+### How to address the DeleteAll problem?
+
+DeleteAll problem is introduced in [Proposal: Use callback in List operations](2-use-callback-in-list-operations.md). The unified list operation can't delete a folder with content:
+
+```go
+it := store.ListDir(path, types.WithRecursive(true))
+
+for {
+    o, err := it.Next()
+    if err != nil && errors.Is(err, iterator.ErrDone) {
+        break
+    }
+    if err != nil {
+        t.TriggerFault(types.NewErrUnhandled(err))
+        return
+    }
+    store.Delete(o.Name)
+}
+```
+
+In this proposal, we change `Recursive` into `ListType` and require object type check after list because we have link object now. So we can return dirs even while listing with prefix list type.
 
 ## Compatibility
 
-<proposal's compatibility statement>
+List related APIs could be changed.
 
 ## Implementation
 
-<proposal's implementation>
+Most of the work would be done by the author of this proposal.
 
 [go-storage]: https://github.com/aos-dev/go-storage
