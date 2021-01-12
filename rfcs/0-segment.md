@@ -80,16 +80,16 @@ type Segmenter interface {
 
 type IndexSegmenter interface {
     Segmentable
-    
-	ListSegment(seg Segment) PartIterator
-	CompleteSegment(seg Segment, idxs []int, pairs ...Pair) error
+
+    ListSegment(seg Segment) PartIterator
+    CompleteSegment(seg Segment, idxs []int, pairs ...Pair) error
     WriteIndexSegment(seg Segment, r io.Reader, index int, size int64, pairs ...Pair) (err error)
 }
 
 type OffsetSegmenter interface {
     Segmentable
-    
-	WriteOffsetSegment(seg Segment, r io.Reader, offset int64, size int64, pairs ...Pair) (err error)
+
+    WriteOffsetSegment(seg Segment, r io.Reader, offset int64, size int64, pairs ...Pair) (err error)
 }
 ```
 
