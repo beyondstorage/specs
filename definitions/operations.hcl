@@ -19,14 +19,17 @@ interface "index_segmenter" {
   description = "is the interface for index based segment."
   embed       = ["segmenter"]
 
-  op "init_index_segment" {
-    description = "will init an index based segment."
-    params      = ["path"]
-    results     = ["seg"]
+  op "list_index_segment" {
+    params  = ["seg"]
+    results = ["pi"]
   }
   op "write_index_segment" {
     description = "will write a part into an index based segment."
     params      = ["seg", "r", "index", "size"]
+  }
+  op "complete_index_segment" {
+    description = "will complete a segment and merge them into a File."
+    params      = ["seg", "parts"]
   }
 }
 interface "mover" {
@@ -35,6 +38,15 @@ interface "mover" {
   op "move" {
     description = "will move an object in the service."
     params      = ["src", "dst"]
+  }
+}
+interface "offset_segmenter" {
+  description = "is the interface for offset based segment."
+  embed       = ["segmenter"]
+
+  op "write_offset_segment" {
+    description = "will write a part into an index based segment."
+    params      = ["seg", "r", "offset", "size"]
   }
 }
 interface "reacher" {
@@ -47,25 +59,20 @@ interface "reacher" {
   }
 }
 interface "segmenter" {
-  internal = true
-
-  op "abort_segment" {
-    description = "will abort a segment."
-    params      = ["seg"]
-  }
-  op "complete_segment" {
-    description = "will complete a segment and merge them into a File."
-    params      = ["seg"]
-  }
-}
-interface "segments_lister" {
-  description = "is used for prefix based storage service to list segments under a prefix."
-  embed       = ["segmenter"]
 
   op "list_segments" {
     description = "will list segments."
     params      = ["path"]
     results     = ["si"]
+  }
+  op "init_segment" {
+    description = "will init a segment."
+    params      = ["path"]
+    results     = ["seg"]
+  }
+  op "abort_segment" {
+    description = "will abort a segment."
+    params      = ["seg"]
   }
 }
 interface "servicer" {
@@ -106,7 +113,7 @@ interface "storager" {
     params      = ["path"]
   }
   op "metadata" {
-    description = "will return current storager's metadata."
+    description = "will return current storager metadata."
     results     = ["meta"]
   }
   op "list" {
@@ -154,14 +161,23 @@ field "name" {
 field "o" {
   type = "*Object"
 }
+field "offset" {
+  type = "int64"
+}
 field "oi" {
   type = "*ObjectIterator"
 }
 field "pairs" {
   type = "...Pair"
 }
+field "parts" {
+  type = "[]*Part"
+}
 field "path" {
   type = "string"
+}
+field "pi" {
+  type = "*PartIterator"
 }
 field "r" {
   type = "io.Reader"
