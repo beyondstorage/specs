@@ -14,11 +14,11 @@ The first design looks like:
 
 ```go
 type Segmenter interface {
-	ListSegments(path string, pairs ...*types.Pair) (err error)
-	InitSegment(path string, pairs ...*types.Pair) (id string, err error)
-	WriteSegment(id string, offset, size int64, r io.Reader, pairs ...*types.Pair) (err error)
-	CompleteSegment(id string, pairs ...*types.Pair) (err error)
-	AbortSegment(id string, pairs ...*types.Pair) (err error)
+    ListSegments(path string, pairs ...*types.Pair) (err error)
+    InitSegment(path string, pairs ...*types.Pair) (id string, err error)
+    WriteSegment(id string, offset, size int64, r io.Reader, pairs ...*types.Pair) (err error)
+    CompleteSegment(id string, pairs ...*types.Pair) (err error)
+    AbortSegment(id string, pairs ...*types.Pair) (err error)
 }
 ```
 
@@ -26,10 +26,10 @@ But this design is buggy: a single segment/multipart can't be identified by ID. 
 
 ```go
 type Segment interface {
-	String() string
+    String() string
 
-	ID() string
-	Path() string
+    ID() string
+    Path() string
 }
 ```
 
@@ -37,11 +37,11 @@ Changing the `Segmenter` interface into:
 
 ```go
 type Segmenter interface {
-	ListSegments(path string, pairs ...*types.Pair) (err error)
-	InitSegment(path string, pairs ...*types.Pair) (seg segment.Segment, err error)
-	WriteSegment(seg segment.Segment, r io.Reader, pairs ...*types.Pair) (err error)
-	CompleteSegment(seg segment.Segment, pairs ...*types.Pair) (err error)
-	AbortSegment(seg segment.Segment, pairs ...*types.Pair) (err error)
+    ListSegments(path string, pairs ...*types.Pair) (err error)
+    InitSegment(path string, pairs ...*types.Pair) (seg segment.Segment, err error)
+    WriteSegment(seg segment.Segment, r io.Reader, pairs ...*types.Pair) (err error)
+    CompleteSegment(seg segment.Segment, pairs ...*types.Pair) (err error)
+    AbortSegment(seg segment.Segment, pairs ...*types.Pair) (err error)
 }
 ```
 
@@ -49,8 +49,8 @@ And [Proposal: Split Segmenter](21-split-segmenter.md) added new interfaces:
 
 ```go
 type IndexSegmenter interface {
-	InitIndexSegment(path string, pairs ...Pair) (seg Segment, err error)
-	WriteIndexSegment(seg Segment, r io.Reader, index int, size int64, pairs ...Pair) (err error)
+    InitIndexSegment(path string, pairs ...Pair) (seg Segment, err error)
+    WriteIndexSegment(seg Segment, r io.Reader, index int, size int64, pairs ...Pair) (err error)
 }
 ```
 
@@ -68,13 +68,13 @@ So our interfaces look like following:
 
 ```go
 type Segment struct {
-	Path string
-	ID string
+    Path string
+    ID string
 }
 
 type Segmenter interface {
-	ListSegments(pairs ...Pair) SegmentIterator
-	InitSegment(path string, pairs ...Pair) Segment
+    ListSegments(pairs ...Pair) SegmentIterator
+    InitSegment(path string, pairs ...Pair) Segment
     AbortSegment(seg Segment) error
 }
 
