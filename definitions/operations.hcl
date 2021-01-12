@@ -7,25 +7,6 @@ interface "copier" {
     params      = ["src", "dst"]
   }
 }
-interface "dir_lister" {
-  description = "is used for directory based storage service to list objects under a dir."
-
-  op "list_dir" {
-    description = "will return list a specific dir."
-    params      = ["dir"]
-    results     = ["oi"]
-  }
-}
-interface "dir_segments_lister" {
-  description = "is used for directory based storage service to list segments under a dir."
-  embed       = ["segmenter"]
-
-  op "list_dir_segments" {
-    description = "will list segments via dir."
-    params      = ["dir"]
-    results     = ["si"]
-  }
-}
 interface "fetcher" {
   description = "is the interface for Fetch."
 
@@ -56,25 +37,6 @@ interface "mover" {
     params      = ["src", "dst"]
   }
 }
-interface "prefix_lister" {
-  description = "is used for prefix based storage service to list objects under a prefix."
-
-  op "list_prefix" {
-    description = "will return list a specific dir."
-    params      = ["prefix"]
-    results     = ["oi"]
-  }
-}
-interface "prefix_segments_lister" {
-  description = "is used for prefix based storage service to list segments under a prefix."
-  embed       = ["segmenter"]
-
-  op "list_prefix_segments" {
-    description = "will list segments."
-    params      = ["prefix"]
-    results     = ["si"]
-  }
-}
 interface "reacher" {
   description = "is the interface for Reach."
 
@@ -94,6 +56,16 @@ interface "segmenter" {
   op "complete_segment" {
     description = "will complete a segment and merge them into a File."
     params      = ["seg"]
+  }
+}
+interface "segments_lister" {
+  description = "is used for prefix based storage service to list segments under a prefix."
+  embed       = ["segmenter"]
+
+  op "list_segments" {
+    description = "will list segments."
+    params      = ["path"]
+    results     = ["si"]
   }
 }
 interface "servicer" {
@@ -137,6 +109,11 @@ interface "storager" {
     description = "will return current storager's metadata."
     results     = ["meta"]
   }
+  op "list" {
+    description = "will return list a specific path."
+    params      = ["path"]
+    results     = ["oi"]
+  }
   op "read" {
     description = "will read the file's data."
     params      = ["path", "w"]
@@ -156,9 +133,6 @@ interface "storager" {
   }
 }
 
-field "dir" {
-  type = "string"
-}
 field "dst" {
   type = "string"
 }
@@ -187,9 +161,6 @@ field "pairs" {
   type = "...Pair"
 }
 field "path" {
-  type = "string"
-}
-field "prefix" {
   type = "string"
 }
 field "r" {
