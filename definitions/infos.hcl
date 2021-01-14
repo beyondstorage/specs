@@ -15,13 +15,17 @@ info "object" "meta" "id" {
   export  = true
   comment = "ID is the unique key in storage."
 }
+info "object" "meta" "link-target" {
+  type    = "string"
+  comment = "LinkTarget is the symlink target for link object."
+}
 info "object" "meta" "mode" {
   type   = "ObjectMode"
   export = true
 }
-info "object" "meta" "part-id" {
+info "object" "meta" "multipart-id" {
   type    = "string"
-  comment = "PartID is the part id of part object."
+  comment = "MultipartID is the part id of part object."
 }
 info "object" "meta" "path" {
   type    = "string"
@@ -33,10 +37,6 @@ info "object" "meta" "size" {
 }
 info "object" "meta" "storage-class" {
   type = "string"
-}
-info "object" "meta" "target" {
-  type    = "string"
-  comment = "Target is the symlink target for link object."
 }
 info "object" "meta" "updated-at" {
   type = "time.Time"
