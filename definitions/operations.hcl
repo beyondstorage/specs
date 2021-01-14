@@ -1,31 +1,39 @@
 
 interface "appender" {
+  description = "is the interface for Append related operations."
 
   op "create_append" {
-    params  = ["path"]
-    results = ["o"]
+    description = "will create an append object."
+    params      = ["path"]
+    results     = ["o"]
   }
   op "write_append" {
-    params  = ["o", "r", "size"]
-    results = ["n"]
+    description = "will append content to an append object."
+    params      = ["o", "r", "size"]
+    results     = ["n"]
   }
 }
 interface "blocker" {
+  description = "is the interface for Block related operations."
 
   op "create_block" {
-    params  = ["path"]
-    results = ["o"]
+    description = "will create a new block object."
+    params      = ["path"]
+    results     = ["o"]
   }
   op "write_block" {
-    params  = ["o", "r", "size", "bid"]
-    results = ["n"]
+    description = "will write content to a block."
+    params      = ["o", "r", "size", "bid"]
+    results     = ["n"]
   }
   op "combine_block" {
-    params = ["o", "bids"]
+    description = "will combine blocks into an object."
+    params      = ["o", "bids"]
   }
   op "list_block" {
-    params  = ["o"]
-    results = ["bi"]
+    description = "will list blocks belong to this object."
+    params      = ["o"]
+    results     = ["bi"]
   }
 }
 interface "copier" {
@@ -52,33 +60,41 @@ interface "mover" {
     params      = ["src", "dst"]
   }
 }
-interface "pager" {
+interface "multiparter" {
+  description = "is the interface for Multipart related operations."
 
-  op "create_page" {
-    params  = ["path"]
-    results = ["o"]
+  op "create_multipart" {
+    description = "will create a new multipart."
+    params      = ["path"]
+    results     = ["o"]
   }
-  op "write_page" {
-    params  = ["o", "r", "size", "offset"]
-    results = ["n"]
+  op "write_multipart" {
+    description = "will write content to a multipart."
+    params      = ["o", "r", "size", "index"]
+    results     = ["n"]
+  }
+  op "complete_multipart" {
+    description = "will complete a multipart upload and construct an Object."
+    params      = ["o", "parts"]
+  }
+  op "list_multipart" {
+    description = "will list parts belong to this multipart."
+    params      = ["o"]
+    results     = ["pi"]
   }
 }
-interface "parter" {
+interface "pager" {
+  description = "is the interface for Page related operations which support random write."
 
-  op "create_part" {
-    params  = ["path"]
-    results = ["o"]
+  op "create_page" {
+    description = "will create a new page object."
+    params      = ["path"]
+    results     = ["o"]
   }
-  op "write_part" {
-    params  = ["o", "r", "size", "index"]
-    results = ["n"]
-  }
-  op "complete_part" {
-    params = ["o", "parts"]
-  }
-  op "list_part" {
-    params  = ["o"]
-    results = ["pi"]
+  op "write_page" {
+    description = "will write content to specific offset."
+    params      = ["o", "r", "size", "offset"]
+    results     = ["n"]
   }
 }
 interface "reacher" {
@@ -134,6 +150,7 @@ interface "storager" {
   op "list" {
     description = "will return list a specific path."
     params      = ["path"]
+    pairs       = ["list_mode"]
     results     = ["oi"]
   }
   op "read" {
