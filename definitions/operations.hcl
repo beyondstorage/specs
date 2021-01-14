@@ -1,4 +1,33 @@
 
+interface "appender" {
+
+  op "create_append" {
+    params  = ["path"]
+    results = ["o"]
+  }
+  op "write_append" {
+    params  = ["o", "r", "size"]
+    results = ["n"]
+  }
+}
+interface "blocker" {
+
+  op "create_block" {
+    params  = ["path"]
+    results = ["o"]
+  }
+  op "write_block" {
+    params  = ["o", "r", "size", "bid"]
+    results = ["n"]
+  }
+  op "combine_block" {
+    params = ["o", "bids"]
+  }
+  op "list_block" {
+    params  = ["o"]
+    results = ["bi"]
+  }
+}
 interface "copier" {
   description = "is the interface for Copy."
 
@@ -15,23 +44,6 @@ interface "fetcher" {
     params      = ["path", "url"]
   }
 }
-interface "index_segmenter" {
-  description = "is the interface for index based segment."
-  embed       = ["segmenter"]
-
-  op "list_index_segment" {
-    params  = ["seg"]
-    results = ["pi"]
-  }
-  op "write_index_segment" {
-    description = "will write a part into an index based segment."
-    params      = ["seg", "r", "index", "size"]
-  }
-  op "complete_index_segment" {
-    description = "will complete a segment and merge them into a File."
-    params      = ["seg", "parts"]
-  }
-}
 interface "mover" {
   description = "is the interface for Move."
 
@@ -40,13 +52,33 @@ interface "mover" {
     params      = ["src", "dst"]
   }
 }
-interface "offset_segmenter" {
-  description = "is the interface for offset based segment."
-  embed       = ["segmenter"]
+interface "pager" {
 
-  op "write_offset_segment" {
-    description = "will write a part into an index based segment."
-    params      = ["seg", "r", "offset", "size"]
+  op "create_page" {
+    params  = ["path"]
+    results = ["o"]
+  }
+  op "write_page" {
+    params  = ["o", "r", "size", "offset"]
+    results = ["n"]
+  }
+}
+interface "parter" {
+
+  op "create_part" {
+    params  = ["path"]
+    results = ["o"]
+  }
+  op "write_part" {
+    params  = ["o", "r", "size", "index"]
+    results = ["n"]
+  }
+  op "complete_part" {
+    params = ["o", "parts"]
+  }
+  op "list_part" {
+    params  = ["o"]
+    results = ["pi"]
   }
 }
 interface "reacher" {
@@ -56,23 +88,6 @@ interface "reacher" {
     description = "will provide a way, which can reach the object."
     params      = ["path"]
     results     = ["url"]
-  }
-}
-interface "segmenter" {
-
-  op "list_segments" {
-    description = "will list segments."
-    params      = ["path"]
-    results     = ["si"]
-  }
-  op "init_segment" {
-    description = "will init a segment."
-    params      = ["path"]
-    results     = ["seg"]
-  }
-  op "abort_segment" {
-    description = "will abort a segment."
-    params      = ["seg"]
   }
 }
 interface "servicer" {
@@ -134,12 +149,21 @@ interface "storager" {
   }
   op "write" {
     description = "will write data into a file."
-    params      = ["path", "r"]
-    pairs       = ["size", "offset", "storage_class", "content_type", "content_md5", "read_callback_func"]
+    params      = ["path", "r", "size"]
+    pairs       = ["storage_class", "content_type", "content_md5", "read_callback_func"]
     results     = ["n"]
   }
 }
 
+field "bi" {
+  type = "*BlockIterator"
+}
+field "bid" {
+  type = "string"
+}
+field "bids" {
+  type = "[]string"
+}
 field "dst" {
   type = "string"
 }

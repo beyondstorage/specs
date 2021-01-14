@@ -36,8 +36,8 @@ pair "http_client_options" {
 pair "interceptor" {
   type = "Interceptor"
 }
-pair "list_type" {
-  type = "ListType"
+pair "list_mode" {
+  type = "ListMode"
 }
 pair "location" {
   type        = "string"
@@ -54,6 +54,9 @@ pair "offset" {
 }
 pair "pair_policy" {
   type = "PairPolicy"
+}
+pair "part_id" {
+  type = "string"
 }
 pair "read_callback_func" {
   type        = "func([]byte)"
