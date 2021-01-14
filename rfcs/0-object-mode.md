@@ -130,12 +130,12 @@ type Parter interface {
 
 ## Rationale
 
-<TODO>
+This designed is highly influenced by [Microsoft Azblob API](https://docs.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api)
 
 ## Compatibility
 
-<TODO>
+Object related operations could be changed.
 
 ## Implementation
 
-<TODO>
+Most of the work would be done by the author of this proposal.
