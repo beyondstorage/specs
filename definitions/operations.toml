@@ -1,0 +1,153 @@
+[appender]
+description = "is the interface for Append related operations."
+
+[appender.op.create_append]
+description = "will create an append object."
+params = ["path"]
+results = ["o"]
+
+[appender.op.write_append]
+description = "will append content to an append object."
+params = ["o", "r", "size"]
+results = ["n"]
+
+[blocker]
+description = "is the interface for Block related operations."
+
+[blocker.op.create_block]
+description = "will create a new block object."
+params = ["path"]
+results = ["o"]
+
+[blocker.op.write_block]
+description = "will write content to a block."
+params = ["o", "r", "size", "bid"]
+results = ["n"]
+
+[blocker.op.combine_block]
+description = "will combine blocks into an object."
+params = ["o", "bids"]
+
+[blocker.op.list_block]
+description = "will list blocks belong to this object."
+params = ["o"]
+results = ["bi"]
+
+[copier]
+description = "is the interface for Copy."
+
+[copier.op.copy]
+description = "will copy an Object or multiple object in the service."
+params = ["src", "dst"]
+
+[fetcher]
+description = "is the interface for Fetch."
+
+[fetcher.op.fetch]
+description = "will fetch from a given url to path."
+params = ["path", "url"]
+
+[mover]
+description = "is the interface for Move."
+
+[mover.op.move]
+description = "will move an object in the service."
+params = ["src", "dst"]
+
+[multiparter]
+description = "is the interface for Multipart related operations."
+
+[multiparter.op.create_multipart]
+description = "will create a new multipart."
+params = ["path"]
+results = ["o"]
+
+[multiparter.op.write_multipart]
+description = "will write content to a multipart."
+params = ["o", "r", "size", "index"]
+results = ["n"]
+
+[multiparter.op.complete_multipart]
+description = "will complete a multipart upload and construct an Object."
+params = ["o", "parts"]
+
+[multiparter.op.list_multipart]
+description = "will list parts belong to this multipart."
+params = ["o"]
+results = ["pi"]
+
+[pager]
+description = "is the interface for Page related operations which support random write."
+
+[pager.op.create_page]
+description = "will create a new page object."
+params = ["path"]
+results = ["o"]
+
+[pager.op.write_page]
+description = "will write content to specific offset."
+params = ["o", "r", "size", "offset"]
+results = ["n"]
+
+[reacher]
+description = "is the interface for Reach."
+
+[reacher.op.reach]
+description = "will provide a way, which can reach the object."
+params = ["path"]
+results = ["url"]
+
+[servicer]
+description = "can maintain multipart storage services."
+
+[servicer.op.create]
+description = "will create a new storager instance."
+params = ["name"]
+results = ["store"]
+
+[servicer.op.delete]
+description = "will delete a storager instance."
+params = ["name"]
+
+[servicer.op.get]
+description = "will get a valid storager instance for service."
+params = ["name"]
+results = ["store"]
+
+[servicer.op.list]
+description = "will list all storager instances under this service."
+results = ["sti"]
+
+[storager]
+description = "is the interface for storage service."
+
+[storager.op.delete]
+description = "will delete an Object from service."
+params      = ["path"]
+
+[storager.op.metadata]
+description = "will return current storager metadata."
+results     = ["meta"]
+
+[storager.op.list]
+description = "will return list a specific path."
+params      = ["path"]
+pairs       = ["list_mode"]
+results     = ["oi"]
+
+[storager.op.read]
+description = "will read the file's data."
+params      = ["path", "w"]
+pairs       = ["size", "offset", "read_callback_func"]
+results     = ["n"]
+
+[storager.op.stat]
+description = "will stat a path to get info of an object."
+params      = ["path"]
+results     = ["o"]
+
+[storager.op.write]
+description = "will write data into a file."
+params      = ["path", "r", "size"]
+pairs       = ["storage_class", "content_type", "content_md5", "io_callback"]
+results     = ["n"]
