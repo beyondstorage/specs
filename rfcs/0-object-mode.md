@@ -61,7 +61,7 @@ So I propose following changes
 
 ### Add Object Mode to replace Object Type
 
-Add Object Mode like `os.FileMode` dose:
+Add Object Mode like `os.FileMode` does:
 
 ```go
 type ObjectMode uint32
