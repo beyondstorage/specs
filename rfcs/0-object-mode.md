@@ -94,7 +94,7 @@ Adding more mode will not affect current implementations.
 
 Now we have a much more flexible Object design, we can remove the segment abstraction:
 
-- IndexSegment means an Object with `ModePart` a.k.a. Part Object
+- IndexSegment means an Object with `ModeMultipart` a.k.a. Multipart Object
 - OffsetSegment means an Object with `ModePage` a.k.a. Page Object
 - Object which supports append mains Object with `ModeAppend`.
 
@@ -119,8 +119,8 @@ type Pager interface {
 	CreatePage(path string, pairs ...Pair) (o *Object, err error)
 	WritePage(o *Object, r io.Reader, size int64, offset int64, pairs ...Pair) (n int64, err error)
 }
-// Multipart Upload support via part object.
-type Parter interface {
+// Multipart Upload support via multipart object.
+type Multiparter interface {
 	CompletePart(o *Object, parts []*Part, pairs ...Pair) (err error)
 	CreatePart(path string, pairs ...Pair) (o *Object, err error)
 	ListPart(o *Object, pairs ...Pair) (pi *PartIterator, err error)
