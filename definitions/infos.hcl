@@ -15,25 +15,28 @@ info "object" "meta" "id" {
   export  = true
   comment = "ID is the unique key in storage."
 }
-info "object" "meta" "name" {
+info "object" "meta" "link-target" {
+  type    = "string"
+  comment = "LinkTarget is the symlink target for link object."
+}
+info "object" "meta" "mode" {
+  type   = "ObjectMode"
+  export = true
+}
+info "object" "meta" "multipart-id" {
+  type    = "string"
+  comment = "MultipartID is the part id of part object."
+}
+info "object" "meta" "path" {
   type    = "string"
   export  = true
-  comment = "Name is either the absolute path or the relative path towards storage's WorkDir depends on user's input."
+  comment = "Path is either the absolute path or the relative path towards storage's WorkDir depends on user's input."
 }
 info "object" "meta" "size" {
   type = "int64"
 }
 info "object" "meta" "storage-class" {
   type = "string"
-}
-info "object" "meta" "target" {
-  type    = "string"
-  comment = "Target is the symlink target for this object, only exist when object type is link."
-}
-info "object" "meta" "type" {
-  type    = "ObjectType"
-  export  = true
-  comment = "Type could be one of `file`, `dir`, `link` or `unknown`."
 }
 info "object" "meta" "updated-at" {
   type = "time.Time"
