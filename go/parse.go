@@ -1,6 +1,11 @@
 package specs
 
-import "log"
+import (
+	"io/ioutil"
+	"log"
+
+	"github.com/pelletier/go-toml"
+)
 
 type tomlField struct {
 	Type string
@@ -35,6 +40,28 @@ type tomlInterface struct {
 }
 
 type tomlInterfaces map[string]tomlInterface
+
+type tomlOp struct {
+	Required []string `hcl:"required,optional"`
+	Optional []string `hcl:"optional,optional"`
+}
+
+type tomlNamespace struct {
+	Implement []string          `toml:"implement"`
+	New       tomlOp            `toml:"new"`
+	Op        map[string]tomlOp `toml:"op"`
+}
+
+type tomlService struct {
+	Name      string                                    `toml:"name"`
+	Namespace map[string]tomlNamespace                  `toml:"namespace"`
+	Pairs     map[string]tomlPair                       `toml:"pairs"`
+	Infos     map[string]map[string]map[string]tomlInfo `toml:"infos"`
+}
+
+func parseTOML(src []byte, in interface{}) (err error) {
+	return toml.Unmarshal(src, in)
+}
 
 func parsePairs() Pairs {
 	var tp tomlPairs
@@ -147,6 +174,74 @@ func parseOperations() Operations {
 		}
 
 		ps.Interfaces = append(ps.Interfaces, it)
+	}
+
+	return ps
+}
+
+func parseService(filePath string) Service {
+	var (
+		ts tomlService
+		ps Service
+	)
+
+	content, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		log.Fatalf("read file %s: %v", filePath, err)
+	}
+
+	err = parseTOML(content, &ts)
+	if err != nil {
+		log.Fatalf("parse toml %s: %v", filePath, err)
+	}
+
+	ps.Name = ts.Name
+
+	// Parse pairs
+	for k, v := range ts.Pairs {
+		ps.Pairs = append(ps.Pairs, Pair{
+			Name:        k,
+			Type:        v.Type,
+			Description: v.Description,
+		})
+	}
+
+	// Parse infos
+	for scope, v := range ts.Infos {
+		for category, v := range v {
+			for name, v := range v {
+				ps.Infos = append(ps.Infos, Info{
+					Scope:       scope,
+					Category:    category,
+					Name:        name,
+					Type:        v.Type,
+					Export:      v.Export,
+					Description: v.Description,
+				})
+			}
+		}
+	}
+
+	// Parse namespace.
+	for name, v := range ts.Namespace {
+		n := Namespace{
+			Name:      name,
+			Implement: v.Implement,
+			New: New{
+				Required: v.New.Required,
+				Optional: v.New.Optional,
+			},
+		}
+
+		for opName, op := range v.Op {
+			n.Op = append(n.Op, Op{
+				Name:     opName,
+				Required: op.Required,
+				Optional: op.Optional,
+			})
+		}
+
+		ps.Namespaces = append(ps.Namespaces, n)
 	}
 
 	return ps

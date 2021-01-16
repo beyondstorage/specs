@@ -138,7 +138,7 @@ results     = ["oi"]
 [storager.op.read]
 description = "will read the file's data."
 params      = ["path", "w"]
-pairs       = ["size", "offset", "read_callback_func"]
+pairs       = ["size", "offset", "io_callback"]
 results     = ["n"]
 
 [storager.op.stat]

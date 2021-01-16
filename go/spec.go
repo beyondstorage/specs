@@ -53,7 +53,7 @@ type Service struct {
 	Infos      Infos
 }
 
-// Sort will sort ther service spec.
+// Sort will sort the service spec.
 func (s *Service) Sort() {
 	s.Pairs.Sort()
 	s.Infos.Sort()
@@ -109,10 +109,10 @@ type Pair struct {
 
 // Namespace is the data parsed from HCL.
 type Namespace struct {
-	Name      string   `hcl:",label"`
-	Implement []string `hcl:"implement,optional"`
-	New       *New     `hcl:"new,block"`
-	Op        []*Op    `hcl:"op,block"`
+	Name      string
+	Implement []string
+	New       New
+	Op        []Op
 }
 
 // Sort will sort the Namespace
@@ -133,9 +133,9 @@ func (n *Namespace) Sort() {
 
 // Op means an operation definition.
 type Op struct {
-	Name     string   `hcl:",label"`
-	Required []string `hcl:"required,optional"`
-	Optional []string `hcl:"optional,optional"`
+	Name     string
+	Required []string
+	Optional []string
 }
 
 // Sort will sort the Op
@@ -146,8 +146,8 @@ func (o *Op) Sort() {
 
 // New is the spec for new function.
 type New struct {
-	Required []string `hcl:"required,optional"`
-	Optional []string `hcl:"optional,optional"`
+	Required []string
+	Optional []string
 }
 
 // Sort will sort the New
