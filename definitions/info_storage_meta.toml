@@ -1,0 +1,10 @@
+[location]
+type = "string"
+
+[name]
+type = "string"
+export = true
+
+[work-dir]
+type = "string"
+export = true

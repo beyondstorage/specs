@@ -1,0 +1,39 @@
+[content-md5]
+type = "string"
+
+[content-type]
+type = "string"
+
+[etag]
+type = "string"
+
+[id]
+type = "string"
+export = true
+description = "ID is the unique key in storage."
+
+[link-target]
+type = "string"
+description = "LinkTarget is the symlink target for link object."
+
+[mode]
+type = "ObjectMode"
+export = true
+
+[multipart-id]
+type = "string"
+description = "MultipartID is the part id of part object."
+
+[path]
+type = "string"
+export = true
+description = "Path is either the absolute path or the relative path towards storage's WorkDir depends on user's input."
+
+[size]
+type = "int64"
+
+[storage-class]
+type = "string"
+
+[updated-at]
+type = "time"

@@ -6,22 +6,15 @@ import (
 
 // Interface is the spec for interface.
 type Interface struct {
-	Name        string       `hcl:",label"`
-	Description string       `hcl:"description,optional"`
-	Internal    bool         `hcl:"internal,optional"`
-	Embed       []string     `hcl:"embed,optional"`
-	Ops         []*Operation `hcl:"op,block"`
-}
-
-// Sort will sort the Interface
-func (i *Interface) Sort() {
-	sort.Strings(i.Embed)
+	Name        string
+	Description string
+	Ops         []Operation
 }
 
 // Operations is the spec for operations.
 type Operations struct {
-	Interfaces []*Interface `hcl:"interface,block"`
-	Fields     []*Field     `hcl:"field,block"`
+	Interfaces []Interface
+	Fields     []Field
 }
 
 // Sort will sort the Operations
@@ -35,36 +28,32 @@ func (o *Operations) Sort() {
 		x := o.Interfaces
 		return x[i].Name < x[j].Name
 	})
-
-	for _, v := range o.Interfaces {
-		v.Sort()
-	}
 }
 
 // Operation is the spec for operation.
 type Operation struct {
-	Name        string   `hcl:",label"`
-	Description string   `hcl:"description,optional"`
-	Params      []string `hcl:"params,optional"`
-	Pairs       []string `hcl:"pairs,optional"`
-	Results     []string `hcl:"results,optional"`
+	Name        string
+	Description string
+	Params      []string
+	Pairs       []string
+	Results     []string
 }
 
 // Field is the spec for field.
 type Field struct {
-	Name string `hcl:",label"`
-	Type string `hcl:"type"`
+	Name string
+	Type string
 }
 
 // Service is the data parsed from HCL.
 type Service struct {
-	Name       string       `hcl:"name"`
-	Namespaces []*Namespace `hcl:"namespace,block"`
-	Pairs      *Pairs       `hcl:"pairs,block"`
-	Infos      *Infos       `hcl:"infos,block"`
+	Name       string
+	Namespaces []Namespace
+	Pairs      Pairs
+	Infos      Infos
 }
 
-// Sort will sort ther service spec.
+// Sort will sort the service spec.
 func (s *Service) Sort() {
 	s.Pairs.Sort()
 	s.Infos.Sort()
@@ -75,66 +64,55 @@ func (s *Service) Sort() {
 }
 
 // Infos is the spec for infos.
-type Infos struct {
-	Infos []*Info `hcl:"info,block"`
-}
+type Infos []Info
 
 // Sort will sort the pair spec.
-func (p *Infos) Sort() {
-	if p == nil || len(p.Infos) == 0 {
+func (p Infos) Sort() {
+	if p == nil || len(p) == 0 {
 		return
 	}
 
-	sort.Slice(p.Infos, func(i, j int) bool {
-		x := p.Infos
-		return compareInfoSpec(x[i], x[j])
+	sort.Slice(p, func(i, j int) bool {
+		return compareInfoSpec(p[i], p[j])
 	})
 }
 
 // Info is the spec for info.
 type Info struct {
-	Scope       string `hcl:",label"`
-	Category    string `hcl:",label"`
-	Name        string `hcl:",label"`
-	Type        string `hcl:"type"`
-	DisplayName string `hcl:"display_name,optional"`
-	ZeroValue   string `hcl:"zero_value,optional"`
-	Export      bool   `hcl:"export,optional"`
-	Comment     string `hcl:"comment,optional"`
+	Scope       string
+	Category    string
+	Name        string
+	Type        string
+	Export      bool
+	Description string
 }
 
-// Pairs is the data parsed from HCL.
-type Pairs struct {
-	Pairs []*Pair `hcl:"pair,block"`
-}
+type Pairs []Pair
 
 // Sort will sort the pair spec.
-func (p *Pairs) Sort() {
-	if p == nil || len(p.Pairs) == 0 {
+func (p Pairs) Sort() {
+	if p == nil || len(p) == 0 {
 		return
 	}
 
-	sort.Slice(p.Pairs, func(i, j int) bool {
-		x := p.Pairs
-		return x[i].Name < x[j].Name
+	sort.Slice(p, func(i, j int) bool {
+		return p[i].Name < p[j].Name
 	})
 }
 
 // Pair is the data parsed from HCL.
 type Pair struct {
-	Name        string `hcl:",label"`
-	Type        string `hcl:"type"`
-	Description string `hcl:"description,optional"`
-	Parser      string `hcl:"parser,optional"`
-	Default     string `hcl:"default,optional"`
+	Name        string
+	Type        string
+	Description string
 }
 
 // Namespace is the data parsed from HCL.
 type Namespace struct {
-	Name      string   `hcl:",label"`
-	Implement []string `hcl:"implement,optional"`
-	New       *New     `hcl:"new,block"`
-	Op        []*Op    `hcl:"op,block"`
+	Name      string
+	Implement []string
+	New       New
+	Op        []Op
 }
 
 // Sort will sort the Namespace
@@ -155,9 +133,9 @@ func (n *Namespace) Sort() {
 
 // Op means an operation definition.
 type Op struct {
-	Name     string   `hcl:",label"`
-	Required []string `hcl:"required,optional"`
-	Optional []string `hcl:"optional,optional"`
+	Name     string
+	Required []string
+	Optional []string
 }
 
 // Sort will sort the Op
@@ -168,8 +146,8 @@ func (o *Op) Sort() {
 
 // New is the spec for new function.
 type New struct {
-	Required []string `hcl:"required,optional"`
-	Optional []string `hcl:"optional,optional"`
+	Required []string
+	Optional []string
 }
 
 // Sort will sort the New
@@ -178,7 +156,7 @@ func (o *New) Sort() {
 	sort.Strings(o.Optional)
 }
 
-func compareInfoSpec(x, y *Info) bool {
+func compareInfoSpec(x, y Info) bool {
 	if x.Scope != y.Scope {
 		return x.Scope < y.Scope
 	}
