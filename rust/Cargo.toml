@@ -5,7 +5,7 @@ authors = ["Xuanwo <github@xuanwo.io>"]
 edition = "2018"
 description = "AOS specs for rust"
 license = "apache 2.0"
-documentation = "docs.rs/aos-specs"
+documentation = "https://docs.rs/aos-specs"
 repository = "https://github.com/aos-dev/specs"
 
 [dependencies]
