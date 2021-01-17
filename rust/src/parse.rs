@@ -1,13 +1,8 @@
 use std::collections::HashMap;
 
 use anyhow::Result;
-use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 use std::fs;
-
-#[derive(RustEmbed)]
-#[folder = "../definitions/"]
-struct Assets;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 struct Field {
@@ -87,7 +82,7 @@ struct Service {
 }
 
 pub fn parse_pairs() -> Result<super::Pairs> {
-    let tp: Pairs = toml::from_slice(&Assets::get("pairs.toml").unwrap())?;
+    let tp: Pairs = toml::from_slice(include_bytes!("definitions/pairs.toml"))?;
 
     let mut ps = super::Pairs::default();
 
@@ -106,7 +101,7 @@ pub fn parse_infos() -> Result<super::Infos> {
     let mut ps = super::Infos::default();
 
     // Parse object meta.
-    let tp: Infos = toml::from_slice(&Assets::get("info_object_meta.toml").unwrap())?;
+    let tp: Infos = toml::from_slice(include_bytes!("definitions/info_object_meta.toml"))?;
 
     for (k, v) in tp.iter() {
         ps.push(super::Info {
@@ -120,7 +115,7 @@ pub fn parse_infos() -> Result<super::Infos> {
     }
 
     // Parse storage meta.
-    let tp: Infos = toml::from_slice(&Assets::get("info_storage_meta.toml").unwrap())?;
+    let tp: Infos = toml::from_slice(include_bytes!("definitions/info_storage_meta.toml"))?;
 
     for (k, v) in tp.iter() {
         ps.push(super::Info {
@@ -139,8 +134,8 @@ pub fn parse_infos() -> Result<super::Infos> {
 pub fn parse_operations() -> Result<super::Operations> {
     let mut ps = super::Operations::default();
 
-    let interfaces: Interfaces = toml::from_slice(&Assets::get("operations.toml").unwrap())?;
-    let fields: Fields = toml::from_slice(&Assets::get("fields.toml").unwrap())?;
+    let interfaces: Interfaces = toml::from_slice(include_bytes!("definitions/operations.toml"))?;
+    let fields: Fields = toml::from_slice(include_bytes!("definitions/fields.toml"))?;
 
     for (name, v) in fields.iter() {
         ps.fields.push(super::Field {
