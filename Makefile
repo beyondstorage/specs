@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: go
+.PHONY: go rust
 
 go:
 	@echo "build specs for golang"
@@ -11,4 +11,10 @@ go:
 	pushd go       && \
 	  go fmt ./... && \
 	  go mod tidy  && \
+	  popd
+
+rust:
+	@echo "build specs for rust"
+	pushd rust && \
+	  cargo build && \
 	  popd
