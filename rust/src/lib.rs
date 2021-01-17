@@ -11,80 +11,80 @@ lazy_static! {
 
 #[derive(Debug, Clone)]
 pub struct Interface {
-    name: String,
-    description: String,
-    op: Vec<Operation>,
+    pub name: String,
+    pub description: String,
+    pub op: Vec<Operation>,
 }
 
 #[derive(Debug, Clone)]
 pub struct Operation {
-    name: String,
-    description: String,
-    params: Vec<String>,
-    pairs: Vec<String>,
-    results: Vec<String>,
+    pub name: String,
+    pub description: String,
+    pub params: Vec<String>,
+    pub pairs: Vec<String>,
+    pub results: Vec<String>,
 }
 
 #[derive(Debug, Clone, Default)]
 pub struct Operations {
-    interfaces: Vec<Interface>,
-    fields: Vec<Field>,
+    pub interfaces: Vec<Interface>,
+    pub fields: Vec<Field>,
 }
 
 #[derive(Debug, Clone)]
 pub struct Field {
-    name: String,
-    ty: String,
+    pub name: String,
+    pub ty: String,
 }
 
 #[derive(Debug, Clone, Default)]
 pub struct Service {
-    name: String,
-    namespaces: Vec<Namespace>,
-    pairs: Pairs,
-    infos: Infos,
+    pub name: String,
+    pub namespaces: Vec<Namespace>,
+    pub pairs: Pairs,
+    pub infos: Infos,
 }
 
 #[derive(Debug, Clone, Default)]
 pub struct Namespace {
-    name: String,
-    implement: Vec<String>,
-    new: New,
-    op: Vec<Op>,
+    pub name: String,
+    pub implement: Vec<String>,
+    pub new: New,
+    pub op: Vec<Op>,
 }
 
 #[derive(Debug, Clone, Default)]
 pub struct New {
-    required: Vec<String>,
-    optional: Vec<String>,
+    pub required: Vec<String>,
+    pub optional: Vec<String>,
 }
 
 #[derive(Debug, Clone, Default)]
 pub struct Op {
-    name: String,
-    required: Vec<String>,
-    optional: Vec<String>,
+    pub name: String,
+    pub required: Vec<String>,
+    pub optional: Vec<String>,
 }
 
 pub type Pairs = Vec<Pair>;
 
 #[derive(Debug, Clone)]
 pub struct Pair {
-    name: String,
-    ty: String,
-    description: String,
+    pub name: String,
+    pub ty: String,
+    pub description: String,
 }
 
 pub type Infos = Vec<Info>;
 
 #[derive(Debug, Clone)]
 pub struct Info {
-    scope: String,
-    category: String,
-    name: String,
-    ty: String,
-    export: bool,
-    description: String,
+    pub scope: String,
+    pub category: String,
+    pub name: String,
+    pub ty: String,
+    pub export: bool,
+    pub description: String,
 }
 
 pub fn parse_services(file_path: &str) -> Result<Service> {
