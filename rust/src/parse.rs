@@ -94,6 +94,8 @@ pub fn parse_pairs() -> Result<super::Pairs> {
         })
     }
 
+    ps.sort_by_key(|i| i.name.clone());
+
     Ok(ps)
 }
 
@@ -127,6 +129,8 @@ pub fn parse_infos() -> Result<super::Infos> {
             description: v.description.clone(),
         })
     }
+
+    ps.sort_by_key(|i| i.name.clone());
 
     Ok(ps)
 }
