@@ -9,7 +9,7 @@ documentation = "https://docs.rs/aos-specs"
 repository = "https://github.com/aos-dev/specs"
 
 [dependencies]
-serde = { version = "1.0.119", features = ["derive"] }
+serde = { version = "1.0.122", features = ["derive"] }
 toml = "0.5.8"
 anyhow = "1.0.38"
 lazy_static = "1.4.0"
