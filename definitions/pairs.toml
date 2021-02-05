@@ -52,13 +52,6 @@ description = "specify what todo every time we read data from source"
 type = "int64"
 description = "specify size for this request, storage will only read limited content data"
 
-[storage_class]
-type = "string"
-
-[user_agent]
-type = "string"
-description = "specify the custom user-agent from client"
-
 [work_dir]
 type = "string"
 description = """

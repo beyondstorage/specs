@@ -149,5 +149,5 @@ results     = ["o"]
 [storager.op.write]
 description = "will write data into a file."
 params      = ["path", "r", "size"]
-pairs       = ["storage_class", "content_type", "content_md5", "io_callback"]
+pairs       = ["content_type", "content_md5", "io_callback"]
 results     = ["n"]
