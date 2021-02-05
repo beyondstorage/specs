@@ -27,12 +27,11 @@ In order to unify object metadata behavior so that we can handle them in the sam
 
 The problem is: How to implement cross-storage operations？
 
-Giving a set object, how to migrate them to another storage services without changing it's behavior? For example, permission on local file system, storage class on object storage class.
-
+Giving a set object, how to migrate them to another storage services without changing its behavior? For example, permission on local file system, storage class on object storage class.
 
 ## Proposal
 
-Split all metadata into three groups:
+So, I propose to split all metadata into four groups which based on the definer:
 
 - global metadata: defined via framework
     - id
@@ -47,13 +46,13 @@ Split all metadata into three groups:
     - etag
     - last-modified
     - ...
-- service metadata: defined via service implemantations
+- service metadata: defined via service implementations
     - x-amz-storage-class
     - x-qs-storage-class
     - ...
 - user metadata: defined via user input.
 
-`global` and `standard` metadata will be included in object type. `service` and `user-defined` metadata will be stored in a hash map inside object type.
+Both `global` and `standard` metadata will be included in object type. Both `service` and `user-defined` metadata will be stored in a hash map inside object type.
 
 Use `golang` as example:
 
