@@ -57,6 +57,13 @@ For the first one, it would be weird to set a field whose operation is not imple
 For example, the [fs-service] does not implement `WriteIndexSegment` operation, we do not need a field like `WriteIndexSegmentPair`.
 All the pairs are generated from specs, so we choose the second way.
 
+We can get all available operations for each specific namespace.
+So that if the service only implements `Storager`, only `DefaultStoragePairs` struct will be generated.   
+**Notice:** 
+1. Both the struct and its fields should be public, so that we can access the fields fluently.
+2. The `DefaultXXXPairs` is also a pair, which should only work in `New` action, 
+so we should declare the pair explicitly in service's definition (e.g.: in `service.toml`).  
+
 ### Parse pairs in specific operation
 
 When parsing pairs in specific operation, we should combine default pairs and `pairs from args`,
