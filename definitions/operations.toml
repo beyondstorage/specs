@@ -145,6 +145,7 @@ results     = ["n"]
 description = "will create a new object without any api call."
 params      = ["path"]
 results     = ["o"]
+local       = true
 
 [storager.op.stat]
 description = "will stat a path to get info of an object."
