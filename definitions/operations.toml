@@ -141,6 +141,11 @@ params      = ["path", "w"]
 pairs       = ["size", "offset", "io_callback"]
 results     = ["n"]
 
+[storager.op.new]
+description = "will create a new object without any api call."
+params      = ["path"]
+results     = ["o"]
+
 [storager.op.stat]
 description = "will stat a path to get info of an object."
 params      = ["path"]
