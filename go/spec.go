@@ -37,6 +37,7 @@ type Operation struct {
 	Params      []string
 	Pairs       []string
 	Results     []string
+	Local       bool
 }
 
 // Field is the spec for field.
