@@ -22,6 +22,18 @@ type = "time"
 type = "string"
 description = "LinkTarget is the symlink target for link object."
 
+[max-part-count]
+type = "int"
+description = "Maximum part number in multipart operation"
+
+[max-part-size]
+type = "int64"
+description = "Maximum part size defined by storager"
+
+[min-part-size]
+type = "int64"
+description = "Minimum part size defined by storager"
+
 [mode]
 type = "ObjectMode"
 export = true
