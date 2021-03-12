@@ -30,6 +30,18 @@ export = true
 type = "string"
 description = "MultipartID is the part id of part object."
 
+[multipart-number-maximum]
+type = "int"
+description = "Maximum part number in multipart operation"
+
+[multipart-size-maximum]
+type = "int64"
+description = "Maximum part size defined by storager"
+
+[multipart-size-minimum]
+type = "int64"
+description = "Minimum part size defined by storager"
+
 [path]
 type = "string"
 export = true
