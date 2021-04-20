@@ -1,3 +1,7 @@
+[append-offset]
+type = "int64"
+description = "AppendOffset is the offset of the append object"
+
 [content-length]
 type = "int64"
 
