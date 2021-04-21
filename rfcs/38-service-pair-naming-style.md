@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-04-21
 ---
 
-# Proposal: Service Pair Naming Style
+# AOS-38: Service Pair Naming Style
 
 ## Background
 
