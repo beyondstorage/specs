@@ -10,7 +10,7 @@ updated_at: 2021-04-21
 
 There are 10 services have been implemented and more services are on the way, and every service may have their only pairs. We need to design a naming style that meets following needs:
 
-- No ambiguity: the pair should be confused with other pairs.
+- No ambiguity: the pair should not be confused with other pairs.
 - Cross Language: the pair's name should not contain the language related details.
 - Easy to follow and learn: the pair's naming style should be easy to follow.
 
