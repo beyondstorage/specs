@@ -60,6 +60,8 @@ So we should add following pairs:
 - `server-side-encryption-customer-key`
 - `server-side-encryption-customer-key-md5`
 
+There is an exception for Servicer & Storager's `new` operation's pairs. Those pairs should follow the SDK's option name.
+
 ## Rationale
 
 N/A
