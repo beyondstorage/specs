@@ -22,6 +22,8 @@ So I propose following service pair naming style.
 
 the style only applies for service's pairs and infos, global pairs' name should be discussed in related RFCs.
 
+`new` operation's pairs are also not included. Those pairs should follow the SDK's option name.
+
 ### Rule
 
 We should adopt a style called `API Native Style` which means our pairs name should be native in original API.
@@ -59,8 +61,6 @@ So we should add following pairs:
 - `server-side-encryption-customer-algorithm`
 - `server-side-encryption-customer-key`
 - `server-side-encryption-customer-key-md5`
-
-There is an exception for Servicer & Storager's `new` operation's pairs. Those pairs should follow the SDK's option name.
 
 ## Rationale
 
