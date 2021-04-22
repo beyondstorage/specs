@@ -22,6 +22,21 @@ So I propose following service pair naming style.
 
 the style only applies for service's pairs and infos, global pairs' name should be discussed in related RFCs.
 
+If a pair could be used with no service type check, we can consider adding it into global service, otherwise, we need to keep it as service pair.
+
+```go
+// size & offset can be used in any service
+_, err = store.Read("abc", pairs.WithSize(1024), pairs.Offset(4096))
+// But s3 storage class can only be used in s3's store
+
+var pairs []types.Pair
+switch tp {
+    case s3.Type:
+        pairs = append(pairs, s3.WithStorageClass("STANDARD_IA"))
+}
+_, err = store.Read("abc", pairs...)
+```
+
 `new` operation's pairs are also not included. Those pairs should follow the SDK's option name.
 
 ### Rule
@@ -61,6 +76,12 @@ So we should add following pairs:
 - `server-side-encryption-customer-algorithm`
 - `server-side-encryption-customer-key`
 - `server-side-encryption-customer-key-md5`
+
+Pair type should use their real type, for `server-side-encryption-customer-key` here, it's real type is `[]byte`.
+
+Because HTTP headers only allow string, so we have to encode it to base64 like boolean `True`/`False` should be `"true"`/`"false"`. But it doesn't mean we have to set all header-related pairs type to string, this makes it much less easy to use.
+
+So we use the `[]byte` and `boolean` for pairs type based on their real type.
 
 ## Rationale
 
