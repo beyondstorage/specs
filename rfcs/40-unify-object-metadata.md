@@ -78,8 +78,8 @@ type ObjectMetadata struct {
 And add following generated functions:
 
 ```go
-func SetObjectMetadata(o *Object, om *ObjectMetadata)
-func GetObjectMetadata(o *Object) *ObjectMetadata
+func SetObjectMetadata(o *Object, om *ObjectMetadata) {}
+func GetObjectMetadata(o *Object) *ObjectMetadata {}
 ```
 
 ## Rationale
