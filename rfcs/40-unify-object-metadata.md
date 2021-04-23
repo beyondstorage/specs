@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-04-23
 ---
 
-# Proposal: Unify Object Metadata
+# AOS-40: Unify Object Metadata
 
 ## Background
 
