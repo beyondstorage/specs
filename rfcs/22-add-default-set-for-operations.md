@@ -1,6 +1,6 @@
 ---
 author: Lance <github.com/Prnyself>
-status: candidate
+status: finished
 updated_at: 2020-12-10
 ---
 

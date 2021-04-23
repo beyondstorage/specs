@@ -1,10 +1,10 @@
 ---
 author: Xuanwo <github@xuanwo.io>
 status: draft
-updated_at: 2021-02-03
+updated_at: 2021-04-23
 ---
 
-# Proposal: Unify Object Metadata
+# AOS-40: Unify Object Metadata
 
 ## Background
 
@@ -52,23 +52,53 @@ So, I propose to split all metadata into four groups which based on the definer:
     - ...
 - user metadata: defined via user input.
 
-Both `global` and `standard` metadata will be included in object type. Both `service` and `user-defined` metadata will be stored in a hash map inside object type.
+Both `global` and `standard` metadata will be included in object type.
+`service` metadata will be stored in a struct that defined by service.
+`user-defined` metadata will be stored in a hash map inside object type.
 
 Use `golang` as example:
 
 - `id` will be `id string`
 - `content md5` will be `contentMd5 string`
-- service metadata will be `serviceMetadata map[string]interface{}`
+- service metadata will be `serviceMetadata interface{}`
 - user metadata will be `userMetadata map[string]string`
+
+For service metadata,  we will introduce `Strong Typed Service Metadata`. We can generate following struct for every service:
+
+```go
+// For Service A
+type ObjectMetadata struct {
+    ServerSideEncryption                 string
+    ServerSideEncryptionAwsKmsKeyID      string
+    ServerSideEncryptionBucketKeyEnabled bool
+    StorageClass                         string
+    ...
+}
+
+// For Service B
+type ObjectMetadata struct {
+	ContentSha256 []byte
+	...
+}
+```
+
+And add following generated functions in service packages:
+
+```go
+// Only be used in service to set object metadata.
+func setObjectMetadata(o *Object, om *ObjectMetadata) {}
+// Only be used outside service package to get service metadata.
+func GetObjectMetadata(o *Object) *ObjectMetadata {}
+```
 
 ## Rationale
 
-TODO
+N/A
 
 ## Compatibility
 
-TODO
+All API call that used service metadata could be affected.
 
 ## Implementation
 
-TODO
+This proposal been implemented partially in go-storage with service metadata implemented as `map[string]string`, which made it hard to use.
