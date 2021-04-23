@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-04-23
 ---
 
-# Proposal: Turn Pair Expire into Duration
+# AOS-41: Turn Pair Expire into Duration
 
 ## Background
 
