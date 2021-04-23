@@ -63,9 +63,10 @@ Use `golang` as example:
 - service metadata will be `serviceMetadata interface{}`
 - user metadata will be `userMetadata map[string]string`
 
-For service metadata,  we will introduce `Strong Typed Service Metadata`. We can generate following struct:
+For service metadata,  we will introduce `Strong Typed Service Metadata`. We can generate following struct for every service:
 
 ```go
+// For Service A
 type ObjectMetadata struct {
     ServerSideEncryption                 string
     ServerSideEncryptionAwsKmsKeyID      string
@@ -73,12 +74,20 @@ type ObjectMetadata struct {
     StorageClass                         string
     ...
 }
+
+// For Service B
+type ObjectMetadata struct {
+	ContentSha256 []byte
+	...
+}
 ```
 
-And add following generated functions:
+And add following generated functions in service packages:
 
 ```go
-func SetObjectMetadata(o *Object, om *ObjectMetadata) {}
+// Only be used in service to set object metadata.
+func setObjectMetadata(o *Object, om *ObjectMetadata) {}
+// Only be used outside service package to get service metadata.
 func GetObjectMetadata(o *Object) *ObjectMetadata {}
 ```
 
