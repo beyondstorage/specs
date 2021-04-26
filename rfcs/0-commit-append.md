@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-04-26
 ---
 
-# Proposal: Add CommitAppend in Appender
+# AOS-44: Add CommitAppend in Appender
 
 ## Background
 
