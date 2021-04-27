@@ -2,6 +2,18 @@
 type = "int64"
 description = "AppendOffset is the offset of the append object"
 
+[append-number-maximum]
+type = "int"
+description = "Max append numbers in append operation"
+
+[append-size-maximum]
+type = "int64"
+description = "Max append size in per append operation"
+
+[append-total-size-maximum]
+type = "int64"
+description = "Max append total size in append operation"
+
 [content-length]
 type = "int64"
 
