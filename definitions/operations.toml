@@ -11,6 +11,10 @@ description = "will append content to an append object."
 params = ["o", "r", "size"]
 results = ["n"]
 
+[appender.op.commit_append]
+description = "will commit and finish an append process."
+params = ["o"]
+
 [blocker]
 description = "is the interface for Block related operations."
 
