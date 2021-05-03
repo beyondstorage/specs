@@ -25,13 +25,13 @@ type SomeError struct {
 
 The `Err` field wraps the cause of the error. 
 - For unexpected error, it will be wrapped directly. 
-- For expected error, the related error should be used directly. However, it is not strictly specified how to define and use expected errors. 
+- For expected error, the related error should be used directly.
 
 ### Current Practice
 
 Currently, the error handling mechanism in [go-storage] can be summarized as below:
 
-- top-level: `InitError`, `ServiceError` and `StorageError`
+- top-level error `struct`s (returned by public APIs): `InitError`, `ServiceError` and `StorageError`
 	- defined in [go-storage/services/error.go]
 	- have `Op`, `Err` and context fields
 	- returned in `defer` in `go-service-*`s' public APIs
@@ -39,34 +39,24 @@ Currently, the error handling mechanism in [go-storage] can be summarized as bel
 		- For other handwritten public APIs like `New`, the implementor should similarly return a top-level error like `InitError`.
 	- They are orthogonal (won't wrap each other).
 
-- middle-level: `MetadataUnrecognizedError`, `PairUnsupportedError`, `PairRequiredError`
-	- wrapped by top-level errors
-	- defined in [go-storage/services/error.go]
-	- have `Err` and context fields, don't have `Op`
-	- returned in `go-service-*` by generated parse functions and handwritten `new` functions
-
-- bottom-level: the most deeply wrapped error
-	- wrapped by top-level or intermediate-level errors
-	- are either 
-		- from SDKs: `*googleapi.Error`, `*qserror.QingStorError`, ...
-		- sentinel errors: 
-			- `var ErrSomethingWrong = errors.New("what happened")`
-			- defined in either [go-storage/services/error.go] or `go-service-*/error.go`
-		- ad-hoc string errors: `errors.New()` or `fmt.Errorf()` without `%w` verb wrapping an error inside
-
-And correspondingly, the lifetime of an error is:
-1. Returned by SDK as a SDK error.
-2. Converted into a sentinel error or an ad-hoc string error if it is what we expected. Otherwise, kept as it is.
-3. Wrapped into one or more layers of error `struct`s 
+- `Err`s wrapped are either:
+  - unexpected errors: original SDK errors: `*googleapi.Error`, `*qserror.QingStorError`, ...
+  - expected errors, either:
+    - ad-hoc string errors: `errors.New()` or `fmt.Errorf()` without `%w` verb
+    - sentinel errors wrapped by `fmt.Errorf` with `%w`: 
+    	- defined in either [go-storage/services/error.go] or `go-service-*/error.go`
+    	- defined as `var ErrSomethingWrong = errors.New("what happened")`
+    	- returned in `fmt.Errorf("%w: %v", services.ErrObjectNotExist, err)`, carrying error messages of original SDK errors
+    - another layer of error `struct`s carrying contextual information: `MetadataUnrecognizedError`, `PairUnsupportedError`, `PairRequiredError`
+    	- defined in [go-storage/services/error.go]
+    	- have `Err` and context fields, don't have `Op`
+    	- returned by constructor methods, where `Err` is set to a sentinel error, which can be viewed as the error `struct`s' classification
 
 ### Problems
 
-#### Nonunified bottom-level errors
+#### Unexpected Errors: Abstraction Leak
 
-The bottom-level errors are the really cause of the errors, so it will be good if they can enable users to identify and handle errors more easily. But now they can't.
-
-1. Ad-hoc string errors are not user-friendly. The user cannot use `errors.Is` & `errors.As` to handle such errors specially.
-2. Wrapping (partial) SDK errors will lead to abstraction leak. In terms of error handling, being vendor agnostic means we should provide a unified custom error to hide the SDK errors, e.g., we convert some SDK errors into our `ErrObjectNotExist`. However, unexpected errors will be wrapped directly. It is possible that users use `errors.Is` & `errors.As` targeting SDK errors. Then problems will come when we add a new kind of expected error and convert some SDK errors into it. It may be confusing that some SDK errors are wrapped, while the others are not. Below is an example of such partial conversion.
+Wrapping (partial) SDK errors will lead to abstraction leak. In terms of error handling, being vendor agnostic means we should provide a unified custom error to hide the SDK errors, e.g., we convert some SDK errors into our `ErrObjectNotExist`. However, unexpected errors will be wrapped directly. It is possible that users use `errors.Is` & `errors.As` targeting SDK errors. Then problems will come when we add a new kind of expected error and convert some SDK errors into it. It may be confusing that some SDK errors are wrapped, while the others are not. Below is an example of such partial conversion.
 
 ```go
 func formatError(err error) error {
@@ -87,15 +77,21 @@ func formatError(err error) error {
 	return err
 }
 ```
-#### Unclear error layers
 
-`11-error-handling` is not detailed enough. It talked about expected and unexpected errors, but not the error layers. Below are not clear:
+Although we declared in `11-error-handling` that unexpected errors could be changed or disappeared while dependence upgraded and no changelog for them, we'd better simply eliminate the possibility of using them.
 
-1. There exist mid-level contextual errors wrapped by top-level contextual errors, and mid-level errors do not have `Op`.
-2. It is not specified how to define bottom-level expected errors.
+#### Expected Errors
 
+`11-error-handling` is not detailed enough. It does not specify how to define and use expected errors. Current practice has too many cases, and has some problems. Both users and implementors may be confused which kind of error should be returned at which place.
 
-As a result, both users and implementors may be confused which kind of error should be returned at which place.
+- Ad-hoc string errors are not user-friendly. The user cannot use `errors.Is` & `errors.As` to handle such errors specially. We should avoid using them.
+
+- Another layer of error `struct`s may be confusing.
+  - It may be mistaken for top-level errors.
+  - Their `Err` fields are also confusing.
+    - Will they wrap yet another layer of error `struct`s? 
+    - If it will be the same for all instances, not intended for the caller to fill in, and only accessed via `Unwrap`, we can actually hide the field.
+    - The wrapped errors seem like the super class. It may be more reasonable to wrap other errors instead of being wrapped. But the order does not matter in the error chain.
 
 ## Proposal
 
@@ -112,29 +108,40 @@ So I propose the following error handling specification as a supplement of `11-e
 		...
 	}
 	```
-2. The bottom-level (most deeply wrapped) errors MUST be either:
-   - sentinel errors defined somewhere, if it is an expected error.
-   - `fmt.Errorf("%v", err)`, if it is an unexpected error. SDK errors are NEVER wrapped.
-3. There CAN be zero or more middle-level errors between top-level and bottom-level errors, which MUST be defined as below:
-	```go
-	type SomeError struct {
-		Err error
+2. For the wrapped error:
+   - If it is an unexpected error, it MUST be `fmt.Errorf("%v", err)`. SDK errors SHOULD not be wrapped.
+   - If it is an expected error, it MUST be created by either
+     - `fmt.Errorf("%w: %v", SomeError, err)` where
+       - `SomeError` is defined as a sentinel error `var SomeError = errors.New("what happened")`
+       - `err` is the original SDK error
+     - `NewSomeError(contextA, contextB)` where 
+       - `SomeError` is returned and it is defined as:
+			```go
+			type SomeError struct {
+				ContextA string
+				ContextB structB
+				...
+			}
+			```
+       - `SomeError` SHOULD implement `Error`
+       - `SomeError` CAN implement `Unwrap`, returning the category (or the label) of the error, which is a sentinel error
 
-		ContextA string
-		ContextB structB
-		...
-	}
-	```
+In short, compared with current practice, there are three changes:
+1. Ad-hoc string errors SHOULD not be used.
+2. SDK errors SHOULD not be wrapped.
+3. Wrapped error `struct`s won't wrap another layer of error `struct`s, and its wrapped `Err` is hidden.
+
+Besides, we should list all available errors in the docs.
 
 ### Where to define expected errors
 
 Top-level errors SHOULD be defined in [go-storage].
 
-For other errors, if an error is related to a feature supported by service pairs, e.g., server-side encryption, it is considered a service-specific error and should be defined in `go-service-*`. Otherwise, it should be defined in [go-storage].
+For wrapped errors, if an error is related to a feature supported by service pairs, e.g., server-side encryption, it is considered a service-specific error and should be defined in `go-service-*`. Otherwise, it should be defined in [go-storage].
 
-### Alternative 1: Single Top-level Error
+### Alternative 1: Single Top-level Error and Multiple Middle-level Errors
 
-Since the only difference between top-level and middle-level errors is `Op`, we can provide a single top-level `Error` type as below, and old top-level errors are turned into middle-level errors.
+We can provide a single top-level `Error` type as below, and old top-level errors are turned into middle-level errors.
 
 ```go
 type Error struct {
@@ -143,15 +150,17 @@ type Error struct {
 }
 ```
 
+And we allow zero or more error `struct`s to be nested.
+
 #### Pros
 
-- Easier to understand the error layers.
 - The user can get `Op` by `As(Error)`, instead of figuring out which top-level error it is. (But `Op` may be rare to be need elsewhere than in an error message.)
+- Multiple middle-level errors are more expressive.
 
 #### Cons 
 
 - Introduce break change.
-- Former top-level errors degraded to the same category as other middle-level errors. (Formerly, each of them is special.) 
+- Too many levels may be too complex both for implementors and users.
 
 ### Alternative 2: Wrapping all SDK errors
 
@@ -173,13 +182,18 @@ The current situation has almost reached the goal of letting users know "where" 
 - The top-level errors' `Op` and their names tell users "where".
 - The context fields and the wrapped error can provide rich error message, telling users "why".
 
-But we can do more: let users handle error gracefully.Ad-hoc string error can not be handled by users, so we should ban them.
-
-And our goal is to provide a unified user experience: define an abstract layer of errors for the users, free them of the tedium of handling similar errors from multiple SDKs.
+But we can do more: let users handle error gracefully. The following can be done:
+- Help users quickly identify errors: 
+  - Ad-hoc string error can not be identified, so we should ban them.
+  - If we have too many levels, the users may use too general or too specific errors. We should provide proper granularity.
+- Provide a unified user experience: define an abstract layer of errors for the users, free them of the tedium of handling similar errors from multiple SDKs.
 
 ## Compatibility
 
-Only need to extract some ad-hoc string errors into defined sentinel errors.
+The following changes will be made:
+- Extract some ad-hoc string errors into defined sentinel errors. (forward compatible)
+- Turn SDK errors into `fmt.Errorf("%v", err)`. (not forward compatible, but doesn't violate our promise)
+- Some error `struct`s' `Err` field will be removed. (not forward compatible)
 
 ## Implementation
 
