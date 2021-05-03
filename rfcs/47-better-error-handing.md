@@ -52,6 +52,7 @@ Currently, the error handling mechanism in [go-storage] can be summarized as bel
     	- have `Err` and context fields, don't have `Op`
     	- returned by constructor methods, where `Err` is set to a sentinel error, which can be viewed as the error `struct`s' classification
 
+![](https://user-images.githubusercontent.com/37948597/116873067-9ce86c80-ac49-11eb-9409-91dcc84da340.png)
 ### Problems
 
 #### Unexpected Errors: Abstraction Leak
@@ -125,6 +126,8 @@ So I propose the following error handling specification as a supplement of `11-e
 			```
        - `SomeError` SHOULD implement `Error`
        - `SomeError` CAN implement `Unwrap`, returning the category (or the label) of the error, which is a sentinel error
+
+![](https://user-images.githubusercontent.com/37948597/116872935-6dd1fb00-ac49-11eb-8f25-8983d564ba66.png)
 
 In short, compared with current practice, there are three changes:
 1. Ad-hoc string errors SHOULD not be used.
