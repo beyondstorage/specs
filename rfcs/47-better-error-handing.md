@@ -4,7 +4,7 @@ status: draft
 updated_at: 2020-05-03
 ---
 
-# AOS-xx: Better Error Handling
+# AOS-47: Better Error Handling
 
 ## Background
 
