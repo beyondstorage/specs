@@ -158,6 +158,7 @@ And we allow zero or more error `struct`s to be nested.
 #### Pros
 
 - The user can get `Op` by `As(Error)`, instead of figuring out which top-level error it is. (But `Op` may be rare to be need elsewhere than in an error message.)
+- What's more, we can add more common fields like HTTP status code in the top-level error.
 - Multiple middle-level errors are more expressive.
 
 #### Cons 
@@ -171,6 +172,7 @@ Wrapping SDK errors partially is bad. Then besides never wrapping them, we can a
 
 #### Pros 
 
+- Do not lose error information.
 - The user can handle original SDK errors transparently with `As` & `Is`.
 
 #### Cons
