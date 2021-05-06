@@ -113,10 +113,9 @@ So I propose the following error handling specification as a supplement of `11-e
    - If it is an unexpected error, it MUST be `fmt.Errorf("%w: %v", ErrUnexpected, err)`
      - `ErrUnexpected` is defined as: `var ErrUnexpected = errors.New("go-storage can't handle this error")`. 
      - SDK errors SHOULD not be wrapped.
-   - If it is an expected error, it MUST be created by either
-     - `fmt.Errorf("%w: %v", SomeError, err)` where
-       - `SomeError` is an exported public variable containing an `error` value created by `errors.New()` (a.k.a. a sentinel error): `var SomeError = errors.New("what happened")`
-       - `err` is the original SDK error
+   - If it is an expected error, it MUST be either
+     - an exported public variable containing an `error` value created by `errors.New()` (a.k.a. a sentinel error)
+       - `var SomeError = errors.New("what happened")`
      - `NewSomeError(contextA, contextB)` where 
        - `SomeError` is returned and it is defined as:
 			```go
@@ -128,7 +127,10 @@ So I propose the following error handling specification as a supplement of `11-e
 			```
        - `SomeError` SHOULD implement `Error`
        - `SomeError` CAN implement `Unwrap`, returning the category (or the label) of the error, which is a sentinel error
-
+     - `fmt.Errorf("%w: %v", SomeError, err)` if the expected error is caused by another `error` value
+       - `SomeError` is one of the two kind of errors above
+       - `err` is the original error
+     
 Real examples of expected errors:
 
 Definitions:
