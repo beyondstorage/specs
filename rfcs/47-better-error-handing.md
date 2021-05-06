@@ -113,7 +113,7 @@ So I propose the following error handling specification as a supplement of [AOS-
    - Only include `InitError`, `ServiceError` and `StorageError`
 2. For the wrapped error:
    - If it is an unexpected error, it MUST be `fmt.Errorf("%w: %v", ErrUnexpected, err)`
-     - `ErrUnexpected` is defined as: `var ErrUnexpected = errors.New("go-storage can't handle this error")`. 
+     - `ErrUnexpected` is defined as: `var ErrUnexpected = errors.New("unexpected")`. 
      - SDK errors SHOULD not be wrapped.
    - If it is an expected error, it MUST be either
      - an exported public variable containing an `error` value created by `errors.New()` (a.k.a. a sentinel error)
@@ -240,7 +240,7 @@ But we can do more: let users handle error gracefully. The following can be done
 
 The following changes will be made:
 - Extract some ad-hoc string errors into defined sentinel errors. (forward compatible)
-- Turn SDK errors into `fmt.Errorf("%v", err)`. (not forward compatible, but doesn't violate our promise)
+- Turn SDK errors into `fmt.Errorf("%w, %v", ErrUnexpected, err)`. (not forward compatible, but doesn't violate our promise)
 - Some error `struct`s' `Err` field will be removed. (not forward compatible)
 
 ## Implementation
