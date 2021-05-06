@@ -109,6 +109,8 @@ So I propose the following error handling specification as a supplement of `11-e
 		...
 	}
 	```
+   - SHOULD implement `Error` and `Unwrap`
+   - Only include `InitError`, `ServiceError` and `StorageError`
 2. For the wrapped error:
    - If it is an unexpected error, it MUST be `fmt.Errorf("%w: %v", ErrUnexpected, err)`
      - `ErrUnexpected` is defined as: `var ErrUnexpected = errors.New("go-storage can't handle this error")`. 
