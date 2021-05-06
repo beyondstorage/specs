@@ -183,6 +183,21 @@ Top-level errors SHOULD be defined in [go-storage].
 
 For wrapped errors, if an error is related to a feature supported by service pairs, e.g., server-side encryption, it is considered a service-specific error and should be defined in `go-service-*`. Otherwise, it should be defined in [go-storage].
 
+### Naming convention
+
+Except that
+- Top-level errors are named as `<noun>Error`, `StorageError`, `ServiceError`, `InitError`
+- Unexpected error is named as `ErrUnexpected`
+
+Error `struct`s SHOULD be named as `<noun><adj>Error`, and sentinel errors SHOULD be named as `Err<noun><adj>`.
+
+Because we can organize them via `<noun>` easily:
+- `ObjetNotExist`
+- `ObjectModeInvalid`
+
+instead of
+- `NotExistObject`
+- `InvalidObjectMode`
 ### Alternative 1: Single Top-level Error and Multiple Middle-level Errors
 
 We can provide a single top-level `Error` type as below, and old top-level errors are turned into middle-level errors.
