@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-05-06
 ---
 
-# Proposal: Service Registry
+# AOS-48: Service Registry
 
 ## Background
 
