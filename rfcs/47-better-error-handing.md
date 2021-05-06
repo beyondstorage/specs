@@ -53,6 +53,7 @@ Currently, the error handling mechanism in [go-storage] can be summarized as bel
     	- returned by constructor methods, where `Err` is set to a sentinel error, which can be viewed as the error `struct`s' classification
 
 ![](./47/old.png)
+
 ### Problems
 
 #### Unexpected Errors: Abstraction Leak
