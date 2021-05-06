@@ -110,7 +110,9 @@ So I propose the following error handling specification as a supplement of `11-e
 	}
 	```
 2. For the wrapped error:
-   - If it is an unexpected error, it MUST be `fmt.Errorf("%v", err)`. SDK errors SHOULD not be wrapped.
+   - If it is an unexpected error, it MUST be `fmt.Errorf("%w: %v", ErrUnexpected, err)`
+     - `ErrUnexpected` is defined as: `var ErrUnexpected = errors.New("go-storage can't handle this error")`. 
+     - SDK errors SHOULD not be wrapped.
    - If it is an expected error, it MUST be created by either
      - `fmt.Errorf("%w: %v", SomeError, err)` where
        - `SomeError` is an exported public variable containing an `error` value created by `errors.New()` (a.k.a. a sentinel error): `var SomeError = errors.New("what happened")`
