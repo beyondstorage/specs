@@ -133,7 +133,7 @@ So I propose the following error handling specification as a supplement of [AOS-
      - `fmt.Errorf("%w: %v", SomeError, err)` if the expected error is caused by another `error` value
        - `SomeError` is one of the two kind of errors above
        - `err` is the original error
-     
+
 Real examples of expected errors:
 
 Definitions:
@@ -175,13 +175,13 @@ In short, compared with current practice, there are three changes:
 2. SDK errors SHOULD not be wrapped.
 3. Wrapped error `struct`s won't wrap another layer of error `struct`s, and its wrapped `Err` is hidden.
 
-Besides, we should list all available errors in the docs.
-
 ### Where to define expected errors
 
 Top-level errors SHOULD be defined in [go-storage].
 
-For wrapped errors, if an error is related to a feature supported by service pairs, e.g., server-side encryption, it is considered a service-specific error and should be defined in `go-service-*`. Otherwise, it should be defined in [go-storage].
+For wrapped errors, if an error is related to a feature supported by service pairs, e.g., server-side encryption, it is considered a service-specific error and should be defined in `go-service-*`. Otherwise, it is considered a global error and should be defined in [go-storage].
+
+New global errors except the ones listed in this RFC should be defined via the RFC procedure.
 
 ### Naming convention
 
@@ -198,6 +198,18 @@ Because we can organize them via `<noun>` easily:
 instead of
 - `NotExistObject`
 - `InvalidObjectMode`
+
+### All currently available global expected errors 
+
+- ErrCapabilityInsufficient
+  - MetadataUnrecognizedError
+  - PairUnsupportedError
+- ErrRestrictionDissatisfied
+  - PairRequiredError
+- ErrObjectNotExist
+- ErrObjectModeInvalid
+- ErrPermissionDenied
+- ErrListModeInvalid
 
 ## Rationale
 
