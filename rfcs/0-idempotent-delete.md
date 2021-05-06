@@ -1,10 +1,10 @@
 ---
 author: Xuanwo <github@xuanwo.io>
 status: draft
-updated_at: 2021-05-02
+updated_at: 2021-05-06
 ---
 
-# Proposal: Idempotent Storager Delete Operation
+# AOS-46: Idempotent Storager Delete Operation
 
 ## Background
 
