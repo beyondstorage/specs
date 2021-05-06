@@ -206,10 +206,11 @@ instead of
   - PairUnsupportedError
 - ErrRestrictionDissatisfied
   - PairRequiredError
+- ObjectModeInvalidError
+- ListModeInvalidError
 - ErrObjectNotExist
-- ErrObjectModeInvalid
 - ErrPermissionDenied
-- ErrListModeInvalid
+- ErrNewFuncNotRegistered
 
 ## Rationale
 
