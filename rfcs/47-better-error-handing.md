@@ -239,14 +239,20 @@ But we can do more: let users handle error gracefully. The following can be done
 
 ## Compatibility
 
-The following changes will be made:
-- Extract some ad-hoc string errors into defined sentinel errors. (forward compatible)
-- Turn SDK errors into `fmt.Errorf("%w, %v", ErrUnexpected, err)`. (not forward compatible, but doesn't violate our promise)
+- SDK errors will not be wrapped any more and will be turned into `fmt.Errorf("%w, %v", ErrUnexpected, err)`, so the user cannot use `As` & `Is` to access them. (not forward compatible, but doesn't violate our promise)
 - Some error `struct`s' `Err` field will be removed. (not forward compatible)
 
 ## Implementation
 
 Most of the work would be done by the author of this proposal.
+
+The following changes will be made:
+- [go-storage]:
+  - Remove non-top-level error `struct`s' `Err` field. 
+  - Add some error definitions.
+- `go-service-*`:
+  - Turn ad-hoc string errors into defined errors.
+  - Turn SDK errors into `fmt.Errorf("%w, %v", ErrUnexpected, err)`.
 
 [AOS-11]: ./11-error-handling.md
 [go-storage]: https://github.com/aos-dev/go-storage
