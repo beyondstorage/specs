@@ -198,6 +198,24 @@ Because we can organize them via `<noun>` easily:
 instead of
 - `NotExistObject`
 - `InvalidObjectMode`
+
+## Rationale
+
+First, it is necessary to state more clearly the current practice and turn it into a specification.
+
+The current situation has almost reached the goal of letting users know "where" and "why" an error happens:
+- The top-level errors' `Op` and their names tell users "where".
+- The context fields and the wrapped error can provide rich error message, telling users "why".
+
+But we can do more: let users handle error gracefully. The following can be done:
+- Help users quickly identify errors: 
+  - Ad-hoc string error can not be identified, so we should ban them.
+  - If we have too many levels, the users may use too general or too specific errors. We should provide proper granularity. The proposal's granularity can be described as:
+    - Top-level errors decide which component the errors belong to.
+    - Wrapped errors are specific. There isn't a more specific error type.
+    - If some wrapped errors can be grouped together, their `Unwrap` will return a sentinel error representing the category.
+- Provide a unified user experience: define an abstract layer of errors for the users, free them of the tedium of handling similar errors from multiple SDKs.
+
 ### Alternative 1: Single Top-level Error and Multiple Middle-level Errors
 
 We can provide a single top-level `Error` type as below, and old top-level errors are turned into middle-level errors.
@@ -234,23 +252,6 @@ Wrapping SDK errors partially is bad. Then besides never wrapping them, we can a
 #### Cons
 
 - Introduce break change: former bottom-level sentinel errors like `ErrObjectNotExist` should wrap an original error now.
-
-## Rationale
-
-First, it is necessary to state more clearly the current practice and turn it into a specification.
-
-The current situation has almost reached the goal of letting users know "where" and "why" an error happens:
-- The top-level errors' `Op` and their names tell users "where".
-- The context fields and the wrapped error can provide rich error message, telling users "why".
-
-But we can do more: let users handle error gracefully. The following can be done:
-- Help users quickly identify errors: 
-  - Ad-hoc string error can not be identified, so we should ban them.
-  - If we have too many levels, the users may use too general or too specific errors. We should provide proper granularity. The proposal's granularity can be described as:
-    - Top-level errors decide which component the errors belong to.
-    - Wrapped errors are specific. There isn't a more specific error type.
-    - If some wrapped errors can be grouped together, their `Unwrap` will return a sentinel error representing the category.
-- Provide a unified user experience: define an abstract layer of errors for the users, free them of the tedium of handling similar errors from multiple SDKs.
 
 ## Compatibility
 
