@@ -59,10 +59,12 @@ So:
 
 ## Compatibility
 
-<proposal's compatibility statement>
+For `fs` and `dropbox`: `Delete` will not return `ObjectNotExist` anymore. 
 
 ## Implementation
 
-<proposal's implementation>
+- Update [go-integration-test](https://github.com/aos-dev/go-integration-test)
+  - Add a case that delete an object twice, and should not meet error.
+- Make sure all service implement delete correctly.
 
 [AOS-25]: ./25-object-mode.md
