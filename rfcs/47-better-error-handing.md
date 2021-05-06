@@ -129,6 +129,40 @@ So I propose the following error handling specification as a supplement of `11-e
        - `SomeError` SHOULD implement `Error`
        - `SomeError` CAN implement `Unwrap`, returning the category (or the label) of the error, which is a sentinel error
 
+Real examples of expected errors:
+
+Definitions:
+```go
+var (
+	// ErrCapabilityInsufficient means this service doesn't have this capability
+	ErrCapabilityInsufficient = errors.New("capability insufficient")
+
+	// ErrObjectNotExist means the object to be operated is not exist.
+	ErrObjectNotExist = errors.New("object not exist")
+)
+
+// NewPairUnsupportedError will create a new PairUnsupportedError.
+func NewPairUnsupportedError(pair types.Pair) *PairUnsupportedError {
+	return &PairUnsupportedError{
+		Pair: pair,
+	}
+}
+
+// PairUnsupportedError means this operation has unsupported pair.
+type PairUnsupportedError struct {
+	Pair types.Pair
+}
+
+func (e *PairUnsupportedError) Error() string {
+	return fmt.Sprintf("pair unsupported, %s: %s", e.Pair, ErrCapabilityInsufficient.Error())
+}
+
+// Unwrap implements xerrors.Wrapper
+func (e *PairUnsupportedError) Unwrap() error {
+	return ErrCapabilityInsufficient
+}
+```
+
 ![](./47/new.png)
 
 In short, compared with current practice, there are three changes:
