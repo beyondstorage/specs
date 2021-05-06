@@ -4,7 +4,7 @@ status: draft
 updated_at: 2020-05-03
 ---
 
-# AOS-47: Better Error Handling
+# AOS-47: Additional Error Specification
 
 ## Background
 
