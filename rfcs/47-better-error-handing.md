@@ -10,7 +10,7 @@ updated_at: 2020-05-03
 
 ### AOS-11
 
-`11-error-handling` proposed that in the top level, [go-storage] should return custom error `struct`s carrying contextual errors. Specifically, the `struct`s will have the following definitions:
+[AOS-11] proposed that in the top level, [go-storage] should return custom error `struct`s carrying contextual errors. Specifically, the `struct`s will have the following definitions:
 
 ```go
 type SomeError struct {
@@ -79,11 +79,11 @@ func formatError(err error) error {
 }
 ```
 
-Although we declared in `11-error-handling` that unexpected errors could be changed or disappeared while dependence upgraded and no changelog for them, we'd better simply eliminate the possibility of using them.
+Although we declared in [AOS-11] that unexpected errors could be changed or disappeared while dependence upgraded and no changelog for them, we'd better simply eliminate the possibility of using them.
 
 #### Expected Errors
 
-`11-error-handling` is not detailed enough. It does not specify how to define and use expected errors. Current practice has too many cases, and has some problems. Both users and implementors may be confused which kind of error should be returned at which place.
+[AOS-11] is not detailed enough. It does not specify how to define and use expected errors. Current practice has too many cases, and has some problems. Both users and implementors may be confused which kind of error should be returned at which place.
 
 - Ad-hoc string errors are not user-friendly. The user cannot use `errors.Is` & `errors.As` to handle such errors specially. We should avoid using them.
 
@@ -96,7 +96,7 @@ Although we declared in `11-error-handling` that unexpected errors could be chan
 
 ## Proposal
 
-So I propose the following error handling specification as a supplement of `11-error-handling`:
+So I propose the following error handling specification as a supplement of [AOS-11]:
 
 1. Public APIs SHOULD return top-level errors, which MUST be defined as below:
 	```go
@@ -247,5 +247,6 @@ The following changes will be made:
 
 Most of the work would be done by the author of this proposal.
 
+[AOS-11]: ./11-error-handling.md
 [go-storage]: https://github.com/aos-dev/go-storage
 [go-storage/services/error.go]: https://github.com/aos-dev/go-storage/blob/master/services/error.go
