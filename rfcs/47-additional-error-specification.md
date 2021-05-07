@@ -119,8 +119,8 @@ So I propose the following error handling specification as a supplement of [AOS-
    - If it is an expected error, it MUST be either
      - an exported public variable containing an `error` value created by `errors.New()` (a.k.a. a sentinel error)
        - `var SomeError = errors.New("what happened")`
-     - `NewSomeError(contextA, contextB)` where 
-       - `SomeError` is returned and it is defined as:
+     - an error `struct` `SomeError`
+       - it is defined as:
 			```go
 			type SomeError struct {
 				ContextA string
@@ -128,8 +128,10 @@ So I propose the following error handling specification as a supplement of [AOS-
 				...
 			}
 			```
-       - `SomeError` SHOULD implement `Error`
        - `SomeError` CAN implement `Unwrap`, returning the category (or the label) of the error, which is a sentinel error
+       - `SomeError` SHOULD implement `Error`
+         - the format should be `{Description}, {ContextA}, {ContextB}: {Err}`, where `Err` is its `Unwrap.Error()` 
+         - or `{Description}, {ContextA}, {ContextB}` if it does not implement `Unwrap`
      - `fmt.Errorf("%w: %v", SomeError, err)` if the expected error is caused by another `error` value
        - `SomeError` is one of the two kind of errors above
        - `err` is the original error
