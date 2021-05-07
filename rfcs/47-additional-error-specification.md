@@ -24,6 +24,7 @@ type SomeError struct {
 ```
 
 The `Err` field wraps the cause of the error. 
+
 - For unexpected error, it will be wrapped directly. 
 - For expected error, the related error should be used directly.
 
@@ -169,6 +170,7 @@ func (e PairUnsupportedError) Unwrap() error {
 ![](./47/new.png)
 
 In short, compared with current practice, there are three changes:
+
 1. Ad-hoc string errors SHOULD not be used.
 2. SDK errors SHOULD not be wrapped.
 3. Wrapped error `struct`s won't wrap another layer of error `struct`s, and its wrapped `Err` is hidden.
