@@ -101,7 +101,7 @@ Although we declared in [AOS-11] that unexpected errors could be changed or disa
 So I propose the following error handling specification as a supplement of [AOS-11]:
 
 An error code is an exported public variable containing an `error` value created by `errors.New()` (a.k.a. a sentinel error)
-- `var SomeError = errors. New("what happened")`
+- `var SomeError = errors.New("what happened")`
 
 1. Public APIs SHOULD return top-level errors, which MUST be defined as below:
 	```go
