@@ -212,7 +212,7 @@ instead of
 - ListModeInvalidError
 - ErrObjectNotExist
 - ErrPermissionDenied
-- ErrNewFuncNotRegistered
+- ErrServiceNotRegistered
 
 ## Rationale
 
