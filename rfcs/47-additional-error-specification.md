@@ -283,11 +283,13 @@ Most of the work would be done by the author of this proposal.
 
 The following changes will be made:
 - [go-storage]:
-  - Remove non-top-level error `struct`s' `Err` field. 
+  - Remove non-top-level error `struct`s' `Err` field.
+  - Replace error `struct`s' methods' pointer receiver with value receiver
   - Add some error definitions.
 - `go-service-*`:
   - Turn ad-hoc string errors into defined errors.
   - Turn SDK errors into `fmt.Errorf("%w, %v", ErrUnexpected, err)`.
+  - Return error `struct`s instead of pointers.
 
 [AOS-11]: ./11-error-handling.md
 [go-storage]: https://github.com/aos-dev/go-storage
