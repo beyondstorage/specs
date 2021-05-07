@@ -99,6 +99,9 @@ Although we declared in [AOS-11] that unexpected errors could be changed or disa
 
 So I propose the following error handling specification as a supplement of [AOS-11]:
 
+An error code is an exported public variable containing an `error` value created by `errors.New()` (a.k.a. a sentinel error)
+- `var SomeError = errors. New("what happened")`
+
 1. Public APIs SHOULD return top-level errors, which MUST be defined as below:
 	```go
 	type SomeError struct {
@@ -117,21 +120,20 @@ So I propose the following error handling specification as a supplement of [AOS-
      - `ErrUnexpected` is defined as: `var ErrUnexpected = errors.New("unexpected")`. 
      - SDK errors SHOULD not be wrapped.
    - If it is an expected error, it MUST be either
-     - an exported public variable containing an `error` value created by `errors.New()` (a.k.a. a sentinel error)
-       - `var SomeError = errors.New("what happened")`
-     - an error `struct` `SomeError`
-       - it is defined as:
-			```go
+     - an error code
+     - an error `struct` carrying contextual information, with an assigned error code
+       - it SHOULD be defined as:
+			``` go
 			type SomeError struct {
 				ContextA string
 				ContextB structB
 				...
 			}
 			```
-       - `SomeError` CAN implement `Unwrap`, returning the category (or the label) of the error, which is a sentinel error
-       - `SomeError` SHOULD implement `Error`
-         - the format should be `{Description}, {ContextA}, {ContextB}: {Err}`, where `Err` is its `Unwrap.Error()` 
-         - or `{Description}, {ContextA}, {ContextB}` if it does not implement `Unwrap`
+       - it SHOULD implement `Unwrap`, returning its error code
+       - it SHOULD implement `Error`
+         - the format should be `{Description}, {ContextA}, {ContextB}: {Err}` , where `Err` is its error code
+         - or `{Description}, {ContextA}, {ContextB}` if it is the only struct with its error code
      - `fmt.Errorf("%w: %v", SomeError, err)` if the expected error is caused by another `error` value
        - `SomeError` is one of the two kind of errors above
        - `err` is the original error
@@ -149,24 +151,17 @@ var (
 	ErrObjectNotExist = errors.New("object not exist")
 )
 
-// NewPairUnsupportedError will create a new PairUnsupportedError.
-func NewPairUnsupportedError(pair types.Pair) *PairUnsupportedError {
-	return &PairUnsupportedError{
-		Pair: pair,
-	}
-}
-
 // PairUnsupportedError means this operation has unsupported pair.
 type PairUnsupportedError struct {
 	Pair types.Pair
 }
 
-func (e *PairUnsupportedError) Error() string {
+func (e PairUnsupportedError) Error() string {
 	return fmt.Sprintf("pair unsupported, %s: %s", e.Pair, ErrCapabilityInsufficient.Error())
 }
 
 // Unwrap implements xerrors.Wrapper
-func (e *PairUnsupportedError) Unwrap() error {
+func (e PairUnsupportedError) Unwrap() error {
 	return ErrCapabilityInsufficient
 }
 ```
@@ -209,9 +204,11 @@ instead of
   - PairUnsupportedError
 - ErrRestrictionDissatisfied
   - PairRequiredError
-- ObjectModeInvalidError
-- ListModeInvalidError
 - ErrObjectNotExist
+- ErrObjectModeInvalid
+  - ObjectModeInvalidError
+- ErrListModeInvalid 
+  - ListModeInvalidError
 - ErrPermissionDenied
 - ErrServiceNotRegistered
 
@@ -229,9 +226,14 @@ But we can do more: let users handle error gracefully. The following can be done
   - If we have too many levels, the users may use too general or too specific errors. We should provide proper granularity. The proposal's granularity can be described as:
     - Top-level errors decide which component the errors belong to.
     - Wrapped errors are specific. There isn't a more specific error type.
-    - If some wrapped errors can be grouped together, their `Unwrap` will return a sentinel error representing the category.
+    - If some wrapped errors can be grouped together, their `Unwrap` will return an error code representing the category.
 - Provide a unified user experience: define an abstract layer of errors for the users, free them of the tedium of handling similar errors from multiple SDKs.
 
+In this design, every error `struct` has an error code, or conversely, an error code can have 0, 1 or more error `struct`s.
+- error code represents `What` -> only a label to explain why the error happened
+- error struct represents `Why` -> carrying context info to explain why the error happened
+
+If a user just wants to know what error happened and doesn't care about why and related context, he can just use `errors.Is` to check error codes without using `errors.As`.
 ### Alternative 1: Single Top-level Error and Multiple Middle-level Errors
 
 We can provide a single top-level `Error` type as below, and old top-level errors are turned into middle-level errors.
