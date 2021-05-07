@@ -135,6 +135,7 @@ So I propose the following error handling specification as a supplement of [AOS-
      - `fmt.Errorf("%w: %v", SomeError, err)` if the expected error is caused by another `error` value
        - `SomeError` is one of the two kind of errors above
        - `err` is the original error
+3. `Error` and `Unwrap` methods SHOULD use value receivers.
 
 Real examples of expected errors:
 
