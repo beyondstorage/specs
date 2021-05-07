@@ -1,7 +1,7 @@
 ---
 author: xxchan <xxchan22f@gmail.com>
 status: draft
-updated_at: 2020-05-03
+updated_at: 2020-05-07
 ---
 
 # AOS-47: Additional Error Specification
