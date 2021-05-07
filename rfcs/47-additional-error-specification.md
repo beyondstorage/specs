@@ -142,7 +142,6 @@ An error code is an exported public variable containing an `error` value created
 
 Real examples of expected errors:
 
-Definitions:
 ```go
 var (
 	// ErrCapabilityInsufficient means this service doesn't have this capability
