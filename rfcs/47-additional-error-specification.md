@@ -138,6 +138,7 @@ An error code is an exported public variable containing an `error` value created
        - `SomeError` is one of the two kind of errors above
        - `err` is the original error
 3. `Error` and `Unwrap` methods SHOULD use value receivers.
+4. If an error code has any error `struct`, the implementor SHOULD return one of the error `struct`s with the error code, instead of returning the error code directly.
 
 Real examples of expected errors:
 
