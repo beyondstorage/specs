@@ -50,6 +50,7 @@ description = "is the interface for Directory."
 [direr.op.create_dir]
 description = "will create a new dir object."
 params = ["path"]
+results = ["o"]
 
 [fetcher]
 description = "is the interface for Fetch."
