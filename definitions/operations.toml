@@ -44,6 +44,13 @@ description = "is the interface for Copy."
 description = "will copy an Object or multiple object in the service."
 params = ["src", "dst"]
 
+[direr]
+description = "is the interface for Directory."
+
+[direr.op.create_dir]
+description = "will create a new dir object."
+params = ["path"]
+
 [fetcher]
 description = "is the interface for Fetch."
 
