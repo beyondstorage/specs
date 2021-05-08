@@ -19,15 +19,17 @@ if s.isDirPath(rp) {
 }
 ```
 
-In other storage service, user needs to create by special `content-type`:
+In other storage service, user needs to create dir by special `content-type`:
 
 ```go
 store.Write("abc/", nil, 0, ps.WithContentType("application/x-directory"))
 ```
 
+We need to allow user create a directory in the same way.
+
 ## Proposal
 
-So I propose to add a new operation `CreateDir`:
+So I propose to add a new operation `CreateDir` like we do on `append` / `multipart` Object.
 
 ```go
 type Direr interface {
@@ -35,14 +37,20 @@ type Direr interface {
 }
 ```
 
+`CreateDir` will return an Object with `dir` mode, and different service could have different implementations.
+
 ## Rationale
 
-<proposal's rationale content, other implementations>
+### Directory in Object Storage Services
+
+Object Storage is a K-V Storage, and don't have the concept of directory natively. But most object storages support ListObjects via delimiter `/` to demonstrate a file system tree. With delimiter `/`, object storage services will organize objects end with `/` as common prefix.
 
 ## Compatibility
 
-<proposal's compatibility statement>
+This proposal COULD break users who use `store.Write("abc/")` to create directory.
 
 ## Implementation
 
-<proposal's implementation>
+- Update specs to add `CreateDir` operations.
+- Update go-storage to implement the changes.
+- Update all services that support create dir.
