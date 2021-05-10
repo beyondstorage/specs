@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-05-10
 ---
 
-# AOS-51: Identify go-storage Error
+# AOS-51: Distinguish Errors by IsAosError
 
 ## Background
 
