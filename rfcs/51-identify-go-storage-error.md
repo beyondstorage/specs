@@ -36,9 +36,10 @@ This is problematic since our `PairRequiredError` will also be turned into `ErrU
 
 So I propose to add support for recognizing errors defined in `go-storage`, including:
 
-- Add a new type `ErrorCode` to replace sentinel errors.
-- Add a special `ErrorCode` `ErrGoStorage`
-- `ErrorCode` and every error `struct` should implement `Is(target error) bool { return target == ErrGoStorage}`
+- Add a new unexported type `errorCode` and a function `NewErrorCode(string) error`, to replace sentinel errors created by `errors.New()`.
+- Add a new interface `AosError`, which has a method `IsAosError()`.
+- Top-level errors (`InitError`, `ServiceError`, `StorageError`) do not need to implement `IsAosError()`, since `AosError` is used when formatting the `Err` inside top-level errors.
+- `errorCode` and every error `struct` SHOULD implement `IsAosError()`, which has an empty function body.
 
 ## Rationale
 
@@ -46,13 +47,12 @@ We cannot add methods to sentinel errors, so we need to replace them.
 
 ### Alternative
 
-Add an interface and use type cast to judge.
+- Add a special `errorCode` `ErrAos`
+- `ErrorCode` and every error `struct` should implement `Is(target error) bool { return target == ErrAos}`
 
-```go
-type ErrGoStorage interface {
-    IsErrGoStorage()
-}
-```
+Benchmark shows this approach is slower than the interface way, since `errors.Is` is more expensive than type assertion.
+
+Besides, `errors.Is` is general-purpose while using a special-purpose interface can be a litter clearer.
 
 ## Compatibility
 
@@ -60,40 +60,12 @@ This proposal will not break users, since `errors.New()` create a private error 
 
 ## Implementation
 
-- Add `ErrorCode` `ErrGoStorage`
-- Replace `errors.New` with `NewErrorCode`
-- Implement `Is` for error `struct`s
-
-```go 
-// Create a new error code.
-//
-// Users should return/compare created ErrorCode instances, instead of calling this function.
-func NewErrorCode(text string) ErrorCode {
-	return ErrorCode{text}
-}
-
-type ErrorCode struct {
-	s string
-}
-
-func (e ErrorCode) Error() string {
-	return e.s
-}
-
-var (
-	ErrGoStorage = NewErrorCode("go-storage error")
-
-	ErrObjectNotExist = NewErrorCode("object not exist")
-	//...
-)
-
-func (e ErrorCode) Is(target error) bool {
-	return target == ErrGoStorage
-}
-
-func (e PairRequiredError) Is(target error) bool {
-	return target == ErrGoStorage
-}
-```
+- `go-storage`:
+  - Add `errorCode` `NewErrorCode(string) error`
+  - Replace `errors.New` with `NewErrorCode`
+  - Add interface `AosError`, and implement it for `errorCode` and error `struct`s
+- `go-service-*`:
+  - Replace `errors.New` with `NewErrorCode`
+  - We don't have service error `struct` now, so don't need to implement `AosError`.
 
 [AOS-47]: ./47-additional-error-specification.md
