@@ -1,7 +1,7 @@
 ---
 author: xxchan <xxchan22f@gmail.com>
 status: draft
-updated_at: 2021-05-08
+updated_at: 2021-05-10
 ---
 
 # AOS-51: Identify go-storage Error
