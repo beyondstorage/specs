@@ -110,7 +110,7 @@ Retryable server-side errors:
 	- For non-temporary network, there's little need to handle them specially in code, but it may be good if they are labelled. However, it may be hard to distinguish between non-temporary network errors and user-side errors.
 	- An internal classification in temporary network errors is acceptable if there's a good idea.
 
-4. Usually there's only bipartite communication between the client and the storage service. However, there's a `fetch` operation. Usually the server fetches the resource, and if there's an error, it's a server-side error. But if the service doesn't support `fetch`, and we implement `fetch` in client code, e.g., `go-service-fs`, what's the error's type? In our abstraction, we treat it as server-side. 
+4. Usually there's only bipartite communication between the client and the storage service. However, there's a `fetch` operation. Usually the server fetches the resource, and if there's an error, it's a server-side error. But if the service doesn't support `fetch`, and we implement `fetch` in client code, e.g., `go-service-fs`, what's the error's type? In our abstraction, we treat it as server-side. Especially, it's not a network error, whose range is limited in the network availability problem between the client and the server.
 
 ### Examples of judging retryability
 
