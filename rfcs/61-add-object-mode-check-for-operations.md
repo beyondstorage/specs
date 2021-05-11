@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-05-11
 ---
 
-# Proposal: Add object mode check for operations
+# AOS-61: Add object mode check for operations
 
 ## Background
 
