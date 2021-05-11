@@ -67,7 +67,7 @@ We check `*Object` mode `ModePart` at the start of `writeMultipart` which is cal
 
 So I propose that we should add mode check in specific operation, return `ObjectModeInvalidError` if mode not meet, and the check should be generated.
 
-In this way, we can ensure the `*Object` input must meet the operation.
+In this way, we can ensure the `*Object` input must meet the operation, and service do not need to care about the check in specific operation.
 
 ## Rationale
 
