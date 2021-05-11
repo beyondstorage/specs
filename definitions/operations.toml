@@ -77,7 +77,7 @@ results = ["o"]
 [multiparter.op.write_multipart]
 description = "will write content to a multipart."
 params = ["o", "r", "size", "index"]
-results = ["n"]
+results = ["n", "parts"]
 
 [multiparter.op.complete_multipart]
 description = "will complete a multipart upload and construct an Object."
