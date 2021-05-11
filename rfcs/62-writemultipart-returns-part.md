@@ -62,7 +62,7 @@ This is a breaking change, we should
 ## Implementation
 
 - Update [speces](https://github.com/aos-dev/specs/)
-  - Add ETag to the return value of `WriteMultipart`.
+  - Add `Part` to the return value of `WriteMultipart`.
 - Update [go-storage](https://github.com/aos-dev/go-storage)
 - Update [go-integration-test](https://github.com/aos-dev/go-integration-test)
   - Add the argument ETag in `CompletePart` test case.
