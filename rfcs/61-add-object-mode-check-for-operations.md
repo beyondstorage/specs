@@ -63,6 +63,24 @@ func (s *Storage) writeMultipart(ctx context.Context, o *Object, r io.Reader, si
 
 We check `*Object` mode `ModePart` at the start of `writeMultipart` which is called by `WriteMultipartWithContext` which is generated, too.
 
+### Operation with Object Input
+
+All function listed below contains `XXXWithContext` method 
+
+- Appender
+  - CommitAppend
+  - WriteAppend
+- Blocker
+  - CombineBlock
+  - ListBlock
+  - WriteBlock
+- Multiparter
+  - CompleteMultipart
+  - ListMultipart
+  - WriteMultipart
+- Pager
+  - WritePage
+
 ## Proposal
 
 So I propose that we should add mode check in specific operation, return `ObjectModeInvalidError` if mode not meet, and the check should be generated.
