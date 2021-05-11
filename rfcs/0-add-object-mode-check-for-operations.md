@@ -1,6 +1,6 @@
 ---
 author: Prnyself <lanceren@yunify.com>
-status: [draft]
+status: draft
 updated_at: 2021-05-11
 ---
 
@@ -79,7 +79,10 @@ No break changes
 
 ## Implementation
 
-Most of the work would be done by the author of this proposal.
+Most of the work would be done by the author of this proposal, including:
+- Implement mode check
+- Upgrade go-service-*
+- Remove all mode check in go-sevice-*
 
 [AOS-25]: ./25-object-mode.md
 [AOS-47]: ./47-additional-error-specification.md
