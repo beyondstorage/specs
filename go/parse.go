@@ -33,6 +33,7 @@ type tomlOperation struct {
 	Params      []string `toml:"params"`
 	Pairs       []string `toml:"pairs"`
 	Results     []string `toml:"results"`
+	ObjectMode  string   `toml:"object_mode"`
 	Local       bool     `toml:"local"`
 }
 type tomlInterface struct {
@@ -171,6 +172,7 @@ func parseOperations() Operations {
 				Params:      v.Params,
 				Pairs:       v.Pairs,
 				Results:     v.Results,
+				ObjectMode:  v.ObjectMode,
 				Local:       v.Local,
 			})
 		}

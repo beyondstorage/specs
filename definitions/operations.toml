@@ -10,10 +10,12 @@ results = ["o"]
 description = "will append content to an append object."
 params = ["o", "r", "size"]
 results = ["n"]
+object_mode = "append"
 
 [appender.op.commit_append]
 description = "will commit and finish an append process."
 params = ["o"]
+object_mode = "append"
 
 [blocker]
 description = "is the interface for Block related operations."
@@ -27,15 +29,18 @@ results = ["o"]
 description = "will write content to a block."
 params = ["o", "r", "size", "bid"]
 results = ["n"]
+object_mode = "block"
 
 [blocker.op.combine_block]
 description = "will combine blocks into an object."
 params = ["o", "bids"]
+object_mode = "block"
 
 [blocker.op.list_block]
 description = "will list blocks belong to this object."
 params = ["o"]
 results = ["bi"]
+object_mode = "block"
 
 [copier]
 description = "is the interface for Copy."
@@ -78,15 +83,18 @@ results = ["o"]
 description = "will write content to a multipart."
 params = ["o", "r", "size", "index"]
 results = ["n", "part"]
+object_mode = "part"
 
 [multiparter.op.complete_multipart]
 description = "will complete a multipart upload and construct an Object."
 params = ["o", "parts"]
+object_mode = "part"
 
 [multiparter.op.list_multipart]
 description = "will list parts belong to this multipart."
 params = ["o"]
 results = ["pi"]
+object_mode = "part"
 
 [pager]
 description = "is the interface for Page related operations which support random write."
@@ -100,6 +108,7 @@ results = ["o"]
 description = "will write content to specific offset."
 params = ["o", "r", "size", "offset"]
 results = ["n"]
+object_mode = "page"
 
 [reacher]
 description = "is the interface for Reach."
