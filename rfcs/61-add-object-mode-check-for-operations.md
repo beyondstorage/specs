@@ -88,6 +88,7 @@ So I propose that we should add mode check in specific operation, return `Object
 To generate object mode check in different functions, we will follow these steps (take `Multiparter.WriteMultipart` as an example):
 
 1. Add a field named `object_mode` in `operations.toml`.
+
 ```toml
 [multiparter.op.write_multipart]
 description = "will write content to a multipart."
@@ -97,6 +98,7 @@ object_mode = "part"
 ```
 
 2. Add `ObjectMode` field parsing in `parse.go` and `spec.go`.
+
 ```go
 // tomlOperation in parse.go
 type tomlOperation struct {
@@ -134,6 +136,7 @@ type Operation struct {
     Local       bool
 }
 ```
+
 ```go
 // cmd/definitions/type.go
 func NewOperation(v specs.Operation, fields map[string]*Field) *Operation {
@@ -146,18 +149,9 @@ func NewOperation(v specs.Operation, fields map[string]*Field) *Operation {
     ...
 }
 ```
+
 ```go
 // cmd/definitions/type.go
-// HasObject will check whether we have *Object here.
-func (f Fields) HasObject() bool {
-    for _, v := range f {
-        if v.ftype == "Object" || v.ftype == "*Object" {
-            return true
-        }
-    }
-    return false
-}
-
 // ObjectParamName returns Object's param name.
 func (f Fields) ObjectParamName() string {
     for _, v := range f {
@@ -183,29 +177,31 @@ func (s *{{$pn}}) {{ $fnk }}WithContext(ctx context.Context, {{$fn.Params.String
         err = s.formatError("{{$fn.Name}}", err {{ $path }} )
     }()
     
-    {{- if $fn.Params.HasObject }}
     {{- template "mode_check" makeSlice $fn.ObjectMode $fn.Params.ObjectParamName }}
-    {{- end }}
 
     pairs = append(pairs, s.defaultPairs.{{ $fnk }}...)
     var opt pair{{ $pn }}{{ $fnk }}
     ...
 }
 ```
+
 ```go
 // cmd/definitions/tmpl/service.tmpl
 {{- define "mode_check" }}
     {{- $mode := index . 0 | toPascal }}
     {{- $o := index . 1 }}
-    
+
+    {{- if ne $mode ""}}
     if !{{ $o }}.Mode.Is{{ $mode }}() {
         err = services.ObjectModeInvalidError{Expected: Mode{{ $mode }}, Actual: o.Mode}
         return
     }
+    {{- end }}
 {{- end }}
 ```
 
 5. Generate code in specific service by running `make generate`, the code would be generated in `generated.go`:
+
 ```go
 // generated.go
 // WriteMultipartWithContext will write content to a multipart.
