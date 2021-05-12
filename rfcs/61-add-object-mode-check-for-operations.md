@@ -85,11 +85,22 @@ All function listed below contains `XXXWithContext` method
 
 So I propose that we should add mode check in specific operation, return `ObjectModeInvalidError` if mode not meet, and the check should be generated.
 
+To generate object mode check in different functions, we will add a field named `object_mode` in operations(if the operation get an `*Object` as input param), 
+to specify which object mode must be fit when pass `*Object` as a param, and we can generate corresponding 
+mode check func in operation.
+
 In this way, we can ensure the `*Object` input must meet the operation, and service do not need to care about the check in specific operation.
 
 ## Rationale
 
-None.
+### Alternative 1: generate mode check by interface name
+
+We can add a field `Interface` to specify which interface an operation belongs to. Then we can use this to generate different mode check func.
+
+For example: all operations in `Multiparter` should check `IsPart()`, and all operations in `Appender` should check `IsAppend`.
+
+However, this solution can only fit check functions written in `Golang` (or go-storage), our specs are designed 
+to describe model for different languages. So this is not suitable.
 
 ## Compatibility
 
