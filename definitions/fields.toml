@@ -37,6 +37,9 @@ type = "ObjectIterator"
 [pairs]
 type = "Pairs"
 
+[part]
+type = "Part"
+
 [parts]
 type = "Parts"
 
