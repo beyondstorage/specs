@@ -37,6 +37,7 @@ type Operation struct {
 	Params      []string
 	Pairs       []string
 	Results     []string
+	ObjectMode  string
 	Local       bool
 }
 
