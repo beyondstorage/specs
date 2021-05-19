@@ -1,4 +1,4 @@
-module github.com/aos-dev/specs/go
+module github.com/beyondstorage/specs/go
 
 go 1.15
 
