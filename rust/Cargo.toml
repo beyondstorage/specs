@@ -1,12 +1,12 @@
 [package]
-name = "aos-specs"
-version = "0.1.1"
+name = "beyondstorage-specs"
+version = "0.1.2"
 authors = ["Xuanwo <github@xuanwo.io>"]
 edition = "2018"
-description = "AOS specs for rust"
+description = "Beyond Storage specs for rust"
 license = "Apache-2.0"
-documentation = "https://docs.rs/aos-specs"
-repository = "https://github.com/aos-dev/specs"
+documentation = "https://docs.rs/beyondstorage-specs"
+repository = "https://github.com/beyondstorage/specs"
 
 [dependencies]
 serde = { version = "1.0.126", features = ["derive"] }

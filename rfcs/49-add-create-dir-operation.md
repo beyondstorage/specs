@@ -10,7 +10,7 @@ updated_at: 2021-05-08
 
 Applications need the ability to create a directory. For now, our support is a bit wired.
 
-In [fs](https://github.com/aos-dev/go-service-fs), we support `CreateDir` by dirty hack:
+In [fs](https://github.com/beyondstorage/go-service-fs), we support `CreateDir` by dirty hack:
 
 ```go
 if s.isDirPath(rp) {

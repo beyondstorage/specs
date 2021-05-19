@@ -1,3 +1,3 @@
 # Specs
 
-This repo maintains rfcs and definitions for AOS.
+This repo maintains rfcs and definitions for Beyond Storage.

@@ -61,9 +61,9 @@ This is a breaking change, we should
 
 ## Implementation
 
-- Update [speces](https://github.com/aos-dev/specs/)
+- Update [speces](https://github.com/beyondstorage/specs/)
   - Add `Part` to the return value of `WriteMultipart`.
-- Update [go-storage](https://github.com/aos-dev/go-storage)
-- Update [go-integration-test](https://github.com/aos-dev/go-integration-test)
+- Update [go-storage](https://github.com/beyondstorage/go-storage)
+- Update [go-integration-test](https://github.com/beyondstorage/go-integration-test)
   - Add the argument ETag in `CompletePart` test case.
 - Make sure all services implement `WriteMultipart` and `CompleteMultipart` correctly.
