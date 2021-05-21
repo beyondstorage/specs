@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-05-21
 ---
 
-# Proposal: Local Function Metadata
+# GSP-76: Local Function Metadata
 
 ## Background
 
