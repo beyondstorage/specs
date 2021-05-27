@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-05-27
 ---
 
-# Proposal: Feature Gates
+# GSP-87: Feature Gates
 
 ## Background
 
