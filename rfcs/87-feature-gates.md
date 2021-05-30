@@ -1,7 +1,7 @@
 ---
 author: Xuanwo <github@xuanwo.io>
 status: draft
-updated_at: 2021-05-27
+updated_at: 2021-05-30
 ---
 
 # GSP-87: Feature Gates
@@ -149,7 +149,7 @@ s3.WithStorageFeatures(s3.StorageFeatures{
 
 ## Rationale
 
-<proposal's rationale content, other implementations>
+N/A
 
 ## Compatibility
 
@@ -157,7 +157,17 @@ This proposal will deprecate `PairPolicy`.
 
 ## Implementation
 
-<proposal's implementation>
+To implement virtual operation and virtual pair support, we will add new fields into `service.toml`.
+
+```toml
+[namespace.storage.op.write]
+simulated = true
+optional = ["content_type", "io_callback", "storage_class"]
+virtual = ["content_md5"]
+```
+
+- `simulated`: Mark this operation as a `virtual operation`.
+- `virtual`: The list of `virtual pairs`.
 
 [GSP-16]: ./16-loose-mode.md
 [GSP-20]: ./20-remove-loose-mode.md
