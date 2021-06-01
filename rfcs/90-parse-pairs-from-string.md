@@ -6,7 +6,7 @@ deprecates:
   - 13-remove-config-string.md
 ---
 
-# Proposal: Parse Pairs from string
+# GSP-90: Parse Pairs from String
 
 ## Background
 
