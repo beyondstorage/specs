@@ -135,15 +135,19 @@ func (n *Namespace) Sort() {
 
 // Op means an operation definition.
 type Op struct {
-	Name     string
+	Name      string
+	Simulated bool
+
 	Required []string
 	Optional []string
+	Virtual  []string
 }
 
 // Sort will sort the Op
 func (o *Op) Sort() {
 	sort.Strings(o.Required)
 	sort.Strings(o.Optional)
+	sort.Strings(o.Virtual)
 }
 
 // New is the spec for new function.

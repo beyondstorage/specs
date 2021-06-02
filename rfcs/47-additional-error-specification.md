@@ -293,5 +293,5 @@ The following changes will be made:
   - Return error `struct`s instead of pointers.
 
 [AOS-11]: ./11-error-handling.md
-[go-storage]: https://github.com/aos-dev/go-storage
-[go-storage/services/error.go]: https://github.com/aos-dev/go-storage/blob/master/services/error.go
+[go-storage]: https://github.com/beyondstorage/go-storage
+[go-storage/services/error.go]: https://github.com/beyondstorage/go-storage/blob/master/services/error.go

@@ -149,6 +149,7 @@ params      = ["path"]
 [storager.op.metadata]
 description = "will return current storager metadata."
 results     = ["meta"]
+local       = true
 
 [storager.op.list]
 description = "will return list a specific path."
