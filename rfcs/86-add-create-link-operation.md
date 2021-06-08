@@ -15,7 +15,6 @@ As discussed in [Link / Symlink support](https://github.com/beyondstorage/specs/
 - fs: Native support for hardlink and symlink
 - oss: Native [Symlink](https://help.aliyun.com/document_detail/45126.html) API
 - s3: No native support, [x-amz-website-redirect-location](https://docs.aws.amazon.com/AmazonS3/latest/userguide/how-to-page-redirect.html) can redirect pages but only works for website, see <https://stackoverflow.com/questions/35042316/amazon-s3-multiple-keys-to-one-object#comment57863171_35043462>
-- `more information here`
 
 ## Proposal
 
