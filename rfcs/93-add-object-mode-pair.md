@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-06-08
 ---
 
-# Proposal: Add ObjectMode Pair
+# GSP-93: Add ObjectMode Pair
 
 ## Background
 
@@ -36,7 +36,7 @@ We need to find a way to figure it out.
 So I propose to add `ObjectMode` pair. This pair COULD be used in following operations:
 
 - `Create`: set the output object's `ObjectMode`
-- `Stat`: ObjectMode hint
+- `Stat`: ObjectMode hint, returns error if `ObjectMode` not meet.
 - `Delete`: ObjectMode hint
 
 For `Stat` and `Delete`
@@ -51,16 +51,26 @@ Take `s3` as example, we simulate `CreateDir` via create object ends with `/`. `
 
 ## Rationale
 
-<proposal's rationale content, other implementations>
+### Alternative design for Dir Object
+
+Except `ObjectMode`, we have following alternative designs:
+
+- `CreateDir("test")` + `Stat("test/")`/`Delete("test/")`
+- `CreateDir("test/")` + `Stat("test/")`/`Delete("test/")`
+
+They have following drawbacks:
+
+- Not consist with other APIs
+- Hard to use: user need to do extra work to change the object path
 
 ## Compatibility
 
-<proposal's compatibility statement>
+All changes are compatible.
 
 ## Implementation
 
-<proposal's implementation>
-
+- Add `ObjectMode` pairs
+- Add `ObjectMode` into operations (all service must support)
 
 [GSP-25]: ./25-object-mode.md
 [GSP-49]: ./49-add-create-dir-operation.md
