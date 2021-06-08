@@ -44,8 +44,10 @@ type tomlInterface struct {
 type tomlInterfaces map[string]tomlInterface
 
 type tomlOp struct {
-	Required []string `hcl:"required,optional"`
-	Optional []string `hcl:"optional,optional"`
+	Simulated bool     `toml:"simulated"`
+	Required  []string `toml:"required"`
+	Optional  []string `toml:"optional"`
+	Virtual   []string `toml:"virtual"`
 }
 
 type tomlNamespace struct {
@@ -239,9 +241,11 @@ func parseService(filePath string) Service {
 
 		for opName, op := range v.Op {
 			n.Op = append(n.Op, Op{
-				Name:     opName,
-				Required: op.Required,
-				Optional: op.Optional,
+				Name:      opName,
+				Simulated: op.Simulated,
+				Required:  op.Required,
+				Optional:  op.Optional,
+				Virtual:   op.Virtual,
 			})
 		}
 

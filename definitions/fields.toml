@@ -72,4 +72,3 @@ type = "string"
 
 [w]
 type = "Writer"
-

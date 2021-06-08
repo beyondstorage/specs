@@ -38,9 +38,6 @@ description = "specify the storage name"
 type = "int64"
 description = "specify offset for this request, storage will seek to this offset before read"
 
-[pair_policy]
-type = "PairPolicy"
-
 [multipart_id]
 type = "string"
 
