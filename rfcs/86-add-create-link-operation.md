@@ -63,6 +63,7 @@ This proposal is compatible.
 ## Implementation
 
 - Add new operations in specs
-- Implement Linker for services.
+- Implement integration test
+- Implement Linker for services
 
 [GSP-87]: ./87-feature-gates.md
