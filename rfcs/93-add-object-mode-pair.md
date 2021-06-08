@@ -33,7 +33,7 @@ We need to find a way to figure it out.
 
 ## Proposal
 
-So I propose to add `ObjectMode` pair. This pair COULD be used in the following operations:
+So I propose to add the `ObjectMode` pair. This pair COULD be used in the following operations:
 
 - `Create`: set the output object's `ObjectMode`
 - `Stat`: ObjectMode hint, returns error if `ObjectMode` not meet.
@@ -41,7 +41,7 @@ So I propose to add `ObjectMode` pair. This pair COULD be used in the following 
 
 For `Stat` and `Delete`
 
-- Service SHOULD use `ObjectMode` pair as a hint.
+- Service SHOULD use the `ObjectMode` pair as a hint.
 - Service could have different implementations for different `ObjectMode`.
 
 Take `s3` as an example, we simulate `CreateDir` via creating object ends with `/`. `CreateDir("test")` will create an object `test/` in s3. And we can
