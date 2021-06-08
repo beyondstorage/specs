@@ -144,6 +144,7 @@ description = "is the interface for storage service."
 
 [storager.op.delete]
 params = ["path"]
+pairs = ["object_mode"]
 description = """
 will delete an object from service.
 
@@ -176,15 +177,34 @@ pairs = ["size", "offset", "io_callback"]
 results = ["n"]
 
 [storager.op.create]
-description = "will create a new object without any api call."
 params = ["path"]
 results = ["o"]
+pairs = ["object_mode"]
 local = true
+description = """
+will create a new object without any api call.
+
+## Behavior
+
+- Create SHOULD NOT send any API call.
+- Create SHOULD accept ObjectMode pair as object mode.
+"""
+
 
 [storager.op.stat]
-description = "will stat a path to get info of an object."
 params = ["path"]
+pairs = ["object_mode"]
 results = ["o"]
+description = """
+will stat a path to get info of an object.
+
+## Behavior
+
+- Stat SHOULD accept ObjectMode pair as hints.
+  - Service COULD have different implementations for different object mode.
+  - Service SHOULD check if returning ObjectMode is match
+"""
+
 
 [storager.op.write]
 description = "will write data into a file."

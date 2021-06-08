@@ -34,6 +34,10 @@ description = "specify the location for service or storage"
 type = "string"
 description = "specify the storage name"
 
+[object_mode]
+type = "ObjectMode"
+description = "ObjectMode hint"
+
 [offset]
 type = "int64"
 description = "specify offset for this request, storage will seek to this offset before read"
