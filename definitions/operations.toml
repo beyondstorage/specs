@@ -144,6 +144,7 @@ description = "is the interface for storage service."
 
 [storager.op.delete]
 params = ["path"]
+pairs = ["object_mode"]
 description = """
 will delete an object from service.
 
@@ -179,11 +180,13 @@ results = ["n"]
 description = "will create a new object without any api call."
 params = ["path"]
 results = ["o"]
+pairs = ["object_mode"]
 local = true
 
 [storager.op.stat]
 description = "will stat a path to get info of an object."
 params = ["path"]
+pairs = ["object_mode"]
 results = ["o"]
 
 [storager.op.write]
