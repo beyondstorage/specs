@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-06-09
 ---
 
-# GSP: Add Maximum File Size for Storage Write
+# GSP-97: Add Maximum File Size for Storage Write
 
 ## Background
 
