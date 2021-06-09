@@ -40,6 +40,10 @@ The format of the config string is:
 
 TODO
 
+#### Parseable Value Types
+
+TODO
+
 ### Implementation
 
 `New*FromString` will first parse config string into `(ty string, m map[string]string)`, and then call `New*FromMap(ty, m)`.
