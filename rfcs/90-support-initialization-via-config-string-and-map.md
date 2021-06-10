@@ -58,29 +58,28 @@ We register the types of global pairs and service pairs.
 From [go-storage] side:
 
 ```go
-type PairMap map[string]string
-func RegisterGlobalPairMap(m PairMap) {}
-func RegisterServicePairMap(ty string, m PairMap) {}
+func RegisterGlobalPairMap(m map[string]string) {}
+func RegisterServicePairMap(ty string, m map[string]string) {}
 ```
 
 From services side, we can generate following code:
 
 ```go
-func servicePairs() PairMap {}
+var pairMap = map[string]string{
+      "xxxxx": "xxxxx",
+}
 
 func init() {
 	// ...
-	pairs.RegisterServicePairMap("<type>", servicePairs())
+	pairs.RegisterServicePairMap("<type>", pairMap)
 }
 ```
-
-`PairMap`s are generated.
 
 ## Rationale
 
 Possible problems:
 
-1. In the pair registry `PairMap`, we may need more pair information beside types in the future, so we can also create a custom type `PairInfo` as the value type of the map. But to keep things simple, we'd better not overdesign now.
+1. In the pair registry, we may need more pair information beside types in the future, so we can also create a custom type `PairInfo` as the value type of the map. But to keep things simple, we'd better not overdesign now.
 
 2. It is possible that a service pair have the same name as a global pair. Internally, the name of a service pair has prefix `<type>_` so it wasn't a problem.  
    
