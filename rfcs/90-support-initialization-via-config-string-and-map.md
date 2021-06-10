@@ -27,9 +27,6 @@ So I propose to support service init from config string and map:
 
 We add the following APIs:
 ```go
-func NewServicerFromMap(ty string, m map[string]string) (types.Servicer, error) {}
-func NewStoragerFromMap(ty string, m map[string]string) (types.Storager, error) {}
-
 func NewServicerFromString(config string) (types.Servicer, error) {}
 func NewStoragerFromString(config string) (types.Storager, error) {}
 ```
@@ -46,9 +43,7 @@ TODO
 
 ### Implementation
 
-`New*FromString` will first parse config string into `(ty string, m map[string]string)`, and then call `New*FromMap(ty, m)`.
-
-`New*FromMap` will first parse `(ty string, m map[string]string)` into `ps []Pairs`, and then call `New*(ty, ps)`.
+`New*FromString` will first split config string into `(ty string, m map[string]string)`, and then parse it into `ps []Pairs`, and finally call `New*(ty, ps)`.
 To support this, we have to know that a name is a pair (global or service), and its type, so we implement:
 
 #### Pair Registry
@@ -83,7 +78,7 @@ Possible problems:
 
 2. It is possible that a service pair have the same name as a global pair. Internally, the name of a service pair has prefix `<type>_` so it wasn't a problem.  
    
-   But in `New*FromMap` and `New*FromString`, we won't want to let users add the prefix, so if two pairs have the same name, here comes ambiguity. So we should forbid a service pair from having the same name with a global pair. We can add check in service pair registry.
+   But in `New*FromString`, we won't want to let users add the prefix, so if two pairs have the same name, here comes ambiguity. So we should forbid a service pair from having the same name with a global pair. We can add check in service pair registry.
 
 3. We can also export parsing APIs like 
    ```go 
