@@ -11,5 +11,5 @@ repository = "https://github.com/beyondstorage/specs"
 [dependencies]
 serde = { version = "1.0.126", features = ["derive"] }
 toml = "0.5.8"
-anyhow = "1.0.40"
+anyhow = "1.0.41"
 lazy_static = "1.4.0"
