@@ -47,7 +47,7 @@ type Field struct {
 	Type string
 }
 
-// Service is the data parsed from HCL.
+// Service is the data parsed from TOML.
 type Service struct {
 	Name       string
 	Namespaces []Namespace
@@ -102,14 +102,14 @@ func (p Pairs) Sort() {
 	})
 }
 
-// Pair is the data parsed from HCL.
+// Pair is the data parsed from TOML.
 type Pair struct {
 	Name        string
 	Type        string
 	Description string
 }
 
-// Namespace is the data parsed from HCL.
+// Namespace is the data parsed from TOML.
 type Namespace struct {
 	Name      string
 	Implement []string
