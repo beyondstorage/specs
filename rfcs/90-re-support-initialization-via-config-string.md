@@ -6,7 +6,7 @@ deprecates:
   - 13-remove-config-string.md
 ---
 
-# GSP-90: Support Initialization Via Config String and Map
+# GSP-90: Re-support Initialization Via Config String
 
 ## Background
 
