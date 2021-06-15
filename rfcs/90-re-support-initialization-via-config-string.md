@@ -23,7 +23,7 @@ But passing string config is indeed more convenient, if not much. And actually p
 
 ## Proposal
 
-So I propose to support service init from config string and map:
+So I propose to support service init from config string:
 
 We add the following APIs:
 ```go
@@ -53,24 +53,25 @@ We register the types of global pairs and service pairs.
 From [go-storage] side:
 
 ```go
-func RegisterGlobalPairMap(m map[string]string) {}
-func RegisterServicePairMap(ty string, m map[string]string) {}
+func RegisterServiceSchema(ty string, m map[string]string) {}
 ```
 
 From services side, we can generate following code:
 
 ```go
 var pairMap = map[string]string{
-      "xxxxx": "xxxxx",
+	"xxxxx": "xxxxx",
 }
 
 func init() {
 	// ...
-	pairs.RegisterServicePairMap("<type>", pairMap)
+	pairs.RegisterServiceSchema("<type>", pairMap)
 }
 ```
 
 ## Rationale
+
+We can also easily support `New*FromMap(ty string, m map[string]string)` now, but we may also want to support `New*FromMap(ty string, m map[string]interface{})`. We leave them to the future when real needs occur, instead of exposing these APIs early.
 
 Possible problems:
 
