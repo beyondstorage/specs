@@ -143,39 +143,71 @@ results = ["sti"]
 description = "is the interface for storage service."
 
 [storager.op.delete]
-description = "will delete an Object from service."
-params      = ["path"]
+params = ["path"]
+pairs = ["object_mode"]
+description = """
+will delete an object from service.
+
+## Behavior
+
+- Delete only delete one and only one object.
+  - Service DON'T NEED to support remove all.
+  - User NEED to implement remove_all by themself.
+- Delete is idempotent.
+  - Successful delete always return nil error.
+  - Delete SHOULD never return `ObjectNotExist`
+  - Delete DON'T NEED to check the object exist or not.
+"""
 
 [storager.op.metadata]
 description = "will return current storager metadata."
-results     = ["meta"]
-local       = true
+results = ["meta"]
+local = true
 
 [storager.op.list]
 description = "will return list a specific path."
-params      = ["path"]
-pairs       = ["list_mode"]
-results     = ["oi"]
+params = ["path"]
+pairs = ["list_mode"]
+results = ["oi"]
 
 [storager.op.read]
 description = "will read the file's data."
-params      = ["path", "w"]
-pairs       = ["size", "offset", "io_callback"]
-results     = ["n"]
+params = ["path", "w"]
+pairs = ["size", "offset", "io_callback"]
+results = ["n"]
 
 [storager.op.create]
-description = "will create a new object without any api call."
-params      = ["path"]
-results     = ["o"]
-local       = true
+params = ["path"]
+results = ["o"]
+pairs = ["object_mode"]
+local = true
+description = """
+will create a new object without any api call.
+
+## Behavior
+
+- Create SHOULD NOT send any API call.
+- Create SHOULD accept ObjectMode pair as object mode.
+"""
+
 
 [storager.op.stat]
-description = "will stat a path to get info of an object."
-params      = ["path"]
-results     = ["o"]
+params = ["path"]
+pairs = ["object_mode"]
+results = ["o"]
+description = """
+will stat a path to get info of an object.
+
+## Behavior
+
+- Stat SHOULD accept ObjectMode pair as hints.
+  - Service COULD have different implementations for different object mode.
+  - Service SHOULD check if returning ObjectMode is match
+"""
+
 
 [storager.op.write]
 description = "will write data into a file."
-params      = ["path", "r", "size"]
-pairs       = ["content_type", "content_md5", "io_callback"]
-results     = ["n"]
+params = ["path", "r", "size"]
+pairs = ["content_type", "content_md5", "io_callback"]
+results = ["n"]
