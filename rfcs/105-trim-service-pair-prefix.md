@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-06-15
 ---
 
-# Proposal: Trim Service Pair Prefix
+# GSP-105: Trim Service Pair Prefix
 
 ## Background
 
@@ -114,4 +114,4 @@ Only internal implementation is changed, and it won't break users.
 
 ## Implementation
 
-<proposal's implementation>
+See https://github.com/beyondstorage/go-storage/pull/598
