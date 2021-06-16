@@ -6,7 +6,7 @@ deprecates:
   - 13-remove-config-string.md
 ---
 
-# GSP-90: Re-support Initialization Via Config String
+# GSP-90: Re-support Initialization Via Connection String
 
 ## Background
 
@@ -23,28 +23,29 @@ But passing string config is indeed more convenient, if not much. And actually p
 
 ## Proposal
 
-So I propose to support service init from config string:
+So I propose to support service init from connection string (We rename config string to connection string since this name is more common):
 
 We add the following APIs:
 ```go
-func NewServicerFromString(config string) (types.Servicer, error) {}
-func NewStoragerFromString(config string) (types.Storager, error) {}
+func NewServicerFromString(connStr string) (types.Servicer, error) {}
+func NewStoragerFromString(connStr string) (types.Storager, error) {}
 ```
 
 ### Format
 
-The format of the config string is (optional parts marked by squared brackets):
+The format of the connection string is (optional parts marked by squared brackets):
 
 `<type>://[<name>][<work_dir>][?key1=value1&...&keyN=valueN]`
 
 - name: storage name, e.g., bucket name. MUST NOT contain /
 - work_dir: For object storage, it is prefix; for fs, it is directory path. MUST start with / for every storage services.
+- At least one of name and work_dir MUST be present.
 
-So a valid config string could be:
+So a valid connection string could be:
 
-- `qingstor://bucket_name`
-- `qingstor://bucket_name/prefix`
-- `qingstor://bucket_name/prefix?credential=hmac:xxxx:xxxx&endpoint=https:qingstor.com:443`
+- `s3://bucket_name`
+- `s3://bucket_name/prefix`
+- `s3://bucket_name/prefix?credential=hmac:xxxx:xxxx&endpoint=http://bucket_name.s3-website-Region.amazonaws.com`
 - `fs:///tmp`
 
 #### Parseable Value Types
@@ -68,7 +69,7 @@ In the future, we may consider escaping and enabling `&`.
 
 ### Implementation
 
-`New*FromString` will first split config string into `(ty string, m map[string]string)`, and then parse it into `ps []Pairs`, and finally call `New*(ty, ps)`.
+`New*FromString` will first split connection string into `(ty string, m map[string]string)`, and then parse it into `ps []Pairs`, and finally call `New*(ty, ps)`.
 To support this, we have to know that a name is a pair (global or service), and its type, so we implement:
 
 #### Pair Registry
@@ -78,6 +79,9 @@ We register the types of global pairs and service pairs.
 From [go-storage] side:
 
 ```go
+// RegisterServiceSchema will register a service's pair map.
+//
+// Users SHOULD NOT call this function.
 func RegisterServiceSchema(ty string, m map[string]string) {}
 ```
 
@@ -90,11 +94,19 @@ var pairMap = map[string]string{
 
 func init() {
 	// ...
-	pairs.RegisterServiceSchema("<type>", pairMap)
+	services.RegisterServiceSchema("<type>", pairMap)
 }
 ```
 
 ## Rationale
+
+### Alternative Format
+
+We can also add `<credential>@<endpoint>` in the config string, i.e.:
+
+`type://<credential>@<endpoint>/<name><work_dir>?key1=value1&...&keyN=valueN`
+
+However, our `credential` and `endpoint` is different from the `username:password@hostname` in URL, and we cannot easily utilize `url.Parse` to reduce our work. So we just keep the format simple currently, and we can add them in the future if really needed.
 
 ### Richer Schema?
 
@@ -113,10 +125,10 @@ We can also easily support `New*FromMap(ty string, m map[string]string)` now, bu
 We can also export parsing APIs like 
 ```go 
 func ParseMap(ty string, m map[string]string) []Pair {} 
-func ParseString(config string) []Pair {}
+func ParseString(connStr string) []Pair {}
 ```
 Pros:
-- Users can combine other pairs into a config string flexibly. (Solve the usability problem mentioned in the background section.)
+- Users can combine other pairs into a connection string flexibly. (Solve the usability problem mentioned in the background section.)
 
 Cons:
 - We only want to make initialization easier, instead of providing a general pair parser, which may involve additional complexity. But if we provide an API like `ParseMap` then we can't stop users from using it in other places, and thus it's effectively a general pair parser.
