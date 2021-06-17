@@ -39,14 +39,16 @@ The format of the connection string is (optional parts marked by squared bracket
 
 - name: storage name, e.g., bucket name. MUST NOT contain /
 - work_dir: For object storage, it is prefix; for fs, it is directory path. MUST start with / for every storage services.
-- At least one of name and work_dir MUST be present.
 - For the `key=value` pairs, if `=value` is missing, we just ignore the pair. But `key=` means a pair with a blank value.
+- If their are multiple pairs with the same key, the first one will be picked.
 
 So a valid connection string could be:
 
 - `s3://bucket_name`
 - `s3://bucket_name/prefix`
+- `s3://?credential=hmac:xxxx:xxxx&endpoint=http://s3.us-east-2.amazonaws.com`
 - `s3://bucket_name/prefix?credential=hmac:xxxx:xxxx&endpoint=http://s3.us-east-2.amazonaws.com`
+- `fs://`
 - `fs:///tmp`
 
 #### Parseable Value Types
