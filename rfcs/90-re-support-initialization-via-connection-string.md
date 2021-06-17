@@ -46,7 +46,7 @@ So a valid connection string could be:
 
 - `s3://bucket_name`
 - `s3://bucket_name/prefix`
-- `s3://bucket_name/prefix?credential=hmac:xxxx:xxxx&endpoint=http://bucket_name.s3-website-Region.amazonaws.com`
+- `s3://bucket_name/prefix?credential=hmac:xxxx:xxxx&endpoint=http://s3.us-east-2.amazonaws.com`
 - `fs:///tmp`
 
 #### Parseable Value Types
