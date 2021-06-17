@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-06-17
 ---
 
-# Proposal: Redesign Features
+# GSP-109: Redesign Features
 
 ## Background
 
