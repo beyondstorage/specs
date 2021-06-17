@@ -82,10 +82,10 @@ We register the types of global pairs and service pairs.
 From [go-storage] side:
 
 ```go
-// RegisterServiceSchema will register a service's pair map.
+// RegisterSchema will register a service's pair map.
 //
 // Users SHOULD NOT call this function.
-func RegisterServiceSchema(ty string, m map[string]string) {}
+func RegisterSchema(ty string, m map[string]string) {}
 ```
 
 From services side, we can generate following code:
@@ -97,7 +97,7 @@ var pairMap = map[string]string{
 
 func init() {
 	// ...
-	services.RegisterServiceSchema("<type>", pairMap)
+	services.RegisterSchema("<type>", pairMap)
 }
 ```
 
