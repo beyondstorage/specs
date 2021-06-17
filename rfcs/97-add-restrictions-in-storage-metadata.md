@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-06-09
 ---
 
-# GSP-97: Add Maximum File Size for Storage Write
+# GSP-97: Add Restrictions In Storage Metadata
 
 ## Background
 
@@ -38,7 +38,7 @@ But the current `StorageMeta` cannot solve the above problem:
 
 ## Proposal
 
-So I propose to add maximum size restrictions for storage write related operations as global storage metadata.
+So I propose to add restrictions in storage metadata.
 
 ### Add global storage metadata
 
