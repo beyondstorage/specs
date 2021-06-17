@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-06-17
 ---
 
-# GSP: Add Service Metadata In Storage Metadata
+# GSP-111: Add Service Metadata In Storage Metadata
 
 ## Background
 
