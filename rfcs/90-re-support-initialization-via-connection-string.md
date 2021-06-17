@@ -39,7 +39,9 @@ The format of the connection string is (optional parts marked by squared bracket
 
 - name: storage name, e.g., bucket name. MUST NOT contain /
 - work_dir: For object storage, it is prefix; for fs, it is directory path. MUST start with / for every storage services.
-- For the `key=value` pairs, if `=value` is missing, we just ignore the pair. But `key=` means a pair with a blank value.
+- For the `key=value` pairs:
+  - If `=value` is missing, we just ignore the pair. But `key=` means a pair with a blank value.
+  - The `key` is the pair name defined in `toml` and the format SHOULD be exactly the same.
 - If their are multiple pairs with the same key, the first one will be picked.
 
 So a valid connection string could be:
