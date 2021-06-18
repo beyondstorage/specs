@@ -4,15 +4,27 @@ description = "AppendOffset is the offset of the append object"
 
 [append-number-maximum]
 type = "int"
-description = "Max append numbers in append operation"
+description = """
+Deprecated: Moved to storage meta.
+
+Max append numbers in append operation.
+"""
 
 [append-size-maximum]
 type = "int64"
-description = "Max append size in per append operation"
+description = """
+Deprecated: Moved to storage meta.
+
+Max append size in per append operation
+"""
 
 [append-total-size-maximum]
 type = "int64"
-description = "Max append total size in append operation"
+description = """
+Deprecated: Moved to storage meta.
+
+Max append total size in append operation.
+"""
 
 [content-length]
 type = "int64"
@@ -48,15 +60,27 @@ description = "MultipartID is the part id of part object."
 
 [multipart-number-maximum]
 type = "int"
-description = "Maximum part number in multipart operation"
+description = """
+Deprecated: Moved to storage meta.
+
+Maximum part number in multipart operation.
+"""
 
 [multipart-size-maximum]
 type = "int64"
-description = "Maximum part size defined by storager"
+description = """
+Deprecated: Moved to storage meta.
+
+Maximum part size defined by storager.
+"""
 
 [multipart-size-minimum]
 type = "int64"
-description = "Minimum part size defined by storager"
+description = """
+Deprecated: Moved to storage meta.
+
+Minimum part size defined by storager
+"""
 
 [path]
 type = "string"
