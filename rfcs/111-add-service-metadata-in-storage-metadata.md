@@ -60,7 +60,7 @@ And add following generated functions in service packages:
 ```go
 // Only be used in service to set ServiceMetadata into StorageMeta.
 func setStorageServiceMetadata(s *StorageMeta, sm StorageServiceMetadata) {}
-// GetServiceMetadata will get ServiceMetadata from StorageMeta.
+// GetStorageServiceMetadata will get ServiceMetadata from StorageMeta.
 func GetStorageServiceMetadata(s *StorageMeta) StorageServiceMetadata {}
 ```
 
