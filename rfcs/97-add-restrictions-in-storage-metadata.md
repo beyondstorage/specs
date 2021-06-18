@@ -33,8 +33,8 @@ type StorageMeta struct {
 
 But the current `StorageMeta` cannot solve the above problem:
 
-- The fields are finite. For now, `m` is unused, and it's not convenient to hold the definite metadata.
-- Services have to call `metadata` repeatedly before use storage metadata internally.
+- The restrictions should be global storage metadata.
+- For now, `m` is unused, and it's not convenient to hold the definite metadata.
 
 ## Proposal
 
@@ -105,20 +105,9 @@ type StorageMeta struct {
 ```
 
 For services:
-- A member with type `StorageMeta` SHOULD be added, and the separate fields should be removed in `Storage`, like the following.
-- The storage metadata `sm` should be initiated at the time the storager initiated.
 
-```go
-type Storage struct {
-	sm           StorageMeta
-	
-	defaultPairs DefaultStoragePairs
-	features     StorageFeatures
-	
-	typ.UnimplementedStorager
-	...
-}
-```
+- References to `Object.appendNumberMaximum`, etc SHOULD to be updated.
+- `metadata` SHOULD return the added storage metadata if the service imposes limits on the resources and features.
 
 ## Rationale
 
@@ -130,19 +119,26 @@ This will need invalid request and get the ambiguous error.
 
 ## Compatibility
 
-This change will break all services.
+This change will not break services and users. We could migrate as follows:
+
+- Add fields in `StorageMeta` and mark append and multipart related meta as deprecated in `Object`.
+- Release a new version for [go-storage] and all services bump to this version with all references to `Object.appendNumberMaximum`, etc updated.
+- Remove deprecated fields in `Object` in the next major version.
 
 ## Implementation
 
-- `specs`:
+- `specs`
   - Add storage meta in [info_storage_meta.toml].
-  - Add deprecate mark at the global append and multipart related meta in [info_object_meta.toml].
+  - Mark append and multipart related meta as deprecated in [info_object_meta.toml].
 - `go-storage`
   - Generate the added storage metadata and corresponding `get/set` functions into `StorageMeta`.
   - Add comments start with `Deprecated` at the deprecated object metadata in generate template.
 - `go-service-*`
-   - Add a member with type `StorageMeta` in `Storage` and assign it on initialization.
-   - Check `size` for write related operations and return `ErrRestrictionDissatisfied` when `size` out of limit.
+  - Update all references to `Object.appendNumberMaximum`, etc.
+  - `metadata` should return the added meta if the service imposes the limits.
+  - Check `size` for write related operations and return `ErrRestrictionDissatisfied` when `size` out of limit.
 
+
+[go-storage]: https://github.com/beyondstorage/go-storage
 [info_storage_meta.toml]: ../definitions/info_storage_meta.toml
 [info_object_meta.toml]: ../definitions/info_object_meta.toml
