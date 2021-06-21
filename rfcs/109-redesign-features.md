@@ -78,6 +78,8 @@ Any operation that is related to dir SHOULD check `VirtualDir` in services that 
 
 We will introduce a new feature called `VirtualObjectMetadata` to allow the service to handle object metadata even when it doesn't have native support.
 
+This feature will replace `VirtualPairXxxYxxx` features like `VirutalPairWriteContentMd5` or `VirtualPairWriteContentType`. `VirtualPairXxxYxxx` used to added in GSP-87, but never implemented. In this proposal, we unify all of them into `VirtualObjectMetadata`.
+
 ## Rationale
 
 N/A
