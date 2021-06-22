@@ -31,13 +31,14 @@ N/A
 
 All API call that used object system metadata could be affected. We could migrate as follows:
 
-- Update fields in `Object` and rename `ObjectMetadata`.
+- Add `systemMetadata` in `Object` and mark `serviceMetadata`, `ObjectMetadata` related as deprecated.
 - Release a new version for [go-storage] and all services bump to this version with all references to `Object.serviceMetadata`, etc updated.
+- Remove deprecated fields in `Object` in the next major version.
 
 ## Implementation
 
-- Rename `service-metadata` to `system-metadata` in specs.
-- Rename the generated `ObjectMetadata` to `ObjectSystemMetadata` in go-storage, the same with `GetObjectSystemMetadata`/`setObjectSystemMetadata`.
+- Mark `service metadata` related as deprecated.
+- Add `system metadata` in specs and go-storage.
 - Update all references to `Object.serviceMetadata` in services.
 - Update comments about `Service Pair`, `Service Info` and so on in site.
 
