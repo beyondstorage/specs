@@ -5,7 +5,7 @@ updated_at: 2021-06-22
 updates: [GSP-17](./17-proposal-process.md)
 ---
 
-# Proposal: Update RFC Format and Process
+# GSP-118: Update RFC Format and Process
 
 ## Background
 
