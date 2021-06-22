@@ -58,4 +58,8 @@ N/A
 
 ## Implementation
 
-Migrate plan:
+Migrate plan: 
+- Update existing RFCs to the new format. 
+  - Set `Start Date` to `updated_at`.
+  - Set `Tracking Issue` and `RFC PR` to `N/A` if not applicable.
+- RFCs that haven't been merged before this RFC is merged should follow the new format.
