@@ -2,14 +2,15 @@
 author: Xuanwo <github@xuanwo.io>
 status: finished
 updated_at: 2019-12-23
-updated_by:
-  - design/4-credential-refactor.md
-  - design/9-remove-storager-init.md
-deprecated_by:
-  - design/13-remove-config-string.md
 ---
 
 # Proposal: Support service init via config string
+
+- Updated By:
+  - [GSP-4](./4-credential-refactor.md)
+  - [GSP-9](./9-remove-storager-init.md)
+  - [GSP-13](./13-remove-config-string.md): Deprecates this RFC
+  - [GSP-90](./90-re-support-initialization-via-connection-string.md): Re-support this feature
 
 ## Background
 

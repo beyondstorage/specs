@@ -6,6 +6,9 @@ updated_at: 2020-03-18
 
 # Proposal: Proposal process
 
+- Updated By:
+  - [GSP-118](./118-update-rfc-format-and-process.md): Updates the proposal spec and process
+
 ## Background
 
 [storage]'s development is proposal driven. We need to explain why and how we make changes to [storage] so that we can understand why we are at here.

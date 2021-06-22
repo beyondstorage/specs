@@ -2,11 +2,13 @@
 author: xxchan <xxchan22f@gmail.com>
 status: draft
 updated_at: 2021-06-17
-deprecates:
-  - 13-remove-config-string.md
 ---
 
 # GSP-90: Re-support Initialization Via Connection String
+
+- Updates:
+  - [GSP-13](./13-remove-config-string.md): Deprecates it
+  - [GSP-3](./3-support-service-init-via-config-string.md): Re-support this feature, which was deprecated by [GSP-13](./13-remove-config-string.md)
 
 ## Background
 

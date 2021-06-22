@@ -2,10 +2,12 @@
 author: xxchan <xxchan22f@gmail.com>
 status: draft
 updated_at: 2021-06-22
-updates: [GSP-17](./17-proposal-process.md)
 ---
 
 # GSP-118: Update RFC Format and Process
+
+- Updates:
+  - [GSP-17](./17-proposal-process.md): Updates the RFC spec and process
 
 ## Background
 

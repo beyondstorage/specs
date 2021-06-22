@@ -2,13 +2,13 @@
 author: Xuanwo <github@xuanwo.io>
 status: finished
 updated_at: 2020-04-09
-updates:
-  - design/2-use-callback-in-list-operations.md
-deprecates:
-  - design/12-support-both-directory-and-prefix-based-list.md
 ---
 
 # Proposal: Split storage list
+
+- Updates:
+  - [GSP-2](./2-use-callback-in-list-operations.md)
+  - [GSP-12](./12-support-both-directory-and-prefix-based-list.md): Deprecates this RFC
 
 ## Background
 

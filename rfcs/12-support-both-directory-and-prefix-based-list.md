@@ -2,11 +2,12 @@
 author: Xuanwo <github@xuanwo.io>
 status: finished
 updated_at: 2020-03-02
-updates:
-  - design/2-use-callback-in-list-operations.md
 ---
 
 # Proposal: Support both directory and prefix based list
+
+- Updates:
+  - [GSP-2](./2-use-callback-in-list-operations.md)
 
 ## Background
 
