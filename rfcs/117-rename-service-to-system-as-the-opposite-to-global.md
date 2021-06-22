@@ -4,7 +4,7 @@ status: draft
 updated_at: 2021-06-21
 ---
 
-# GSP: Rename Service to System as the Opposite to Global
+# GSP-117: Rename Service to System as the Opposite to Global
 
 ## Background
 
