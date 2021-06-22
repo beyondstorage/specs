@@ -89,7 +89,15 @@ description = "Path is either the absolute path or the relative path towards sto
 
 [service-metadata]
 type = "any"
-description = "ServiceMetadata stores service defined metadata"
+description = """
+ServiceMetadata stores service defined metadata.
+
+Deprecated: Use SystemMetadata instead.
+"""
+
+[system-metadata]
+type = "any"
+description = "SystemMetadata stores system defined metadata."
 
 [user-metadata]
 type = "string_string_map"
