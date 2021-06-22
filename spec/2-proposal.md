@@ -29,6 +29,9 @@ Proposal will have metadata at the beginning.
 - Start Date: 2019-11-15
 - RFC PR: [beyondstorage/specs#100](https://github.com/beyondstorage/specs/issues/100)
 - Tracking Issue: [beyondstorage/go-storage#100](https://github.com/beyondstorage/go-storage/issues/100)
+
+# GSP-0: <proposal name>
+
 - Updates:
   - [GSP-20](./20-abc): Deletes something
 - Updated By: 
@@ -38,7 +41,7 @@ Proposal will have metadata at the beginning.
 
 `Author`, `Start Date`, `RFC PR` and `Tracking Issue` are required.
 
-If this proposal affects or is affected by other proposals, `Updated By`, `Updates`, should be added.
+If this proposal affects or is affected by other proposals, `Updated By`, `Updates`, should be added below the title.
 
 ## Code
 

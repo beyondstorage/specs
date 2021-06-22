@@ -3,6 +3,7 @@
 This repo maintains rfcs and definitions for Beyond Storage.
 
 ## RFC Process
+
 - (Optional) Submit an issue in `beyondstorage/specs` or [forum](https://forum.beyondstorage.io/) as a pre-proposal to discuss the idea.
 - Copy `rfcs/0-example.md` to `rfcs/0-my-feature.md` (where "my-feature" is descriptive). Don't assign an RFC number yet; This is going to be the PR number.
 - Fill in the RFC.
