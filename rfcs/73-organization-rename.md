@@ -1,8 +1,7 @@
----
-author: JinnyYi <github.com/JinnyYi>
-status: draft
-updated_at: 2021-05-19
----
+- Author: JinnyYi <github.com/JinnyYi>
+- Start Date: 2021-05-19
+- RFC PR: [beyondstorage/specs#73](https://github.com/beyondstorage/specs/issues/73)
+- Tracking Issue: N/A
 
 # GSP-73: Organization Rename
 

@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2019-12-26
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2019-12-26
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Credential refactor
 

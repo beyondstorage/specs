@@ -1,8 +1,7 @@
----
-author: xxchan <xxchan22f@gmail.com>
-status: draft
-updated_at: 2021-06-15
----
+- Author: xxchan <xxchan22f@gmail.com>
+- Start Date: 2021-06-15
+- RFC PR: [beyondstorage/specs#105](https://github.com/beyondstorage/specs/issues/105)
+- Tracking Issue: N/A
 
 # GSP-105: Trim Service Pair Prefix
 

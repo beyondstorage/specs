@@ -1,8 +1,7 @@
----
-author: JinnyYi <github.com/JinnyYi>
-status: draft
-updated_at: 2021-06-09
----
+- Author: JinnyYi <github.com/JinnyYi>
+- Start Date: 2021-06-09
+- RFC PR: [beyondstorage/specs#97](https://github.com/beyondstorage/specs/issues/97)
+- Tracking Issue: [beyondstorage/go-storage#599](https://github.com/beyondstorage/go-storage/issues/599)
 
 # GSP-97: Add Restrictions In Storage Metadata
 

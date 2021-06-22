@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2020-01-08
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2020-01-08
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Support context
 

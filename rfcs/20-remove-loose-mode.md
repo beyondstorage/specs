@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2020-04-09
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2020-04-09
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Remove loose mode
 

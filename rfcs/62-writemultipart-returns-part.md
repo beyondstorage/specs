@@ -1,8 +1,7 @@
----
-author: JinnyYi <github.com/JinnyYi>
-status: draft
-updated_at: 2021-05-11
----
+- Author: JinnyYi <github.com/JinnyYi>
+- Start Date: 2021-05-11
+- RFC PR: [beyondstorage/specs#62](https://github.com/beyondstorage/specs/issues/62)
+- Tracking Issue: N/A
 
 # AOS-62: WriteMultipart Returns Part
 

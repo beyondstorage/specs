@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2019-11-18
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2019-11-18
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Use callback in List operations
 
