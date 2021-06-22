@@ -29,7 +29,10 @@ N/A
 
 ## Compatibility
 
-All API call that used object system metadata could be affected.
+All API call that used object system metadata could be affected. We could migrate as follows:
+
+- Update fields in `Object` and rename `ObjectMetadata`.
+- Release a new version for [go-storage] and all services bump to this version with all references to `Object.serviceMetadata`, etc updated.
 
 ## Implementation
 
