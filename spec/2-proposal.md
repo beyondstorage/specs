@@ -47,5 +47,4 @@ If this proposal affects or is affected by other proposals, `Updated By`, `Updat
 
 Related code should be sub directory with the proposal number.
 
-[3-support-service-init-via-config-string]: ../rfcs/3-support-service-init-via-config-string.md
 [GSP-16]: ../rfcs/16-loose-mode.md
