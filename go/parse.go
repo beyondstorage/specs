@@ -7,6 +7,12 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
+type tomlFeature struct {
+	Description string `toml:"description"`
+}
+
+type tomlFeatures map[string]tomlFeature
+
 type tomlField struct {
 	Type string
 }
@@ -36,6 +42,7 @@ type tomlOperation struct {
 	ObjectMode  string   `toml:"object_mode"`
 	Local       bool     `toml:"local"`
 }
+
 type tomlInterface struct {
 	Description string                   `toml:"description"`
 	Ops         map[string]tomlOperation `toml:"op"`
@@ -44,10 +51,8 @@ type tomlInterface struct {
 type tomlInterfaces map[string]tomlInterface
 
 type tomlOp struct {
-	Simulated bool     `toml:"simulated"`
-	Required  []string `toml:"required"`
-	Optional  []string `toml:"optional"`
-	Virtual   []string `toml:"virtual"`
+	Required []string `toml:"required"`
+	Optional []string `toml:"optional"`
 }
 
 type tomlNamespace struct {
@@ -61,10 +66,34 @@ type tomlService struct {
 	Namespace map[string]tomlNamespace                  `toml:"namespace"`
 	Pairs     map[string]tomlPair                       `toml:"pairs"`
 	Infos     map[string]map[string]map[string]tomlInfo `toml:"infos"`
+
+	Features []string `toml:"features"`
 }
 
 func parseTOML(src []byte, in interface{}) (err error) {
 	return toml.Unmarshal(src, in)
+}
+
+func parseFeatures() Features {
+	var tp tomlFeatures
+
+	err := parseTOML(MustAsset(featurePath), &tp)
+	if err != nil {
+		log.Fatalf("parse: %v", err)
+	}
+
+	var ps Features
+
+	for k, v := range tp {
+		p := Feature{
+			Name:        k,
+			Description: v.Description,
+		}
+
+		ps = append(ps, p)
+	}
+
+	return ps
 }
 
 func parsePairs() Pairs {
@@ -202,6 +231,7 @@ func parseService(filePath string) Service {
 	}
 
 	ps.Name = ts.Name
+	ps.Features = ts.Features
 
 	// Parse pairs
 	for k, v := range ts.Pairs {
@@ -241,11 +271,9 @@ func parseService(filePath string) Service {
 
 		for opName, op := range v.Op {
 			n.Op = append(n.Op, Op{
-				Name:      opName,
-				Simulated: op.Simulated,
-				Required:  op.Required,
-				Optional:  op.Optional,
-				Virtual:   op.Virtual,
+				Name:     opName,
+				Required: op.Required,
+				Optional: op.Optional,
 			})
 		}
 

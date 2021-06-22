@@ -50,6 +50,7 @@ type Field struct {
 // Service is the data parsed from TOML.
 type Service struct {
 	Name       string
+	Features   []string
 	Namespaces []Namespace
 	Pairs      Pairs
 	Infos      Infos
@@ -59,10 +60,28 @@ type Service struct {
 func (s *Service) Sort() {
 	s.Pairs.Sort()
 	s.Infos.Sort()
+	sort.Strings(s.Features)
 
 	for _, v := range s.Namespaces {
 		v.Sort()
 	}
+}
+
+type Features []Feature
+
+func (p Features) Sort() {
+	if p == nil || len(p) == 0 {
+		return
+	}
+
+	sort.Slice(p, func(i, j int) bool {
+		return p[i].Description < p[j].Description
+	})
+}
+
+type Feature struct {
+	Name        string
+	Description string
 }
 
 // Infos is the spec for infos.

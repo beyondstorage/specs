@@ -190,7 +190,6 @@ will create a new object without any api call.
 - Create SHOULD accept ObjectMode pair as object mode.
 """
 
-
 [storager.op.stat]
 params = ["path"]
 pairs = ["object_mode"]
@@ -205,9 +204,8 @@ will stat a path to get info of an object.
   - Service SHOULD check if returning ObjectMode is match
 """
 
-
 [storager.op.write]
 description = "will write data into a file."
 params = ["path", "r", "size"]
-pairs = ["content_type", "content_md5", "io_callback"]
+pairs = ["io_callback"]
 results = ["n"]
