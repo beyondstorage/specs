@@ -7,6 +7,12 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
+type tomlFeature struct {
+	Description string `toml:"description"`
+}
+
+type tomlFeatures map[string]tomlFeature
+
 type tomlField struct {
 	Type string
 }
@@ -36,6 +42,7 @@ type tomlOperation struct {
 	ObjectMode  string   `toml:"object_mode"`
 	Local       bool     `toml:"local"`
 }
+
 type tomlInterface struct {
 	Description string                   `toml:"description"`
 	Ops         map[string]tomlOperation `toml:"op"`
@@ -44,13 +51,14 @@ type tomlInterface struct {
 type tomlInterfaces map[string]tomlInterface
 
 type tomlOp struct {
-	Simulated bool     `toml:"simulated"`
+	Simulated bool     `toml:"simulated"` // Deprecated: This field has been deprecated by GSP-109, planned be removed in v4.3.0.
 	Required  []string `toml:"required"`
 	Optional  []string `toml:"optional"`
-	Virtual   []string `toml:"virtual"`
+	Virtual   []string `toml:"virtual"` // Deprecated: This field has been deprecated by GSP-109, planned be removed in v4.3.0.
 }
 
 type tomlNamespace struct {
+	Features  []string          `toml:"features"`
 	Implement []string          `toml:"implement"`
 	New       tomlOp            `toml:"new"`
 	Op        map[string]tomlOp `toml:"op"`
@@ -65,6 +73,28 @@ type tomlService struct {
 
 func parseTOML(src []byte, in interface{}) (err error) {
 	return toml.Unmarshal(src, in)
+}
+
+func parseFeatures() Features {
+	var tp tomlFeatures
+
+	err := parseTOML(MustAsset(featurePath), &tp)
+	if err != nil {
+		log.Fatalf("parse: %v", err)
+	}
+
+	var ps Features
+
+	for k, v := range tp {
+		p := Feature{
+			Name:        k,
+			Description: v.Description,
+		}
+
+		ps = append(ps, p)
+	}
+
+	return ps
 }
 
 func parsePairs() Pairs {
@@ -233,6 +263,7 @@ func parseService(filePath string) Service {
 		n := Namespace{
 			Name:      name,
 			Implement: v.Implement,
+			Features:  v.Features,
 			New: New{
 				Required: v.New.Required,
 				Optional: v.New.Optional,

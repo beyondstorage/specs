@@ -60,9 +60,34 @@ func (s *Service) Sort() {
 	s.Pairs.Sort()
 	s.Infos.Sort()
 
+	sort.Slice(s.Namespaces, func(i, j int) bool {
+		ns := s.Namespaces
+		return ns[i].Name < ns[j].Name
+	})
+
 	for _, v := range s.Namespaces {
 		v.Sort()
 	}
+}
+
+// Features is all global features that available.
+//
+// Features will be defined in features.toml.
+type Features []Feature
+
+func (p Features) Sort() {
+	if p == nil || len(p) == 0 {
+		return
+	}
+
+	sort.Slice(p, func(i, j int) bool {
+		return p[i].Description < p[j].Description
+	})
+}
+
+type Feature struct {
+	Name        string
+	Description string
 }
 
 // Infos is the spec for infos.
@@ -112,6 +137,7 @@ type Pair struct {
 // Namespace is the data parsed from TOML.
 type Namespace struct {
 	Name      string
+	Features  []string // The feature names that provided by current namespace.
 	Implement []string
 	New       New
 	Op        []Op
@@ -121,6 +147,7 @@ type Namespace struct {
 func (n *Namespace) Sort() {
 	n.New.Sort()
 
+	sort.Strings(n.Features)
 	sort.Strings(n.Implement)
 
 	sort.Slice(n.Op, func(i, j int) bool {
@@ -136,11 +163,11 @@ func (n *Namespace) Sort() {
 // Op means an operation definition.
 type Op struct {
 	Name      string
-	Simulated bool
+	Simulated bool // Deprecated: This field has been deprecated by GSP-109, planned be removed in v4.3.0.
 
 	Required []string
 	Optional []string
-	Virtual  []string
+	Virtual  []string // Deprecated: This field has been deprecated by GSP-109, planned be removed in v4.3.0.
 }
 
 // Sort will sort the Op

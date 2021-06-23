@@ -3,16 +3,16 @@ package specs
 //go:generate go run github.com/kevinburke/go-bindata/go-bindata -nometadata -pkg "specs" -ignore "\\.go$" -prefix "../definitions/" ../definitions
 
 const (
-	pairPath = "pairs.toml"
-
+	featurePath     = "features.toml"
+	fieldPath       = "fields.toml"
 	infoObjectMeta  = "info_object_meta.toml"
 	infoStorageMeta = "info_storage_meta.toml"
-
-	operationPath = "operations.toml"
-	fieldPath     = "fields.toml"
+	operationPath   = "operations.toml"
+	pairPath        = "pairs.toml"
 )
 
 var (
+	ParsedFeatures   Features
 	ParsedPairs      Pairs
 	ParsedInfos      Infos
 	ParsedOperations Operations
@@ -28,6 +28,9 @@ func ParseService(filePath string) (Service, error) {
 }
 
 func init() {
+	ParsedFeatures = parseFeatures()
+	ParsedFeatures.Sort()
+
 	ParsedPairs = parsePairs()
 	ParsedPairs.Sort()
 
