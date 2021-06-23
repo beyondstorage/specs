@@ -18,51 +18,33 @@ proposal's filename will be like following:
 
 `<proposal-number>-proposal-name.md`, for example, `16-loose-mode.md`
 
-And they should be referred by `16-loose-mode` or `design/16-loose-mode.md`
+And they should be referred by `GSP-16` with hyperlink: [GSP-16]
 
 ## Metadata
 
-Proposal will have metadata as front meta to carry more info.
+Proposal will have metadata at the beginning.
 
-Take [3-support-service-init-via-config-string] as example:
+```markdown
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2019-11-15
+- RFC PR: [beyondstorage/specs#100](https://github.com/beyondstorage/specs/issues/100)
+- Tracking Issue: [beyondstorage/go-storage#100](https://github.com/beyondstorage/go-storage/issues/100)
 
-```yaml
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2019-12-23
-updated_by:
-  - rfcs/4-credential-refactor.md
-  - rfcs/9-remove-storager-init.md
-deprecated_by:
-  - rfcs/13-remove-config-string.md
----
+# GSP-0: <proposal name>
+
+- Updates:
+  - [GSP-20](./20-abc): Deletes something
+- Updated By: 
+  - [GSP-10](./10-do-be-do-be-do): Adds something
+  - [GSP-1000](./1000-lalala): Deprecates this RFC
 ```
 
-`auther`, `status` and `updated_at` are required.
+`Author`, `Start Date`, `RFC PR` and `Tracking Issue` are required.
 
-`auther` should be in format: `Name <Email>`
-
-If this proposal affects other proposals, `updated_by`, `updates`, `deprecated_by`, `deprecates` and so on should also be added.
-
-## Status
-
-Proposal has following status: `draft`, `candidate`, `finished`.
-
-- Proposal just created, but not implemented: `draft`
-- Proposal implemented but doesn't have final confirmation: `candidate`
-- Proposal has been included in a minor version: `finished`
-
-So when we send a PR, we should set this proposal to `draft`.
-
-After we implemented a proposal, we should set this proposal to `candidate`, at this stage, we can update our implementation based on actual feedback.
-
-When we decide to have a minor release, we should take all `candidate` proposal into consideration. Dissatisfied proposal will be removed, and accepted proposals will be marked into `finished`.
-
-After a proposal marked `finished`, we can't change it's content anymore (metadata could also be changed if updated). We need to submit a new proposal to change some proposal's behavior.
+If this proposal affects or is affected by other proposals, `Updated By`, `Updates`, should be added below the title.
 
 ## Code
 
 Related code should be sub directory with the proposal number.
 
-[3-support-service-init-via-config-string]: ../rfcs/3-support-service-init-via-config-string.md
+[GSP-16]: ../rfcs/16-loose-mode.md
