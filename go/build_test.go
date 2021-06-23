@@ -21,5 +21,6 @@ func TestParseService(t *testing.T) {
 	}
 
 	assert.Equal(t, "tests", srv.Name)
-	assert.Equal(t, []string{"virtual_dir"}, srv.Features)
+	assert.Equal(t, "storage", srv.Namespaces[1].Name)
+	assert.Equal(t, []string{"virtual_dir"}, srv.Namespaces[1].Features)
 }

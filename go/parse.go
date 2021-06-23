@@ -56,6 +56,7 @@ type tomlOp struct {
 }
 
 type tomlNamespace struct {
+	Features  []string          `toml:"features"`
 	Implement []string          `toml:"implement"`
 	New       tomlOp            `toml:"new"`
 	Op        map[string]tomlOp `toml:"op"`
@@ -66,8 +67,6 @@ type tomlService struct {
 	Namespace map[string]tomlNamespace                  `toml:"namespace"`
 	Pairs     map[string]tomlPair                       `toml:"pairs"`
 	Infos     map[string]map[string]map[string]tomlInfo `toml:"infos"`
-
-	Features []string `toml:"features"`
 }
 
 func parseTOML(src []byte, in interface{}) (err error) {
@@ -231,7 +230,6 @@ func parseService(filePath string) Service {
 	}
 
 	ps.Name = ts.Name
-	ps.Features = ts.Features
 
 	// Parse pairs
 	for k, v := range ts.Pairs {
@@ -263,6 +261,7 @@ func parseService(filePath string) Service {
 		n := Namespace{
 			Name:      name,
 			Implement: v.Implement,
+			Features:  v.Features,
 			New: New{
 				Required: v.New.Required,
 				Optional: v.New.Optional,

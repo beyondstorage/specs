@@ -1,7 +1,5 @@
 name = "tests"
 
-features = ["virtual_dir"]
-
 [namespace.service.new]
 required = ["credential"]
 optional = ["service_features", "default_service_pairs", "endpoint", "http_client_options"]
@@ -19,6 +17,7 @@ optional = ["location"]
 optional = ["location"]
 
 [namespace.storage]
+features = ["virtual_dir"]
 implement = ["copier", "fetcher", "mover", "multiparter", "reacher", "appender"]
 
 [namespace.storage.new]

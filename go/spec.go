@@ -50,7 +50,6 @@ type Field struct {
 // Service is the data parsed from TOML.
 type Service struct {
 	Name       string
-	Features   []string
 	Namespaces []Namespace
 	Pairs      Pairs
 	Infos      Infos
@@ -60,13 +59,15 @@ type Service struct {
 func (s *Service) Sort() {
 	s.Pairs.Sort()
 	s.Infos.Sort()
-	sort.Strings(s.Features)
 
 	for _, v := range s.Namespaces {
 		v.Sort()
 	}
 }
 
+// Features is all global features that available.
+//
+// Features will be defined in features.toml.
 type Features []Feature
 
 func (p Features) Sort() {
@@ -131,6 +132,7 @@ type Pair struct {
 // Namespace is the data parsed from TOML.
 type Namespace struct {
 	Name      string
+	Features  []string // The feature names that provided by current namespace.
 	Implement []string
 	New       New
 	Op        []Op
@@ -140,6 +142,7 @@ type Namespace struct {
 func (n *Namespace) Sort() {
 	n.New.Sort()
 
+	sort.Strings(n.Features)
 	sort.Strings(n.Implement)
 
 	sort.Slice(n.Op, func(i, j int) bool {
