@@ -5,6 +5,9 @@
 
 # GSP-105: Trim Service Pair Prefix
 
+- Updated By:
+  - [GSP-117](./117-rename-service-to-system-as-the-opposite-to-global.md): Rename `service pair` to `system pair`
+
 ## Background
 
 Currently, service pairs have the prefix `<type>_` internally, e.g.,

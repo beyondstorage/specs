@@ -5,6 +5,9 @@
 
 # AOS-38: Service Pair Naming Style
 
+- Updated By:
+    - [GSP-117](./117-rename-service-to-system-as-the-opposite-to-global.md): Rename `service pair` to `system pair`
+
 ## Background
 
 There are 10 services have been implemented and more services are on the way, and every service may have their only pairs. We need to design a naming style that meets following needs:
