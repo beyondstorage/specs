@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: draft
-updated_at: 2021-05-30
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-05-30
+- RFC PR: [beyondstorage/specs#87](https://github.com/beyondstorage/specs/issues/87)
+- Tracking Issue: N/A
 
 # GSP-87: Feature Gates
 

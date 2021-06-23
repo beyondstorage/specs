@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: draft
-updated_at: 2021-05-08
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-05-08
+- RFC PR: [beyondstorage/specs#49](https://github.com/beyondstorage/specs/issues/49)
+- Tracking Issue: N/A
 
 # AOS-49: Add CreateDir Operation
 

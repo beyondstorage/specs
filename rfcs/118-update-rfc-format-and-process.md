@@ -1,11 +1,12 @@
----
-author: xxchan <xxchan22f@gmail.com>
-status: draft
-updated_at: 2021-06-22
-updates: [GSP-17](./17-proposal-process.md)
----
+- Author: xxchan <xxchan22f@gmail.com>
+- Start Date: 2021-06-22
+- RFC PR: [beyondstorage/specs#118](https://github.com/beyondstorage/specs/issues/118)
+- Tracking Issue: [beyondstorage/specs#121](https://github.com/beyondstorage/specs/issues/121)
 
 # GSP-118: Update RFC Format and Process
+
+- Updates:
+  - [GSP-17](./17-proposal-process.md): Updates the RFC spec and process
 
 ## Background
 
