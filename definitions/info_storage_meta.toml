@@ -41,6 +41,10 @@ description = "Minimum part size defined by storager."
 type = "string"
 export = true
 
+[system-metadata]
+type = "any"
+description = "SystemMetadata stores system defined metadata"
+
 [work-dir]
 type = "string"
 export = true
