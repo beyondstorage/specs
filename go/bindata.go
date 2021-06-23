@@ -3,16 +3,8 @@
 // ../definitions/features.toml (1.177kB)
 // ../definitions/fields.toml (590B)
 // ../definitions/info_object_meta.toml (1.756kB)
-<<<<<<< HEAD
-// ../definitions/info_storage_meta.toml (1.036kB)
-// ../definitions/operations.toml (5.014kB)
-||||||| 8271c8a
-// ../definitions/info_storage_meta.toml (1.036kB)
-// ../definitions/operations.toml (5.047kB)
-=======
 // ../definitions/info_storage_meta.toml (1.13kB)
-// ../definitions/operations.toml (5.047kB)
->>>>>>> origin/master
+// ../definitions/operations.toml (5.014kB)
 // ../definitions/pairs.toml (1.414kB)
 
 package specs
