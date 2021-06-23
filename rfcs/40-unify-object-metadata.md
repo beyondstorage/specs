@@ -5,6 +5,9 @@
 
 # AOS-40: Unify Object Metadata
 
+- Updated By:
+  - [GSP-117](./117-rename-service-to-system-as-the-opposite-to-global.md): Rename `service metadata` to `system metadata`
+
 ## Background
 
 Object may have different kind of metadata:

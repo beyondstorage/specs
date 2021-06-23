@@ -43,7 +43,7 @@ export = true
 
 [system-metadata]
 type = "any"
-description = "SystemMetadata stores system defined metadata"
+description = "SystemMetadata stores system defined metadata."
 
 [work-dir]
 type = "string"

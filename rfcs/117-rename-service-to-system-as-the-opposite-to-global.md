@@ -5,6 +5,11 @@
 
 # GSP-117: Rename Service to System as the Opposite to Global
 
+- Updates:
+    - [GSP-38](./38-service-pair-naming-style.md): Rename `service pair` to `system pair`
+    - [GSP-40](./40-unify-object-metadata.md): Rename `service metadata` to `system metadata`
+    - [GSP-105](./105-trim-service-pair-prefix.md): Rename `service pair` to `system pair`
+
 ## Background
 
 The word `Service` has different meanings among our repositories:
