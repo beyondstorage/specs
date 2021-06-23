@@ -60,6 +60,11 @@ func (s *Service) Sort() {
 	s.Pairs.Sort()
 	s.Infos.Sort()
 
+	sort.Slice(s.Namespaces, func(i, j int) bool {
+		ns := s.Namespaces
+		return ns[i].Name < ns[j].Name
+	})
+
 	for _, v := range s.Namespaces {
 		v.Sort()
 	}
