@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: draft
-updated_at: 2021-06-17
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-06-17
+- RFC PR: [beyondstorage/specs#109](https://github.com/beyondstorage/specs/issues/109)
+- Tracking Issue: [beyondstorage/go-storage#603](https://github.com/beyondstorage/go-storage/issues/603)
 
 # GSP-109: Redesign Features
 

@@ -1,8 +1,7 @@
----
-author: xxchan <xxchan22f@gmail.com>
-status: draft
-updated_at: 2021-05-07
----
+- Author: xxchan <xxchan22f@gmail.com>
+- Start Date: 2021-05-07
+- RFC PR: [beyondstorage/specs#47](https://github.com/beyondstorage/specs/issues/47)
+- Tracking Issue: N/A
 
 # AOS-47: Additional Error Specification
 

@@ -1,10 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2020-02-18
-adds:
-  - spec/1-error-handling.md
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2020-02-18
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Error Handling
 

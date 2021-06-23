@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: draft
-updated_at: 2021-05-06
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-05-06
+- RFC PR: [beyondstorage/specs#46](https://github.com/beyondstorage/specs/issues/46)
+- Tracking Issue: N/A
 
 # AOS-46: Idempotent Storager Delete Operation
 

@@ -1,8 +1,7 @@
----
-author: Prnyself <lanceren@yunify.com>
-status: draft
-updated_at: 2021-05-11
----
+- Author: Prnyself <lanceren@yunify.com>
+- Start Date: 2021-05-11
+- RFC PR: [beyondstorage/specs#61](https://github.com/beyondstorage/specs/issues/61)
+- Tracking Issue: N/A
 
 # AOS-61: Add object mode check for operations
 
