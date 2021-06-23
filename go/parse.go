@@ -51,8 +51,10 @@ type tomlInterface struct {
 type tomlInterfaces map[string]tomlInterface
 
 type tomlOp struct {
-	Required []string `toml:"required"`
-	Optional []string `toml:"optional"`
+	Simulated bool     `toml:"simulated"` // Deprecated: This field has been deprecated by GSP-109, planned be removed in v4.3.0.
+	Required  []string `toml:"required"`
+	Optional  []string `toml:"optional"`
+	Virtual   []string `toml:"virtual"` // Deprecated: This field has been deprecated by GSP-109, planned be removed in v4.3.0.
 }
 
 type tomlNamespace struct {
@@ -270,9 +272,11 @@ func parseService(filePath string) Service {
 
 		for opName, op := range v.Op {
 			n.Op = append(n.Op, Op{
-				Name:     opName,
-				Required: op.Required,
-				Optional: op.Optional,
+				Name:      opName,
+				Simulated: op.Simulated,
+				Required:  op.Required,
+				Optional:  op.Optional,
+				Virtual:   op.Virtual,
 			})
 		}
 
