@@ -1,12 +1,13 @@
----
-author: xxchan <xxchan22f@gmail.com>
-status: draft
-updated_at: 2021-06-17
-deprecates:
-  - 13-remove-config-string.md
----
+- Author: xxchan <xxchan22f@gmail.com>
+- Start Date: 2021-06-17
+- RFC PR: [beyondstorage/specs#90](https://github.com/beyondstorage/specs/issues/90)
+- Tracking Issue: [beyondstorage/go-storage#600](https://github.com/beyondstorage/go-storage/issues/600)
 
 # GSP-90: Re-support Initialization Via Connection String
+
+- Updates:
+  - [GSP-13](./13-remove-config-string.md): Deprecates it
+  - [GSP-3](./3-support-service-init-via-config-string.md): Re-support this feature, which was deprecated by [GSP-13](./13-remove-config-string.md)
 
 ## Background
 

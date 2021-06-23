@@ -1,8 +1,7 @@
----
-author: JinnyYi <github.com/JinnyYi>
-status: draft
-updated_at: 2021-06-17
----
+- Author: JinnyYi <github.com/JinnyYi>
+- Start Date: 2021-06-17
+- RFC PR: [beyondstorage/specs#111](https://github.com/beyondstorage/specs/issues/111)
+- Tracking Issue: [beyondstorage/go-storage#602](https://github.com/beyondstorage/go-storage/issues/602)
 
 # GSP-111: Add System Metadata in Storage Metadata
 

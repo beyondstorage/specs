@@ -1,8 +1,7 @@
----
-author: Lance <github.com/Prnyself>
-status: finished
-updated_at: 2020-12-10
----
+- Author: Lance <github.com/Prnyself>
+- Start Date: 2020-12-10
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Add default set for operations
 

@@ -1,8 +1,7 @@
----
-author: JinnyYi <github.com/JinnyYi>
-status: draft
-updated_at: 2021-06-21
----
+- Author: JinnyYi <github.com/JinnyYi>
+- Start Date: 2021-06-21
+- RFC PR: [beyondstorage/specs#117](https://github.com/beyondstorage/specs/issues/117)
+- Tracking Issue: [beyondstorage/go-storage#604](https://github.com/beyondstorage/go-storage/issues/604)
 
 # GSP-117: Rename Service to System as the Opposite to Global
 

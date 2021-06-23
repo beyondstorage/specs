@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2020-03-12
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2020-03-12
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Loose mode
 
