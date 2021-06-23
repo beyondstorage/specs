@@ -1,7 +1,7 @@
 - Author: xxchan <xxchan22f@gmail.com>
 - Start Date: 2021-06-15
 - RFC PR: [beyondstorage/specs#105](https://github.com/beyondstorage/specs/issues/105)
-- Tracking Issue: N/A
+- Tracking Issue: [beyondstorage/go-storage#598](https://github.com/beyondstorage/go-storage/pull/598)
 
 # GSP-105: Trim Service Pair Prefix
 
