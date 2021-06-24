@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: draft
-updated_at: 2021-06-08
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-06-08
+- RFC PR: [beyondstorage/specs#86](https://github.com/beyondstorage/specs/pull/86)
+- Tracking Issue: N/A
 
 # GSP-86: Add Create Link Operation
 
@@ -33,7 +32,7 @@ type Linker interface {
 
 As described in [GSP-87],  `CreateLink` could also be virtual functions.
 
-- Service without native support SHOULD mark `CreateLink` as simulated.
+- Service without native support COULD implement `virtual_link` feature.
 - Users SHOULD enable this feature by themselves.
 
 ## Rationale
@@ -51,10 +50,10 @@ A service doesn't have native support for Link, so we implement one for it. Afte
 
 The feature gates will be kept until next major release.
 
-- If user enabled `virtual_create_link`, service SHOULD run compatible mode: create link via native methods, but allow read link from old-style link object.
-- If user didn't enable `virtual_create_link`, service will run in native as other services.
+- If user enabled `virtual_link`, service SHOULD run compatible mode: create link via native methods, but allow read link from old-style link object.
+- If user didn't enable `virtual_link`, service will run in native as other services.
 
-Finally, those compatible code will be removed in next major release, and `virtual_create_link` feature will be removed.
+Finally, those compatible code will be removed in next major release, and `virtual_link` feature will be removed.
 
 ## Compatibility
 
@@ -62,7 +61,7 @@ This proposal is compatible.
 
 ## Implementation
 
-- Add new operations in specs
+- Add new operations and new features in specs
 - Implement integration test
 - Implement Linker for services
 
