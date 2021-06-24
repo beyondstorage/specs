@@ -1,9 +1,9 @@
 - Author: xxchan <xxchan22f@gmail.com>
 - Start Date: 2021-06-24
-- RFC PR: [beyondstorage/specs#0](https://github.com/beyondstorage/specs/issues/0)
+- RFC PR: [beyondstorage/specs#127](https://github.com/beyondstorage/specs/issues/127)
 - Tracking Issue: [beyondstorage/go-storage#0](https://github.com/beyondstorage/go-storage/issues/0)
 
-# GSP-0: Add ServiceInternel and RequestThrottled Errors
+# GSP-127: Add ServiceInternel and RequestThrottled Errors
 
 ## Background
 
