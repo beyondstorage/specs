@@ -1,7 +1,7 @@
 - Author: Xuanwo <github@xuanwo.io>
 - Start Date: 2021-06-08
 - RFC PR: [beyondstorage/specs#86](https://github.com/beyondstorage/specs/pull/86)
-- Tracking Issue: N/A
+- Tracking Issue: [beyondstorage/go-storage#611](https://github.com/beyondstorage/go-storage/issues/611)
 
 # GSP-86: Add Create Link Operation
 
