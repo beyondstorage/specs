@@ -58,9 +58,6 @@ type = "int64"
 [src]
 type = "string"
 
-[statistic]
-type = "StorageStatistic"
-
 [sti]
 type = "StoragerIterator"
 

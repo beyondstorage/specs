@@ -1,18 +1,30 @@
 [append-offset]
 type = "int64"
-description = "AppendOffset is the offset of the append object"
+description = "AppendOffset is the offset of the append object."
 
 [append-number-maximum]
 type = "int"
-description = "Max append numbers in append operation"
+description = """
+Max append numbers in append operation.
+
+Deprecated: Moved to storage meta.
+"""
 
 [append-size-maximum]
 type = "int64"
-description = "Max append size in per append operation"
+description = """
+Max append size in per append operation.
+
+Deprecated: Moved to storage meta.
+"""
 
 [append-total-size-maximum]
 type = "int64"
-description = "Max append total size in append operation"
+description = """
+Max append total size in append operation.
+
+Deprecated: Moved to storage meta.
+"""
 
 [content-length]
 type = "int64"
@@ -48,15 +60,27 @@ description = "MultipartID is the part id of part object."
 
 [multipart-number-maximum]
 type = "int"
-description = "Maximum part number in multipart operation"
+description = """
+Maximum part number in multipart operation.
+
+Deprecated: Moved to storage meta.
+"""
 
 [multipart-size-maximum]
 type = "int64"
-description = "Maximum part size defined by storager"
+description = """
+Maximum part size defined by storager.
+
+Deprecated: Moved to storage meta.
+"""
 
 [multipart-size-minimum]
 type = "int64"
-description = "Minimum part size defined by storager"
+description = """
+Minimum part size defined by storager.
+
+Deprecated: Moved to storage meta.
+"""
 
 [path]
 type = "string"
@@ -65,8 +89,16 @@ description = "Path is either the absolute path or the relative path towards sto
 
 [service-metadata]
 type = "any"
-description = "ServiceMetadata stores service defined metadata"
+description = """
+ServiceMetadata stores service defined metadata.
+
+Deprecated: Use SystemMetadata instead.
+"""
+
+[system-metadata]
+type = "any"
+description = "SystemMetadata stores system defined metadata."
 
 [user-metadata]
 type = "string_string_map"
-description = "UserMetadata stores user defined metadata"
+description = "UserMetadata stores user defined metadata."

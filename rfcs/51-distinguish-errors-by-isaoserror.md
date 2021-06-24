@@ -1,8 +1,7 @@
----
-author: xxchan <xxchan22f@gmail.com>
-status: draft
-updated_at: 2021-05-10
----
+- Author: xxchan <xxchan22f@gmail.com>
+- Start Date: 2021-05-10
+- RFC PR: [beyondstorage/specs#51](https://github.com/beyondstorage/specs/issues/51)
+- Tracking Issue: N/A
 
 # AOS-51: Distinguish Errors by IsAosError
 

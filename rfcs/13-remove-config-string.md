@@ -1,12 +1,14 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2020-03-06
-deprecates:
-  - design/3-support-service-init-via-config-string.md
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2020-03-06
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Remove config string
+
+- Updates:
+  - [GSP-3](./3-support-service-init-via-config-string.md): Deprecates it
+- Updated By:
+  - [GSP-90](./90-re-support-initialization-via-connection-string.md): Deprecates this RFC
 
 ## Background
 

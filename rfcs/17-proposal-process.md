@@ -1,10 +1,12 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2020-03-18
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2020-03-18
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Proposal process
+
+- Updated By:
+  - [GSP-118](./118-update-rfc-format-and-process.md): Updates the proposal spec and process
 
 ## Background
 

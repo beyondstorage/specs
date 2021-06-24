@@ -1,10 +1,12 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: draft
-updated_at: 2021-04-23
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-04-23
+- RFC PR: [beyondstorage/specs#40](https://github.com/beyondstorage/specs/issues/40)
+- Tracking Issue: N/A
 
 # AOS-40: Unify Object Metadata
+
+- Updated By:
+  - [GSP-117](./117-rename-service-to-system-as-the-opposite-to-global.md): Rename `service metadata` to `system metadata`
 
 ## Background
 

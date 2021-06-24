@@ -4,19 +4,16 @@ SHELL := /bin/bash
 
 go:
 	@echo "build specs for golang"
-	pushd go           && \
-		go mod tidy    && \
-		popd
 	pushd go              && \
+		go mod tidy       && \
 		go generate ./... && \
 		go build ./...    && \
-		popd
-	pushd go         && \
-		go fmt ./... && \
-		popd
+		go fmt ./...      && \
+		go test -v ./...     && \
+	popd
 
 rust:
 	@echo "build specs for rust"
 	pushd rust      && \
 		cargo build && \
-		popd
+	popd

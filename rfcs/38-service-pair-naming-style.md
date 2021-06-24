@@ -1,10 +1,12 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2021-04-21
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-04-21
+- RFC PR: [beyondstorage/specs#38](https://github.com/beyondstorage/specs/issues/38)
+- Tracking Issue: N/A
 
 # AOS-38: Service Pair Naming Style
+
+- Updated By:
+    - [GSP-117](./117-rename-service-to-system-as-the-opposite-to-global.md): Rename `service pair` to `system pair`
 
 ## Background
 

@@ -1,8 +1,7 @@
----
-author: Xuanwo <github@xuanwo.io>
-status: finished
-updated_at: 2021-01-11
----
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-01-11
+- RFC PR: N/A
+- Tracking Issue: N/A
 
 # Proposal: Unify List Operation
 
