@@ -12,7 +12,7 @@ These are common errors, especially in HTTP-based services, but also apply to RP
 ## Proposal
 
 I propose to add the following global error codes:
-- `ErrServerInternal`: e.g., HTTP 5xx
+- `ErrServiceInternal`: e.g., HTTP 5xx
 - `ErrRequestThrottled`: e.g., HTTP 429 Too Many Requests/Limit Exceeded, 503 SlowDown, ...
 
 ## Rationale
