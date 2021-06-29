@@ -1,9 +1,9 @@
 - Author: Xuanwo <github@xuanwo.io>
 - Start Date: 2021-06-29
-- RFC PR: [beyondstorage/specs#0](https://github.com/beyondstorage/specs/issues/0)
+- RFC PR: [beyondstorage/specs#128](https://github.com/beyondstorage/specs/pull/128)
 - Tracking Issue: [beyondstorage/go-storage#0](https://github.com/beyondstorage/go-storage/issues/0)
 
-# GSP-0: Community Organization
+# GSP-128: Community Organization
 
 ## Background
 
@@ -11,7 +11,7 @@ BeyondStorage has been grown up, and we need to define our community organizatio
 
 ## Proposal
 
-I propose to add five positions for BeyondStorage, and they are separate in different projects. 
+I propose to add five positions for BeyondStorage, and they are separate in different projects.
 
 For now, there are two main projects:
 
@@ -64,4 +64,4 @@ No code changes.
 ## Implementation
 
 - Create a repo called `community` in which maintains all members and teams
-- Implement team member permission automatic maintain in `go-community`.
+- Implement team member permission automatically maintain in `go-community`.
