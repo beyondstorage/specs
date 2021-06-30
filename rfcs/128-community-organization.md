@@ -37,21 +37,21 @@ The planner and designer of the project, with the authority to merge code into t
 - ID: `committer`
 - Permissions: `Write`
 
-Contributor who is recommended by Maintainer or Leader and has made outstanding contribution to projects and needs to complete at least one feature or fix major bugs independently.
+The contributor who is recommended by Maintainer or Leader and has made an outstanding contribution to projects and needs to complete at least one feature or fix major bugs independently.
 
 ### Reviewer
 
 - ID: `reviewer`
 - Permissions: `Triage`
-  
-Advanced Contributor, responsible for reviewing community code, has LGTM (Looks Good To Me) approval for new submissions, and can be involved in the design of subsequent projects.
+
+Advanced Contributor, responsible for reviewing community code, has LGTM (Looks Good To Me) approval for new submissions and can be involved in the design of subsequent projects.
 
 ### Contributor
 
 - ID: `contributor`
 - Permissions: `Read`
 
-Community contributors with more than one working on PR.
+Community contributors with more than one PR have been merged.
 
 ## Rationale
 
