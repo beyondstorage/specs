@@ -13,10 +13,12 @@ BeyondStorage has been grown up, and we need to define our community organizatio
 
 I propose to add five positions for BeyondStorage, and they are separate in different projects.
 
-For now, there are two main projects:
+For now, there are following projects:
 
-- `go-storage`: Focus on implement storage abstraction for golang, including `go-storage`, `go-service-*`, `go-endpoint`, `site`, `specs` and so on.
+- `go-storage`: Focus on implement storage abstraction for golang, including `go-storage`, `go-service-*`, `go-endpoint` and so on.
 - `dm`: Focus on implement data migration services, including `dm`.
+- `specs`: Focus on the specs of BeyondStorage, new ideas, new proposals happened here, including `specs`.
+- `community`: Focus on the development of BeyondStorage community, including `site`, `community` and tools like `go-community`.
 
 ### Leader
 
@@ -44,7 +46,7 @@ The contributor who is recommended by Maintainer or Leader and has made an outst
 - ID: `reviewer`
 - Permissions: `Triage`
 
-Advanced Contributor, responsible for reviewing community code, has LGTM (Looks Good To Me) approval for new submissions and can be involved in the design of subsequent projects.
+Advanced Contributor, responsible for reviewing community code, has LGTM (Looks Good To Me) approval for new submissions.
 
 ### Contributor
 
