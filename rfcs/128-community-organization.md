@@ -23,35 +23,35 @@ For now, there are two main projects:
 - ID: `leader`
 - Permissions: `Admin`
 
-TBD
+Project core management team, involved in roadmap development of major community-related resolutions.
 
 ### Maintainer
 
 - ID: `maintainer`
 - Permissions: `Maintain`
 
-TBD
+The planner and designer of the project, with the authority to merge code into the trunk, from the Committer.
 
 ### Committer
 
 - ID: `committer`
 - Permissions: `Write`
 
-TBD
+Contributor who is recommended by Maintainer or Leader and has made outstanding contribution to projects and needs to complete at least one feature or fix major bugs independently.
 
 ### Reviewer
 
 - ID: `reviewer`
 - Permissions: `Triage`
-
-TBD
+  
+Advanced Contributor, responsible for reviewing community code, has LGTM (Looks Good To Me) approval for new submissions, and can be involved in the design of subsequent projects.
 
 ### Contributor
 
 - ID: `contributor`
 - Permissions: `Read`
 
-TBD
+Community contributors with more than one working on PR.
 
 ## Rationale
 
