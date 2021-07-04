@@ -3,7 +3,7 @@
 - RFC PR: [beyondstorage/specs#134](https://github.com/beyondstorage/specs/pull/134)
 - Tracking Issue: [beyondstorage/go-storage#0](https://github.com/beyondstorage/go-storage/issues/0)
 
-# GSP-0: Write Behavior Consistency
+# GSP-134: Write Behavior Consistency
 
 Previous Discussions:
 
