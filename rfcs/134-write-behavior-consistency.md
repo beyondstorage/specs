@@ -1,6 +1,6 @@
 - Author: Xuanwo <github@xuanwo.io>
 - Start Date: 2021-07-04
-- RFC PR: [beyondstorage/specs#0](https://github.com/beyondstorage/specs/issues/0)
+- RFC PR: [beyondstorage/specs#134](https://github.com/beyondstorage/specs/pull/134)
 - Tracking Issue: [beyondstorage/go-storage#0](https://github.com/beyondstorage/go-storage/issues/0)
 
 # GSP-0: Write Behavior Consistency
