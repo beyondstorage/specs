@@ -229,6 +229,6 @@ This proposal doesn't introduce any API changes.
 
 ## Implementation
 
-- Specify the behavior in specs
+- Specify the behavior in specs, docs and comments
 - Add more tests in integration tests
 - Make sure all services passed
