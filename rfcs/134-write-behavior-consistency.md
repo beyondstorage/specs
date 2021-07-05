@@ -55,7 +55,9 @@ Most s3 alike object storage services will not return object exist errors.
 
 For `Write`:
 
-`ipfs` supports `Create` like `fs`, with `Create`, `Write` will not return `FileExists`.
+`ipfs` supports `Create` like `fs`. With `Create`, `ipfs` will create the file if it does not exist, this is the only behavior, in other words, `ipfs` will continue to write to the file even if create is not specified.
+
+If writing to an existing file, IPFS will overwrite it from the beginning, and if there are unwritten parts at the end of the original file, they will remain as well. `ipfs` provides an option `Truncate` to make sure that the write is clean.
 
 ```go
 func (s *Storage) write(ctx context.Context, path string, r io.Reader, size int64, opt pairStorageWrite) (n int64, err error) {
@@ -63,6 +65,7 @@ func (s *Storage) write(ctx context.Context, path string, r io.Reader, size int6
       ctx, s.getAbsPath(path), r,
       ipfs.FilesWrite.Create(true),
       ipfs.FilesWrite.Parents(true),
+      ipfs.FilesWrite.Truncate(true),
    )
    if err != nil {
       return 0, err
@@ -73,7 +76,7 @@ func (s *Storage) write(ctx context.Context, path string, r io.Reader, size int6
 
 For `Copy` and `Move`:
 
-`ipfs` have native support for `Copy` and `Move`, and will return `FileExists` if dst already exists.
+`ipfs` have native support for `Copy` and `Move`. If the dst exists, the `Copy` operation will return `FileExists`, while the `Move` operation will overwrite.
 
 ### dropbox
 
@@ -114,8 +117,11 @@ In [GSP-46](https://github.com/beyondstorage/specs/blob/master/rfcs/46-idempoten
 I propose to improve write behavior consistency in the following method:
 
 - All write operations SHOULD NOT return an error as the object exists.
+- All successful write operations SHOULD be complete
 
 Compared to GSP-46, we will not enforce the requirement for idempotent, because most write operations are not idempotent. For example, the second call for `Move(a, b)` should report `ObjectNotExist`.
+
+`Complete` means after a successful write, the object's content and metadata should be the same as specified in write request. For example, write `1024` bytes on an existing `2048` bytes file should result in a `1024` bytes file.
 
 ### Write Operations
 
@@ -142,6 +148,7 @@ Other APIs are out of scope.
 - Service that has native support for `overwrite` or `create` doesn't NEED to check the object exists or not.
 - Service that doesn't have native support for `overwrite` or `create` SHOULD check and delete the object if exists.
   - `autoreanme` alike features are forbidden: service provider SHOULD NOT change the final destination path.
+- Service SHOULD make sure write operations complete.
 
 ### Error Handling
 
