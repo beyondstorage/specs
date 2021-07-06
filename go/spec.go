@@ -162,19 +162,16 @@ func (n *Namespace) Sort() {
 
 // Op means an operation definition.
 type Op struct {
-	Name      string
-	Simulated bool // Deprecated: This field has been deprecated by GSP-109, planned be removed in v4.3.0.
+	Name string
 
 	Required []string
 	Optional []string
-	Virtual  []string // Deprecated: This field has been deprecated by GSP-109, planned be removed in v4.3.0.
 }
 
 // Sort will sort the Op
 func (o *Op) Sort() {
 	sort.Strings(o.Required)
 	sort.Strings(o.Optional)
-	sort.Strings(o.Virtual)
 }
 
 // New is the spec for new function.
