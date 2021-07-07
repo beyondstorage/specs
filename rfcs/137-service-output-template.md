@@ -1,9 +1,9 @@
 - Author: Xuanwo <github@xuanwo.io>
 - Start Date: 2021-07-07
-- RFC PR: [beyondstorage/specs#0](https://github.com/beyondstorage/specs/issues/0)
+- RFC PR: [beyondstorage/specs#137](https://github.com/beyondstorage/specs/issues/137)
 - Tracking Issue: [beyondstorage/go-storage#0](https://github.com/beyondstorage/go-storage/issues/0)
 
-# GSP-0: Service Output Template
+# GSP-137: Service Output Template
 
 ## Background
 
