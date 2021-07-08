@@ -1,9 +1,9 @@
 - Author: Xuanwo <github@xuanwo.io>
 - Start Date: 2021-07-08
-- RFC PR: [beyondstorage/specs#0](https://github.com/beyondstorage/specs/issues/0)
+- RFC PR: [beyondstorage/specs#139](https://github.com/beyondstorage/specs/issues/139)
 - Tracking Issue: [beyondstorage/go-storage#0](https://github.com/beyondstorage/go-storage/issues/0)
 
-# GSP-0: Split Specs
+# GSP-139: Split Specs
 
 Previous Discussion:
 
