@@ -1,9 +1,9 @@
 - Author: JinnyYi <github.com/JinnyYi>
 - Start Date: 2021-07-07
-- RFC PR: [beyondstorage/specs#0](https://github.com/beyondstorage/specs/pull/0)
+- RFC PR: [beyondstorage/specs#140](https://github.com/beyondstorage/specs/pull/140)
 - Tracking Issue: [beyondstorage/go-storage#0](https://github.com/beyondstorage/go-storage/issues/0)
 
-# GSP-0: Unify List Behavior
+# GSP-140: Unify List Behavior
 
 Previous Discussion:
 
@@ -34,7 +34,7 @@ pairs - It contains all the filters for `List`. Usually we can specify `ListMode
 
 **Returns**
 
-oi - An object iterator. You can retrieve all the object by `Next` and `IterateDone` will be returned while there are no items anymore.
+oi - An object iterator. You can retrieve all the objects by `Next` and `IterateDone` will be returned while there are no items anymore.
 
 err - It's nil if no error.
 
