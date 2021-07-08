@@ -1,0 +1,80 @@
+- Author: Xuanwo <github@xuanwo.io>
+- Start Date: 2021-07-08
+- RFC PR: [beyondstorage/specs#0](https://github.com/beyondstorage/specs/issues/0)
+- Tracking Issue: [beyondstorage/go-storage#0](https://github.com/beyondstorage/go-storage/issues/0)
+
+# GSP-0: Split Specs
+
+Previous Discussion:
+
+- [Move specs back into go-storage](https://github.com/beyondstorage/specs/issues/138)
+
+## Background
+
+`definitions` is a core idea of BeyondStorage's storage abstraction. We use `definitions` to carry the definitions of pairs, infos and operations. In order to share `definitions` between different languages, we move `definitions` into [specs]. So we have cross-language **definitions**: `/definitions` with language-specific parsing utilities: `/go`, `/rust`.
+
+[specs] is also used as `go-storage`'s RFCs center: we store our approved RFCs in `/rfcs` and `/specs`. In [specs] issues, we discuss ideas before sending formal RFCs.
+
+However, with the growth of the community of BeyondStorage, [specs] lead to more and more confusions. [specs] looks like RFC centers for BeyondStorage, but only been used for `go-storage`. [beyond-tp](https://github.com/beyondstorage/beyond-tp) has its own RFCs storage.
+
+After [GSP-128: Community Organization](./128-community-organization.md), the problem become more serious.
+
+- Should [specs] become a separate project?
+- Who will have write access over [specs]?
+
+## Proposal
+
+So I propose to split specs into projects:
+
+- Move `/definitions` and `/go` into `go-storage`.
+- Move `/rfcs` and `/spec` into `go-storage`.
+- Move `/rust` into `rs-storage`.
+
+After those changes, we can be more focused on building up features instead of caring about behavior that across languages. And project's committer and maintainer will have the ability to approved proposals without contact other teams.
+
+## Rationale
+
+### Why not maintain all projects RFC in specs?
+
+Firstly, it could be confusion.
+
+To not break all our links to GSP, we can't change the directory of `rfcs` and filename in it. So we will have following directory names:
+
+- rfcs
+- btp / rfcs-btp or other directory names
+
+Or filenames:
+
+- 0-example.md
+- btp-0-exmaple.md
+
+Secondly, the permission is hard to maintain.
+
+- Only give access to small group: every proposal need their actions.
+- Give access to all committer and maintainers: they may be affected by too many proposals.
+
+### RFCs in project
+
+> Will it be not as clean? There will be many things in issues. BTW, issue labels may be enough for a small organization like us?
+
+I think issue labels are enough for us. We will add `proposal` label for proposal issues.
+
+> Another small problem is the issue numbers for RFCs will become more discontinuous and bigger?
+
+I think it's not a big problem.
+
+> We cannot distinguish 2 LGTMs for RFCs and 1 LGTM for other PRs automatically?
+
+For now, the restriction is executed by committer / maintiner mannully. In the further, we will assign labels like `need-2-lgtm`.
+
+## Compatibility
+
+To not break our links to existing proposals, we will:
+
+- Move all issues into `go-storage`
+- Copy `definitions` and `rfcs` to `go-storage`
+- Convert `specs` into archived (read-only)
+
+## Implementation
+
+[specs]: https://github.com/beyondstorage/specs
